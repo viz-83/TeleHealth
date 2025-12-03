@@ -2,50 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/v2/index.css';
-import axios from 'axios';
+import { useChat } from '../context/ChatContext';
 
 const ChatInterface = () => {
-    const [chatClient, setChatClient] = useState(null);
+    const { chatClient } = useChat();
     const [channel, setChannel] = useState(null);
-    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
-        if (!user) return;
+        if (!chatClient) return;
 
-        const initChat = async () => {
-            try {
-                const { data } = await axios.post('http://localhost:5000/api/stream/token', { userId: user._id });
+        const initChannel = async () => {
+            const channel = chatClient.channel('messaging', 'general-v2', {
+                name: 'General Room V2',
+            });
 
-                const client = StreamChat.getInstance(data.apiKey);
-
-                await client.connectUser(
-                    {
-                        id: user._id,
-                        name: user.name,
-                    },
-                    data.token
-                );
-
-                console.log('Token received:', data.token);
-                const channel = client.channel('messaging', 'general-v2', {
-                    name: 'General Room V2',
-                });
-
-                await channel.watch();
-
-                setChatClient(client);
-                setChannel(channel);
-            } catch (error) {
-                console.error('Error initializing chat:', error);
-            }
+            await channel.watch();
+            setChannel(channel);
         };
 
-        initChat();
-
-        return () => {
-            if (chatClient) chatClient.disconnectUser();
-        };
-    }, [user?._id]);
+        initChannel();
+    }, [chatClient]);
 
     if (!chatClient || !channel) return <div>Loading Chat...</div>;
 

@@ -5,5 +5,6 @@ const { signup, verifyOTP, login } = require('../controllers/authController');
 router.post('/signup', signup);
 router.post('/verify-otp', verifyOTP);
 router.post('/login', login);
+router.post('/users', require('../controllers/authController').getAllUsers);
 
 module.exports = router;

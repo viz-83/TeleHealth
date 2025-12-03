@@ -11,7 +11,7 @@ const VerifyOTP = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/verify-otp', { email, otp });
+            const res = await axios.post('http://localhost:5000/api/auth/verify-otp', { email, otp }, { withCredentials: true });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             alert('Verification successful!');

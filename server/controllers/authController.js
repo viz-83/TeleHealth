@@ -5,8 +5,6 @@ const jwt = require('jsonwebtoken');
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
-const fs = require('fs');
-
 exports.signup = async (req, res) => {
     try {
         const { name, email, password, role } = req.body;
@@ -36,15 +34,12 @@ exports.signup = async (req, res) => {
                 message: `Your OTP code is ${otp}`
             });
         } catch (emailError) {
-            const logMsg = `[${new Date().toISOString()}] Email Error: ${emailError.message}\n`;
-            fs.appendFileSync('debug.log', logMsg);
             console.error('Email Send Error:', emailError);
 
             try {
                 await User.deleteOne({ _id: user._id });
-                fs.appendFileSync('debug.log', `[${new Date().toISOString()}] User deleted successfully\n`);
             } catch (delError) {
-                fs.appendFileSync('debug.log', `[${new Date().toISOString()}] Delete Error: ${delError.message}\n`);
+                // ignore
             }
 
             return res.status(500).json({ message: 'Failed to send OTP email. Please check your email address or try again later.' });
@@ -52,8 +47,6 @@ exports.signup = async (req, res) => {
 
         res.status(201).json({ message: 'User registered. Please verify OTP.' });
     } catch (error) {
-        const logMsg = `[${new Date().toISOString()}] Signup Error: ${error.message}\n`;
-        fs.appendFileSync('debug.log', logMsg);
         console.error('Signup Error:', error);
         res.status(500).json({ message: error.message });
     }
@@ -77,7 +70,13 @@ exports.verifyOTP = async (req, res) => {
 
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-        res.cookie('token', token, { httpOnly: true }).json({ message: 'Verification successful', token, user });
+        const cookieOptions = {
+            httpOnly: true,
+            secure: false, // Set to true in production
+            sameSite: 'lax'
+        };
+        console.log('Setting Cookie (VerifyOTP):', cookieOptions);
+        res.cookie('token', token, cookieOptions).json({ message: 'Verification successful', token, user });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -96,8 +95,58 @@ exports.login = async (req, res) => {
 
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-        res.cookie('token', token, { httpOnly: true }).json({ message: 'Login successful', token, user });
+        const cookieOptions = {
+            httpOnly: true,
+            secure: false, // Set to true in production
+            sameSite: 'lax'
+        };
+        console.log('Setting Cookie (Login):', cookieOptions);
+        res.cookie('token', token, cookieOptions).json({ message: 'Login successful', token, user });
     } catch (error) {
         res.status(500).json({ message: error.message });
+    }
+};
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find({ _id: { $ne: req.body.userId } }).select('-password -otp -otpExpires');
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.protect = async (req, res, next) => {
+    try {
+        let token;
+
+        console.log('--- Protect Middleware Debug ---');
+        console.log('Headers:', req.headers);
+        console.log('Cookies:', req.cookies);
+
+        if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+            token = req.headers.authorization.split(' ')[1];
+        } else if (req.cookies.token) {
+            token = req.cookies.token;
+        }
+
+        if (!token) {
+            console.log('No token found!');
+            return res.status(401).json({ message: 'You are not logged in! Please log in to get access.' });
+        }
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        console.log('Decoded Token:', decoded);
+
+        const currentUser = await User.findById(decoded.id);
+        if (!currentUser) {
+            console.log('User not found for token');
+            return res.status(401).json({ message: 'The user belonging to this token no longer does exist.' });
+        }
+
+        req.user = currentUser;
+        next();
+    } catch (error) {
+        console.error('Protect Middleware Error:', error);
+        res.status(401).json({ message: 'Invalid token. Please log in again.' });
     }
 };

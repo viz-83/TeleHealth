@@ -11,7 +11,7 @@ const Signup = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/auth/signup', formData);
+            await axios.post('http://localhost:5000/api/auth/signup', formData, { withCredentials: true });
             alert('Signup successful! Please check your email for OTP.');
             // navigate('/login');
             navigate('/verify-otp', { state: { email: formData.email } });
