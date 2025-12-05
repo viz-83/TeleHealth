@@ -14,7 +14,7 @@ const Landing = () => {
                         <span className="text-gray-800">Anytime, Anywhere.</span>
                     </h1>
                     <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                        Experience the future of healthcare with TeleHealth. Connect with top-rated doctors and specialists instantly through secure video calls and chat. Skip the waiting room and get the care you deserve, from the comfort of your home.
+                        Experience the future of healthcare with MedSync. Connect with top-rated doctors and specialists instantly through secure video calls and chat. Skip the waiting room and get the care you deserve, from the comfort of your home.
                     </p>
                     <div className="space-x-4">
                         <Link to="/login" className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold text-lg shadow-lg">Get Started</Link>

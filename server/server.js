@@ -58,7 +58,7 @@ app.use('/api/v1/doctors', require('./routes/doctorRoutes'));
 app.use('/api/v1/appointments', require('./routes/appointmentRoutes'));
 
 app.get('/', (req, res) => {
-    res.send('Telehealth API is running...');
+    res.send('MedSync API is running...');
 });
 
 // 404 Handler
@@ -70,5 +70,5 @@ app.use((req, res, next) => {
 app.use(globalErrorHandler);
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT} - Updated V2`);
+    console.log(`MedSync Server running on port ${PORT}`);
 });

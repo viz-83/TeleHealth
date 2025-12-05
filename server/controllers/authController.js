@@ -2,6 +2,9 @@ const User = require('../models/User');
 const sendEmail = require('../utils/email');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { StreamChat } = require('stream-chat');
+
+const streamClient = new StreamChat(process.env.STREAM_API_KEY, process.env.STREAM_API_SECRET);
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
@@ -26,6 +29,18 @@ exports.signup = async (req, res) => {
         });
 
         await user.save();
+
+        // Sync user to Stream
+        try {
+            await streamClient.upsertUser({
+                id: user._id.toString(),
+                name: user.name,
+                role: user.role === 'admin' ? 'admin' : 'user'
+            });
+        } catch (streamError) {
+            console.error('Stream Sync Error (Signup):', streamError);
+            // Don't fail signup if stream sync fails, but log it
+        }
 
         try {
             await sendEmail({
@@ -92,6 +107,17 @@ exports.login = async (req, res) => {
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+
+        // Sync user to Stream on login (to catch existing users)
+        try {
+            await streamClient.upsertUser({
+                id: user._id.toString(),
+                name: user.name,
+                role: user.role === 'admin' ? 'admin' : 'user'
+            });
+        } catch (streamError) {
+            console.error('Stream Sync Error (Login):', streamError);
+        }
 
         const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
 

@@ -132,6 +132,19 @@ exports.getAppointmentToken = catchAsync(async (req, res, next) => {
             chatToken = chatClient.createToken(userId);
             console.log('Chat Token Generated:', chatToken ? 'SUCCESS' : 'FAILED');
 
+            // Ensure users exist in Stream before creating channel
+            try {
+                console.log('Upserting users to Stream:', patientId, doctorId);
+                await chatClient.upsertUsers([
+                    { id: patientId, name: appointment.patient.name, role: 'user' },
+                    { id: doctorId, name: appointment.doctor.name, role: 'user' } // Doctors are 'user' role in Stream for simplicity, or could be 'admin' if needed
+                ]);
+                console.log('Users upserted successfully');
+            } catch (upsertError) {
+                console.error('Failed to upsert users to Stream:', upsertError);
+                // Continue, as they might already exist
+            }
+
             // Ensure channel exists with both members using Chat Client
             console.log('Creating/Updating channel:', appointment.chatChannelId);
 

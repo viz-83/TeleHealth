@@ -5,7 +5,7 @@ const LandingNavbar = () => {
     return (
         <nav className="bg-white shadow-md p-4 flex justify-between items-center fixed top-0 w-full z-10">
             <div className="flex items-center space-x-8">
-                <div className="text-2xl font-bold text-blue-600">TeleHealth</div>
+                <Link to="/" className="text-2xl font-bold text-blue-600">MedSync</Link>
                 <div className="hidden md:flex space-x-6">
                     <Link to="/" className="text-gray-700 hover:text-blue-600 font-medium">Home</Link>
                     <Link to="#" className="text-gray-700 hover:text-blue-600 font-medium">About</Link>
