@@ -14,7 +14,15 @@ const Login = () => {
             const res = await axios.post('http://localhost:5000/api/auth/login', formData, { withCredentials: true });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
-            navigate('/dashboard');
+            if (res.data.user.role === 'doctor') {
+                if (res.data.isDoctorProfileComplete) {
+                    navigate('/doctor/dashboard');
+                } else {
+                    navigate('/doctor/onboarding');
+                }
+            } else {
+                navigate('/dashboard');
+            }
         } catch (error) {
             alert(error.response?.data?.message || 'Login failed');
         }

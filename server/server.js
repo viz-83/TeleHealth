@@ -1,5 +1,5 @@
 const express = require('express');
-// Server restart trigger
+// Server restart trigger - v3
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -56,6 +56,10 @@ app.get('/api/v1/stream-test', (req, res) => {
 
 app.use('/api/v1/doctors', require('./routes/doctorRoutes'));
 app.use('/api/v1/appointments', require('./routes/appointmentRoutes'));
+app.use('/api/v1/prescriptions', require('./routes/prescriptionRoutes'));
+
+// Serve PDF files (Legacy - moved to DB storage, keeping commented out or just removing)
+// app.use('/prescriptions', express.static('prescriptions'));
 
 app.get('/', (req, res) => {
     res.send('MedSync API is running...');

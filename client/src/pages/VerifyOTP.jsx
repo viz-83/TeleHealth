@@ -15,7 +15,15 @@ const VerifyOTP = () => {
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             alert('Verification successful!');
-            navigate('/dashboard');
+            if (res.data.user.role === 'doctor') {
+                if (res.data.isDoctorProfileComplete) {
+                    navigate('/doctor/dashboard');
+                } else {
+                    navigate('/doctor/onboarding');
+                }
+            } else {
+                navigate('/dashboard');
+            }
         } catch (error) {
             alert(error.response?.data?.message || 'Verification failed');
         }

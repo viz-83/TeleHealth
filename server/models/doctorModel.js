@@ -18,6 +18,12 @@ const availabilitySlotSchema = new mongoose.Schema({
 });
 
 const doctorSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        required: [true, 'A doctor must belong to a user'],
+        unique: true
+    },
     name: {
         type: String,
         required: [true, 'A doctor must have a name']

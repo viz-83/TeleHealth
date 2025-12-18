@@ -62,10 +62,30 @@ exports.bookAppointment = catchAsync(async (req, res, next) => {
 });
 
 exports.getMyAppointments = catchAsync(async (req, res, next) => {
-    const appointments = await Appointment.find({ patient: req.user._id })
+    let query = { patient: req.user._id };
+
+    if (req.user.role === 'doctor') {
+        const doctor = await Doctor.findOne({ user: req.user._id });
+        if (doctor) {
+            query = { doctor: doctor._id };
+        } else {
+            // If doctor profile not found, return empty list
+            return res.status(200).json({
+                status: 'success',
+                results: 0,
+                data: { appointments: [] }
+            });
+        }
+    }
+
+    const appointments = await Appointment.find(query)
         .populate({
             path: 'doctor',
             select: 'name specialization hospitalName location'
+        })
+        .populate({
+            path: 'patient',
+            select: 'name email'
         })
         .sort({ date: -1, startTime: -1 });
 

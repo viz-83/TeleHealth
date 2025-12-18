@@ -10,15 +10,23 @@ const Navbar = () => {
         navigate('/login');
     };
 
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
     return (
         <nav className="bg-white shadow-md p-4 flex justify-between items-center">
             <div className="flex items-center space-x-4">
                 <Link to="/dashboard" className="text-2xl font-bold text-blue-600">MedSync</Link>
                 <div className="space-x-4">
                     <Link to="/dashboard" className="text-gray-700 hover:text-blue-600">Home</Link>
-                    <Link to="/find-doctors" className="text-gray-700 hover:text-blue-600">Find Doctors</Link>
-                    <Link to="/my-appointments" className="text-gray-700 hover:text-blue-600">My Appointments</Link>
-                    <Link to="/doctor/dashboard" className="text-gray-700 hover:text-blue-600">Doctor Dashboard</Link>
+                    {user.role === 'patient' && (
+                        <>
+                            <Link to="/find-doctors" className="text-gray-700 hover:text-blue-600">Find Doctors</Link>
+                            <Link to="/my-appointments" className="text-gray-700 hover:text-blue-600">My Appointments</Link>
+                        </>
+                    )}
+                    {user.role === 'doctor' && (
+                        <Link to="/doctor/dashboard" className="text-gray-700 hover:text-blue-600">Doctor Dashboard</Link>
+                    )}
                 </div>
             </div>
             <div className="flex items-center space-x-4">

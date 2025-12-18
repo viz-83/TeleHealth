@@ -13,7 +13,13 @@ exports.getAppointmentToken = catchAsync(async (req, res, next) => {
     // 1. Find Appointment
     const appointment = await Appointment.findById(appointmentId)
         .populate('patient', 'id name email')
-        .populate('doctor', 'id name email role');
+        .populate({
+            path: 'doctor',
+            populate: {
+                path: 'user',
+                select: 'id name email role'
+            }
+        });
 
 
     if (!appointment) {
@@ -39,7 +45,7 @@ exports.getAppointmentToken = catchAsync(async (req, res, next) => {
     // 2. Authorization Check
     const userId = req.user._id.toString();
     const patientId = appointment.patient._id.toString();
-    const doctorId = appointment.doctor._id.toString();
+    const doctorId = appointment.doctor.user._id.toString(); // Use the User ID, not the Doctor Profile ID
 
     console.log('IDs:', { userId, patientId, doctorId });
 
@@ -157,6 +163,10 @@ exports.getAppointmentToken = catchAsync(async (req, res, next) => {
                 console.log('Channel Object Created. Calling create()...');
                 await channel.create();
                 console.log('Channel Created Successfully');
+
+                console.log('Ensuring members are added:', patientId, doctorId);
+                await channel.addMembers([patientId, doctorId]);
+                console.log('Members added successfully');
             } catch (channelError) {
                 console.error('CHANNEL CREATION ERROR:', channelError);
                 throw channelError; // Re-throw to be caught by outer catch

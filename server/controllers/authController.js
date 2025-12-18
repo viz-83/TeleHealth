@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Doctor = require('../models/doctorModel');
 const sendEmail = require('../utils/email');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -91,7 +92,14 @@ exports.verifyOTP = async (req, res) => {
             sameSite: 'lax'
         };
         console.log('Setting Cookie (VerifyOTP):', cookieOptions);
-        res.cookie('token', token, cookieOptions).json({ message: 'Verification successful', token, user });
+
+        let isDoctorProfileComplete = false;
+        if (user.role === 'doctor') {
+            const doctor = await Doctor.findOne({ user: user._id });
+            if (doctor) isDoctorProfileComplete = true;
+        }
+
+        res.cookie('token', token, cookieOptions).json({ message: 'Verification successful', token, user, isDoctorProfileComplete });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -127,7 +135,14 @@ exports.login = async (req, res) => {
             sameSite: 'lax'
         };
         console.log('Setting Cookie (Login):', cookieOptions);
-        res.cookie('token', token, cookieOptions).json({ message: 'Login successful', token, user });
+
+        let isDoctorProfileComplete = false;
+        if (user.role === 'doctor') {
+            const doctor = await Doctor.findOne({ user: user._id });
+            if (doctor) isDoctorProfileComplete = true;
+        }
+
+        res.cookie('token', token, cookieOptions).json({ message: 'Login successful', token, user, isDoctorProfileComplete });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

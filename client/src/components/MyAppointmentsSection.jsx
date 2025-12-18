@@ -84,7 +84,15 @@ const MyAppointmentsSection = () => {
 
     return (
         <div className="bg-white rounded-lg shadow-sm p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">My Appointments</h2>
+            <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-800">My Appointments</h2>
+                <button
+                    onClick={() => navigate('/patient/prescriptions')}
+                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition shadow-sm"
+                >
+                    View My Prescriptions
+                </button>
+            </div>
 
             {loading ? (
                 <p className="text-center text-gray-500 py-8">Loading appointments...</p>

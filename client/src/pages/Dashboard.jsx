@@ -4,25 +4,41 @@ import Navbar from '../components/Navbar';
 import doctorsHero from '../assets/doctors_hero.png';
 import findDoctorsCard from '../assets/find_doctors_card.png';
 import myAppointmentsCard from '../assets/my_appointments_card.png';
+import AboutSection from '../components/AboutSection';
+import ServiceSection from '../components/ServiceSection';
+import ContactSection from '../components/ContactSection';
 
 const Dashboard = () => {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem('user'));
 
-    const services = [
-        {
-            title: "Find Doctors",
-            description: "Search for specialists and book appointments with top-rated doctors near you.",
-            image: findDoctorsCard,
-            action: () => navigate('/find-doctors')
-        },
-        {
-            title: "My Appointments",
-            description: "View your upcoming schedule, join video calls, and manage your bookings.",
-            image: myAppointmentsCard,
-            action: () => navigate('/my-appointments')
-        }
-    ];
+    let services = [];
+
+    if (user?.role === 'patient') {
+        services = [
+            {
+                title: "Find Doctors",
+                description: "Search for specialists and book appointments with top-rated doctors near you.",
+                image: findDoctorsCard,
+                action: () => navigate('/find-doctors')
+            },
+            {
+                title: "My Appointments",
+                description: "View your upcoming schedule, join video calls, and manage your bookings.",
+                image: myAppointmentsCard,
+                action: () => navigate('/my-appointments')
+            }
+        ];
+    } else if (user?.role === 'doctor') {
+        services = [
+            {
+                title: "Doctor Dashboard",
+                description: "Manage your appointments, view patient details, and join consultations.",
+                image: myAppointmentsCard, // Reusing image for now, or use a specific one if available
+                action: () => navigate('/doctor/dashboard')
+            }
+        ];
+    }
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -82,6 +98,10 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+            {/* Additional Sections */}
+            <AboutSection />
+            <ServiceSection />
+            <ContactSection />
         </div>
     );
 };

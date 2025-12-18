@@ -80,7 +80,15 @@ const DoctorDashboard = () => {
         <div className="min-h-screen bg-gray-50">
             <Navbar />
             <div className="max-w-7xl mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold text-gray-800 mb-8">Doctor Dashboard</h1>
+                <div className="flex justify-between items-center mb-8">
+                    <h1 className="text-3xl font-bold text-gray-800">Doctor Dashboard</h1>
+                    <button
+                        onClick={() => navigate('/doctor/availability')}
+                        className="px-6 py-3 bg-white border border-gray-200 text-gray-700 rounded-lg hover:bg-gray-50 transition shadow-sm font-medium"
+                    >
+                        Manage Availability
+                    </button>
+                </div>
 
                 {loading ? (
                     <p className="text-center text-gray-500">Loading schedule...</p>
@@ -106,7 +114,7 @@ const DoctorDashboard = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="flex space-x-3">
+                                <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-3">
                                     <button
                                         onClick={() => handleJoinVideo(apt._id)}
                                         disabled={apt.status === 'CANCELLED' || apt.status === 'COMPLETED'}
@@ -120,6 +128,19 @@ const DoctorDashboard = () => {
                                         className="px-4 py-2 border border-blue-600 text-blue-600 rounded hover:bg-blue-50 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
                                     >
                                         Open Chat
+                                    </button>
+                                    <button
+                                        onClick={() => navigate(`/doctor/appointments/${apt._id}/prescribe`)}
+                                        disabled={apt.status === 'CANCELLED'}
+                                        className="px-4 py-2 border border-green-600 text-green-600 rounded hover:bg-green-50 disabled:border-gray-300 disabled:text-gray-300 disabled:cursor-not-allowed"
+                                    >
+                                        Prescribe
+                                    </button>
+                                    <button
+                                        onClick={() => navigate(`/doctor/appointments/${apt._id}/prescription`)}
+                                        className="px-4 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-100"
+                                    >
+                                        View Prescription
                                     </button>
                                 </div>
                             </div>

@@ -2,12 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LandingNavbar from '../components/LandingNavbar';
 import doctorsHero from '../assets/doctors_hero.png';
+import aboutImage from '../assets/find_doctors_card.png';
+import ServiceSection from '../components/ServiceSection';
+import ContactSection from '../components/ContactSection';
+import AboutSection from '../components/AboutSection';
 
 const Landing = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <LandingNavbar />
-            <div className="flex-1 flex flex-col md:flex-row items-center justify-center pt-20 px-8 max-w-7xl mx-auto">
+            <div className="flex-1 flex flex-col md:flex-row items-center justify-center pt-20 px-8 max-w-7xl mx-auto mb-20">
                 <div className="md:w-1/2 text-center md:text-left mb-12 md:mb-0">
                     <h1 className="text-5xl font-bold text-blue-600 mb-6 leading-tight">
                         Your Health, Our Priority. <br />
@@ -25,10 +29,21 @@ const Landing = () => {
                     <img
                         src={doctorsHero}
                         alt="Team of Doctors"
-                        className="rounded-2xl max-w-full h-auto object-cover"
+                        className="rounded-2xl max-w-full h-auto object-cover shadow-2xl"
                     />
                 </div>
             </div>
+
+            {/* About Section */}
+            {/* About Section */}
+            <AboutSection />
+
+            {/* Service Section */}
+            <ServiceSection />
+
+            {/* Contact Section */}
+            <ContactSection />
+
         </div>
     );
 };

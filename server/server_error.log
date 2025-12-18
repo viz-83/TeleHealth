@@ -1,11 +1,11 @@
-TIMESTAMP: 2025-12-03T17:44:30.085Z
-ERROR: StreamChat error code 4: GetOrCreateChannel failed with error: "The following users are involved in channel create operation, but don't exist: [692c8076332c359132b7b9e6]. Please create the user objects before setting up the channel."
-STACK: ErrorFromResponse: StreamChat error code 4: GetOrCreateChannel failed with error: "The following users are involved in channel create operation, but don't exist: [692c8076332c359132b7b9e6]. Please create the user objects before setting up the channel."
+TIMESTAMP: 2025-12-05T08:50:15.852Z
+ERROR: StreamChat error code 4: GetOrCreateChannel failed with error: "data.members[1].user_id is not a valid user id. a-z, 0-9, @, _ and - are allowed."
+STACK: ErrorFromResponse: StreamChat error code 4: GetOrCreateChannel failed with error: "data.members[1].user_id is not a valid user id. a-z, 0-9, @, _ and - are allowed."
     at _StreamChat.errorFromResponse (C:\Users\kingv\Desktop\Med-site\server\node_modules\stream-chat\dist\cjs\index.node.js:13329:12)
     at _StreamChat.handleResponse (C:\Users\kingv\Desktop\Med-site\server\node_modules\stream-chat\dist\cjs\index.node.js:13338:18)
     at _StreamChat.doAxiosRequest (C:\Users\kingv\Desktop\Med-site\server\node_modules\stream-chat\dist\cjs\index.node.js:12646:23)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
     at async Channel.query (C:\Users\kingv\Desktop\Med-site\server\node_modules\stream-chat\dist\cjs\index.node.js:8828:19)
     at async Channel.create (C:\Users\kingv\Desktop\Med-site\server\node_modules\stream-chat\dist\cjs\index.node.js:7679:14)
-    at async C:\Users\kingv\Desktop\Med-site\server\controllers\streamController.js:145:17
+    at async C:\Users\kingv\Desktop\Med-site\server\controllers\streamController.js:164:17
 
