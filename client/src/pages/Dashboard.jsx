@@ -27,6 +27,24 @@ const Dashboard = () => {
                 description: "View your upcoming schedule, join video calls, and manage your bookings.",
                 image: myAppointmentsCard,
                 action: () => navigate('/my-appointments')
+            },
+            {
+                title: "Lab Reports",
+                description: "Upload and view your medical reports and test results.",
+                image: "https://cdn-icons-png.flaticon.com/512/2966/2966486.png", // Using a placeholder URL for now or reuse existing asset if appropriate
+                action: () => navigate('/patient/reports/upload')
+            },
+            {
+                title: "Symptom Checker",
+                description: "Not sure which specialist to see? Analyze your symptoms instantly.",
+                image: "https://cdn-icons-png.flaticon.com/512/3063/3063176.png",
+                action: () => navigate('/symptom-checker')
+            },
+            {
+                title: "Book Ambulance",
+                description: "Emergency? Request an ambulance to your location immediately.",
+                image: "https://cdn-icons-png.flaticon.com/512/2892/2892962.png",
+                action: () => navigate('/ambulance/book')
             }
         ];
     } else if (user?.role === 'doctor') {
@@ -107,3 +125,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

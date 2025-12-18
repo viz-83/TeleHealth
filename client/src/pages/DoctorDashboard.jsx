@@ -142,6 +142,12 @@ const DoctorDashboard = () => {
                                     >
                                         View Prescription
                                     </button>
+                                    <button
+                                        onClick={() => navigate(`/doctor/patient/${apt.patient._id}/reports`)}
+                                        className="px-4 py-2 border border-purple-300 text-purple-700 rounded hover:bg-purple-50"
+                                    >
+                                        Lab Reports
+                                    </button>
                                 </div>
                             </div>
                         ))}

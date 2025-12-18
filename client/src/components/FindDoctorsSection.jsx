@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 
 const FindDoctorsSection = () => {
+    const [searchParams] = useSearchParams();
     const [city, setCity] = useState('');
     const [specialization, setSpecialization] = useState('');
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
@@ -11,7 +13,17 @@ const FindDoctorsSection = () => {
     const [availability, setAvailability] = useState(null);
     const [bookingLoading, setBookingLoading] = useState(false);
 
-    const handleSearch = async () => {
+    // Initial load from params
+    useEffect(() => {
+        const specParam = searchParams.get('specialization');
+        if (specParam) {
+            setSpecialization(specParam);
+            // Trigger search immediately if param exists
+            handleSearch(specParam);
+        }
+    }, [searchParams]);
+
+    const handleSearch = async (overrideSpec = null) => {
         setLoading(true);
         setDoctors([]);
         setSelectedDoctor(null);
@@ -20,7 +32,9 @@ const FindDoctorsSection = () => {
         try {
             let params = {};
             if (city) params.city = city;
-            if (specialization) params.specialization = specialization;
+
+            const specToUse = overrideSpec || specialization;
+            if (specToUse) params.specialization = specToUse;
 
             const token = localStorage.getItem('token');
             const { data } = await axios.get('http://localhost:5000/api/v1/doctors/nearby', {
@@ -34,7 +48,7 @@ const FindDoctorsSection = () => {
             }
         } catch (error) {
             console.error('Error searching doctors:', error);
-            alert('Failed to search doctors. Please try again.');
+            // alert('Failed to search doctors. Please try again.'); // Muted alert to avoid double alerts on mount
         } finally {
             setLoading(false);
         }
@@ -148,6 +162,16 @@ const FindDoctorsSection = () => {
                             <option value="Pediatrician">Pediatrician</option>
                             <option value="Neurologist">Neurologist</option>
                             <option value="General Physician">General Physician</option>
+                            <option value="Gastroenterologist">Gastroenterologist</option>
+                            <option value="Gynecologist">Gynecologist</option>
+                            <option value="Orthopedic">Orthopedic</option>
+                            <option value="ENT Specialist">ENT Specialist</option>
+                            <option value="Psychiatrist">Psychiatrist</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Urologist">Urologist</option>
+                            <option value="Pulmonologist">Pulmonologist</option>
+                            <option value="Ophthalmologist">Ophthalmologist</option>
+                            <option value="Endocrinologist">Endocrinologist</option>
                         </select>
                     </div>
                     <div>

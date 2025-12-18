@@ -22,7 +22,7 @@ const Landing = () => {
                     </p>
                     <div className="space-x-4">
                         <Link to="/login" className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold text-lg shadow-lg">Get Started</Link>
-                        <Link to="/signup" className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg hover:bg-blue-50 transition font-semibold text-lg">Join Now</Link>
+                        <Link to="/symptom-checker" className="px-8 py-4 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold text-lg shadow-lg">Check Symptoms</Link>
                     </div>
                 </div>
                 <div className="md:w-1/2 flex justify-center">

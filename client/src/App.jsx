@@ -22,6 +22,10 @@ import VideoCallPage from './pages/VideoCallPage';
 import ChatPage from './pages/ChatPage';
 import CreatePrescription from './pages/CreatePrescription';
 import MyPrescriptions from './pages/MyPrescriptions';
+import UploadLabReport from './pages/UploadLabReport';
+import ViewReportsDoctor from './pages/ViewReportsDoctor';
+import SymptomChecker from './pages/SymptomChecker';
+import AmbulanceBooking from './pages/AmbulanceBooking';
 
 import useAutoLogout from './hooks/useAutoLogout';
 
@@ -98,6 +102,22 @@ function App() {
           <Route path="/patient/prescriptions" element={
             <ProtectedRoute>
               <MyPrescriptions />
+            </ProtectedRoute>
+          } />
+          <Route path="/patient/reports/upload" element={
+            <ProtectedRoute>
+              <UploadLabReport />
+            </ProtectedRoute>
+          } />
+          <Route path="/doctor/patient/:id/reports" element={
+            <ProtectedRoute>
+              <ViewReportsDoctor />
+            </ProtectedRoute>
+          } />
+          <Route path="/symptom-checker" element={<SymptomChecker />} />
+          <Route path="/ambulance/book" element={
+            <ProtectedRoute>
+              <AmbulanceBooking />
             </ProtectedRoute>
           } />
         </Routes>

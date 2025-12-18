@@ -57,6 +57,9 @@ app.get('/api/v1/stream-test', (req, res) => {
 app.use('/api/v1/doctors', require('./routes/doctorRoutes'));
 app.use('/api/v1/appointments', require('./routes/appointmentRoutes'));
 app.use('/api/v1/prescriptions', require('./routes/prescriptionRoutes'));
+app.use('/api/v1/reports', require('./routes/reportRoutes'));
+app.use('/api/v1/symptoms', require('./routes/symptomRoutes'));
+app.use('/api/v1/ambulance', require('./routes/ambulanceRoutes'));
 
 // Serve PDF files (Legacy - moved to DB storage, keeping commented out or just removing)
 // app.use('/prescriptions', express.static('prescriptions'));
