@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { StreamVideoClient, StreamVideo } from '@stream-io/video-react-sdk';
-import axios from 'axios';
+import axios from '../utils/axiosInstance';
 
 const StreamContext = createContext();
 

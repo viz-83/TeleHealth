@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import axios from 'axios';
+import axios from '../utils/axiosInstance';
 
 const ChatContext = createContext();
 

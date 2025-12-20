@@ -5,13 +5,48 @@ import {
     useStreamVideoClient,
     StreamCall,
     StreamTheme,
-    SpeakerLayout,
     CallControls,
+    ParticipantView,
+    useCallStateHooks
 } from '@stream-io/video-react-sdk';
 import '@stream-io/video-react-sdk/dist/css/styles.css';
 
 import UserList from './UserList';
 import { RingingCall } from '@stream-io/video-react-sdk';
+
+const CustomVideoLayout = () => {
+    const { useParticipants } = useCallStateHooks();
+    const participants = useParticipants();
+
+    // Deduplicate participants: filter out ghost sessions for the same user
+    const uniqueParticipants = Object.values(
+        participants.reduce((acc, participant) => {
+            const existing = acc[participant.userId];
+            // ALWAYS prefer the latest participant in the list for a given UserID.
+            acc[participant.userId] = participant;
+            return acc;
+        }, {})
+    );
+
+    return (
+        <div className="flex flex-wrap justify-center items-center h-full w-full p-4 gap-4 overflow-y-auto bg-gray-900">
+            {uniqueParticipants.map((participant) => (
+                <div
+                    key={participant.sessionId}
+                    className="w-full md:w-1/2 lg:w-1/3 aspect-video relative bg-gray-900 rounded-lg overflow-hidden shadow-lg border border-gray-800"
+                >
+                    <ParticipantView
+                        participant={participant}
+                        muted={participant.isLocalParticipant}
+                    />
+                    <div className="absolute bottom-2 left-2 bg-black/50 text-white px-2 py-1 rounded text-sm backdrop-blur-sm flex flex-col items-start">
+                        <span className="font-bold">{participant.name || participant.userId} {participant.isLocalParticipant ? '(You)' : ''}</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
 
 const VideoCall = () => {
     const [callId, setCallId] = useState('');
@@ -65,10 +100,10 @@ const VideoCall = () => {
             <StreamTheme>
                 <StreamCall call={call}>
                     <div className="fixed inset-0 z-50 bg-black flex flex-col">
-                        <div className="flex-1 w-full relative">
-                            <SpeakerLayout />
+                        <div className="flex-1 w-full relative overflow-hidden">
+                            <CustomVideoLayout />
                         </div>
-                        <div className="p-4 flex justify-center bg-gray-900">
+                        <div className="p-4 flex justify-center bg-gray-900 border-t border-gray-800">
                             <CallControls onLeave={() => setCall(null)} />
                         </div>
                     </div>

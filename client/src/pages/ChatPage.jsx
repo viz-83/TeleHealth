@@ -4,7 +4,7 @@ import { StreamChat } from 'stream-chat';
 import { Chat, Channel, Window, ChannelHeader, MessageList, MessageInput, Thread } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/v2/index.css';
 import { useStreamSession } from '../context/StreamSessionContext';
-import axios from 'axios';
+import axios from '../utils/axiosInstance';
 
 const apiKey = 'p6yehc4e2xgg'; // Replace with actual key or env var
 

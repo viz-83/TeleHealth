@@ -11,7 +11,7 @@ import {
 } from '@stream-io/video-react-sdk';
 import '@stream-io/video-react-sdk/dist/css/styles.css';
 import { useStreamSession } from '../context/StreamSessionContext';
-import axios from 'axios';
+import axios from '../utils/axiosInstance';
 
 const apiKey = 'p6yehc4e2xgg'; // Replace with actual key or env var
 
@@ -19,9 +19,39 @@ const CustomVideoLayout = () => {
     const { useParticipants } = useCallStateHooks();
     const participants = useParticipants();
 
+
+    // Deduplicate participants: filter out ghost sessions for the same user
+    const uniqueParticipants = Object.values(
+        participants.reduce((acc, participant) => {
+            const existing = acc[participant.userId];
+
+
+
+            // Logic to keep the "best" participant session
+            if (!existing) {
+                acc[participant.userId] = participant;
+            } else {
+                // If duplicate found:
+                // 1. Always prefer the active local participant
+                if (participant.isLocalParticipant) {
+                    acc[participant.userId] = participant;
+                } else if (!existing.isLocalParticipant) {
+                    // 2. For remote users: Prefer the one who joined most recently
+                    const existingTime = existing.joinedAt ? new Date(existing.joinedAt).getTime() : 0;
+                    const newTime = participant.joinedAt ? new Date(participant.joinedAt).getTime() : 0;
+
+                    if (newTime > existingTime) {
+                        acc[participant.userId] = participant;
+                    }
+                }
+            }
+            return acc;
+        }, {})
+    );
+
     return (
         <div className="flex flex-wrap justify-center items-center h-full w-full p-4 gap-4 overflow-y-auto">
-            {participants.map((participant) => (
+            {uniqueParticipants.map((participant) => (
                 <div
                     key={participant.sessionId}
                     className="w-full md:w-1/2 lg:w-1/3 aspect-video relative bg-gray-900 rounded-lg overflow-hidden shadow-lg"
@@ -33,8 +63,7 @@ const CustomVideoLayout = () => {
                     />
                     <div className="absolute bottom-2 left-2 bg-black/50 text-white px-2 py-1 rounded text-sm backdrop-blur-sm flex flex-col items-start">
                         <span className="font-bold">{participant.name || participant.userId} {participant.isLocalParticipant ? '(You)' : ''}</span>
-                        <span className="text-xs text-gray-300">ID: {participant.userId}</span>
-                        <span className="text-xs text-gray-300">Session: {participant.sessionId}</span>
+                        {/* ID and Session hidden as per user request */}
                     </div>
                 </div>
             ))}
@@ -273,10 +302,22 @@ const VideoCallPage = () => {
             if (call) {
                 const stopTracks = async () => {
                     try {
-                        console.log('Stopping tracks...');
-                        if (call.camera) await call.camera.disable();
-                        if (call.microphone) await call.microphone.disable();
+                        console.log('Stopping tracks (cleanup)...');
+
+                        // Aggressive Track Stopping
+                        if (call.camera) {
+                            await call.camera.disable();
+                            call.camera.state?.mediaStream?.getTracks().forEach(t => t.stop());
+                        }
+                        if (call.microphone) {
+                            await call.microphone.disable();
+                            call.microphone.state?.mediaStream?.getTracks().forEach(t => t.stop());
+                        }
+
                         await call.leave();
+                        if (clientRef.current) {
+                            await clientRef.current.disconnectUser();
+                        }
                     } catch (err) {
                         console.warn('Error during call cleanup:', err);
                     }
@@ -298,9 +339,43 @@ const VideoCallPage = () => {
 
     const handleEndCall = async () => {
         if (call) {
-            await call.leave();
+            try {
+                console.log('Ending call: Disabling media tracks...');
+
+                // 1. Stop Camera Tracks
+                if (call.camera) {
+                    await call.camera.disable();
+                    if (call.camera.state?.mediaStream) {
+                        call.camera.state.mediaStream.getTracks().forEach(track => {
+                            console.log('Stopping camera track:', track.label);
+                            track.stop();
+                        });
+                    }
+                }
+
+                // 2. Stop Microphone Tracks
+                if (call.microphone) {
+                    await call.microphone.disable();
+                    if (call.microphone.state?.mediaStream) {
+                        call.microphone.state.mediaStream.getTracks().forEach(track => {
+                            console.log('Stopping mic track:', track.label);
+                            track.stop();
+                        });
+                    }
+                }
+
+                // 3. Leave and Disconnect
+                await call.leave();
+                if (client) {
+                    await client.disconnectUser();
+                }
+            } catch (err) {
+                console.error('Error disabling media tracks:', err);
+            }
         }
-        navigate('/dashboard');
+        // Force fully reload/navigate to ensure browser releases hardware
+        // navigate('/dashboard'); 
+        window.location.href = '/dashboard';
     };
 
     if (permissionDenied) {
