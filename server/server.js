@@ -1,5 +1,5 @@
 const express = require('express');
-// Server restart trigger - v3
+// Server restart trigger - v4
 const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -99,8 +99,10 @@ app.use('/api/v1/reports', require('./routes/reportRoutes'));
 app.use('/api/v1/symptoms', require('./routes/symptomRoutes'));
 app.use('/api/v1/ambulance', require('./routes/ambulanceRoutes'));
 app.use('/api/v1/health-metrics', require('./routes/healthMetricRoutes'));
-
-// Serve PDF files (Legacy - moved to DB storage, keeping commented out or just removing)
+app.use('/api/v1/tests', require('./routes/diagnosticTestRoutes')); // Diagnostic tests
+app.use('/api/v1/test-orders', require('./routes/diagnosticOrderRoutes')); // Test orders
+app.use('/api/v1/medicines', require('./routes/medicineRoutes')); // Medicine catalog
+app.use('/api/v1/medicine-orders', require('./routes/medicineOrderRoutes')); // Medicine ordersve PDF files (Legacy - moved to DB storage, keeping commented out or just removing)
 // app.use('/prescriptions', express.static('prescriptions'));
 
 app.get('/', (req, res) => {

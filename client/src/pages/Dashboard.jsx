@@ -6,8 +6,10 @@ import Button from '../components/ui/Button';
 import ServiceCard from '../components/ui/ServiceCard';
 import BentoGrid from '../components/BentoGrid';
 import doctorsHero from '../assets/doctors_hero.jpeg';
-import { FaLaptopMedical, FaUserMd, FaNotesMedical, FaHeartbeat, FaCalendarAlt } from 'react-icons/fa';
+import { FaLaptopMedical, FaUserMd, FaNotesMedical, FaHeartbeat, FaCalendarAlt, FaMicroscope } from 'react-icons/fa';
+import { Pill } from 'lucide-react';
 import DiseaseMarquee from '../components/DiseaseMarquee';
+import TestCarousel from '../components/TestCarousel';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -38,6 +40,19 @@ const Dashboard = () => {
             description: "Log vitals like BP & Glucose to keep track of your wellbeing.",
             icon: FaHeartbeat,
             action: () => navigate('/patient/health-tracker')
+        },
+        {
+            title: "Online Pharmacy",
+            description: "Order medicines & health products",
+            icon: Pill,
+            action: () => navigate('/medicines'),
+            color: "bg-teal-50"
+        },
+        {
+            title: "Home Lab Tests",
+            description: "Book diagnostic tests for home sample collection.",
+            icon: FaMicroscope,
+            action: () => navigate('/tests')
         },
     ];
 
@@ -122,6 +137,9 @@ const Dashboard = () => {
                     </div>
                 </div>
             </section>
+
+            {/* TEST CAROUSEL */}
+            <TestCarousel />
 
             {/* 3. THINGS WE OFFER (Services Grid) */}
             <section className="py-24 bg-white relative overflow-hidden">

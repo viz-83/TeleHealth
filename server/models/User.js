@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['patient', 'doctor'],
+        enum: ['patient', 'doctor', 'admin', 'pharmacy_admin'],
         default: 'patient'
     },
     isVerified: {

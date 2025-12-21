@@ -29,6 +29,19 @@ import AmbulanceBooking from './pages/AmbulanceBooking';
 import HealthTracker from './pages/HealthTracker';
 import PatientVitals from './pages/PatientVitals';
 
+import Tests from './pages/Tests';
+import TestCart from './pages/TestCart';
+import TestOrderDetails from './pages/TestOrderDetails';
+import CollectorDashboard from './pages/CollectorDashboard';
+
+import Medicines from './pages/Medicines';
+import MedicineCart from './pages/MedicineCart';
+import MedicineOrderDetails from './pages/MedicineOrderDetails';
+import PharmacyDashboard from './pages/PharmacyDashboard';
+
+import { TestCartProvider } from './context/TestCartContext';
+import { MedicineCartProvider } from './context/MedicineCartContext';
+
 import useAutoLogout from './hooks/useAutoLogout';
 
 const AutoLogoutHandler = () => {
@@ -37,113 +50,132 @@ const AutoLogoutHandler = () => {
 };
 
 import Home from './pages/Home';
+import Layout from './components/Layout';
 
 // ... imports ...
 
-function App() {
+import { Toaster } from 'react-hot-toast';
+
+const App = () => {
   return (
     <Router>
+      <Toaster position="top-right" />
       <AutoLogoutHandler />
       <StreamSessionProvider>
-        <Routes>
-          {/* Unified Home Route */}
-          <Route path="/" element={<Home />} />
+        <TestCartProvider>
+          <MedicineCartProvider>
+            <Routes>
+              {/* Unified Home Route */}
+              <Route path="/" element={<Home />} />
 
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/verify-otp" element={<VerifyOTP />} />
-          <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/verify-otp" element={<VerifyOTP />} />
+              <Route path="/login" element={<Login />} />
 
-          {/* /dashboard is now handled by / (Home) if logged in. 
+              {/* /dashboard is now handled by / (Home) if logged in. 
               Keeping /dashboard as a redirect or alias is optional, 
               but usually cleaner to remove or redirect if used by bookmarks.
               For now, we remove it and rely on Home. 
           */}
 
-          <Route path="/doctor/onboarding" element={
-            <ProtectedRoute>
-              <DoctorOnboarding />
-            </ProtectedRoute>
-          } />
-          <Route path="/find-doctors" element={
-            <ProtectedRoute>
-              <FindDoctors />
-            </ProtectedRoute>
-          } />
-          <Route path="/my-appointments" element={
-            <ProtectedRoute>
-              <MyAppointments />
-            </ProtectedRoute>
-          } />
-          <Route path="/doctor/dashboard" element={
-            <ProtectedRoute>
-              <DoctorDashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="/doctor/appointments/:id/prescription" element={
-            <ProtectedRoute>
-              <DoctorViewPrescription />
-            </ProtectedRoute>
-          } />
-          <Route path="/doctor/prescriptions" element={
-            <ProtectedRoute>
-              <DoctorPrescriptions />
-            </ProtectedRoute>
-          } />
-          <Route path="/doctor/availability" element={
-            <ProtectedRoute>
-              <DoctorAvailability />
-            </ProtectedRoute>
-          } />
-          <Route path="/appointments/:appointmentId/call" element={
-            <ProtectedRoute>
-              <VideoCallPage />
-            </ProtectedRoute>
-          } />
-          <Route path="/appointments/:appointmentId/chat" element={
-            <ProtectedRoute>
-              <ChatPage />
-            </ProtectedRoute>
-          } />
-          <Route path="/doctor/appointments/:id/prescribe" element={
-            <ProtectedRoute>
-              <CreatePrescription />
-            </ProtectedRoute>
-          } />
-          <Route path="/patient/prescriptions" element={
-            <ProtectedRoute>
-              <MyPrescriptions />
-            </ProtectedRoute>
-          } />
-          <Route path="/patient/reports/upload" element={
-            <ProtectedRoute>
-              <UploadLabReport />
-            </ProtectedRoute>
-          } />
-          <Route path="/doctor/patient/:id/reports" element={
-            <ProtectedRoute>
-              <ViewReportsDoctor />
-            </ProtectedRoute>
-          } />
-          <Route path="/symptom-checker" element={<SymptomChecker />} />
-          <Route path="/ambulance/book" element={
-            <ProtectedRoute>
-              <AmbulanceBooking />
-            </ProtectedRoute>
-          } />
-          <Route path="/patient/health-tracker" element={
-            <ProtectedRoute>
-              <HealthTracker />
-            </ProtectedRoute>
-          } />
-          <Route path="/doctor/patient/:id/vitals" element={
-            <ProtectedRoute>
-              <PatientVitals />
-            </ProtectedRoute>
-          } />
-        </Routes>
+              <Route path="/doctor/onboarding" element={
+                <ProtectedRoute>
+                  <DoctorOnboarding />
+                </ProtectedRoute>
+              } />
+              <Route path="/find-doctors" element={
+                <ProtectedRoute>
+                  <FindDoctors />
+                </ProtectedRoute>
+              } />
+              <Route path="/my-appointments" element={
+                <ProtectedRoute>
+                  <MyAppointments />
+                </ProtectedRoute>
+              } />
+              <Route path="/doctor/dashboard" element={
+                <ProtectedRoute>
+                  <DoctorDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/doctor/appointments/:id/prescription" element={
+                <ProtectedRoute>
+                  <DoctorViewPrescription />
+                </ProtectedRoute>
+              } />
+              <Route path="/doctor/prescriptions" element={
+                <ProtectedRoute>
+                  <DoctorPrescriptions />
+                </ProtectedRoute>
+              } />
+              <Route path="/doctor/availability" element={
+                <ProtectedRoute>
+                  <DoctorAvailability />
+                </ProtectedRoute>
+              } />
+              <Route path="/appointments/:appointmentId/call" element={
+                <ProtectedRoute>
+                  <VideoCallPage />
+                </ProtectedRoute>
+              } />
+              <Route path="/appointments/:appointmentId/chat" element={
+                <ProtectedRoute>
+                  <ChatPage />
+                </ProtectedRoute>
+              } />
+              <Route path="/doctor/appointments/:id/prescribe" element={
+                <ProtectedRoute>
+                  <CreatePrescription />
+                </ProtectedRoute>
+              } />
+              <Route path="/patient/prescriptions" element={
+                <ProtectedRoute>
+                  <MyPrescriptions />
+                </ProtectedRoute>
+              } />
+              <Route path="/patient/reports/upload" element={
+                <ProtectedRoute>
+                  <UploadLabReport />
+                </ProtectedRoute>
+              } />
+              <Route path="/doctor/patient/:id/reports" element={
+                <ProtectedRoute>
+                  <ViewReportsDoctor />
+                </ProtectedRoute>
+              } />
+              <Route path="/symptom-checker" element={<SymptomChecker />} />
+              <Route path="/ambulance/book" element={
+                <ProtectedRoute>
+                  <AmbulanceBooking />
+                </ProtectedRoute>
+              } />
+              <Route path="/patient/health-tracker" element={
+                <ProtectedRoute>
+                  <HealthTracker />
+                </ProtectedRoute>
+              } />
+              <Route path="/doctor/patient/:id/vitals" element={
+                <ProtectedRoute>
+                  <PatientVitals />
+                </ProtectedRoute>
+              } />
+
+              {/* Diagnostic & Medicine Systems */}
+              <Route path="/tests" element={<ProtectedRoute><Layout><Tests /></Layout></ProtectedRoute>} />
+              <Route path="/tests/cart" element={<ProtectedRoute><Layout><TestCart /></Layout></ProtectedRoute>} />
+              <Route path="/tests/orders/:id" element={<ProtectedRoute><Layout><TestOrderDetails /></Layout></ProtectedRoute>} />
+              <Route path="/collector/dashboard" element={<ProtectedRoute><Layout><CollectorDashboard /></Layout></ProtectedRoute>} />
+
+              <Route path="/medicines" element={<ProtectedRoute><Layout><Medicines /></Layout></ProtectedRoute>} />
+              <Route path="/medicines/cart" element={<ProtectedRoute><Layout><MedicineCart /></Layout></ProtectedRoute>} />
+              <Route path="/medicines/orders/:id" element={<ProtectedRoute><Layout><MedicineOrderDetails /></Layout></ProtectedRoute>} />
+              <Route path="/pharmacy/dashboard" element={<ProtectedRoute><Layout><PharmacyDashboard /></Layout></ProtectedRoute>} />
+            </Routes>
+          </MedicineCartProvider>
+        </TestCartProvider>
       </StreamSessionProvider>
     </Router>
   );
-}
+};
 
 export default App;
