@@ -117,7 +117,7 @@ const MyAppointmentsSection = () => {
             </div>
 
             {appointments.length === 0 ? (
-                <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-200">
+                <div className="text-center py-24 bg-white dark:bg-surface rounded-3xl border border-dashed border-gray-200 dark:border-gray-700">
                     <div className="text-6xl mb-6">📅</div>
                     <h3 className="text-xl font-bold text-text-primary mb-2">No appointments yet</h3>
                     <p className="text-text-secondary mb-8 max-w-sm mx-auto">Book your first consultation with a specialist today and take control of your health.</p>
@@ -128,11 +128,11 @@ const MyAppointmentsSection = () => {
             ) : (
                 <div className="grid grid-cols-1 gap-6">
                     {appointments.map((apt) => (
-                        <Card key={apt._id} className="hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden">
+                        <Card key={apt._id} className="hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 overflow-hidden">
                             <div className="p-6 sm:p-8 flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center">
                                 {/* Doctor Info */}
                                 <div className="flex-1 flex items-start gap-4 w-full">
-                                    <div className="w-16 h-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl flex items-center justify-center text-blue-600 font-bold text-2xl shadow-inner">
+                                    <div className="w-16 h-16 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/40 dark:to-indigo-900/40 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-300 font-bold text-2xl shadow-inner">
                                         {apt.doctor.name.charAt(0)}
                                     </div>
                                     <div className="flex-1">
@@ -148,11 +148,11 @@ const MyAppointmentsSection = () => {
                                         </div>
 
                                         <div className="mt-4 flex flex-wrap gap-4 text-sm text-text-secondary">
-                                            <div className="flex items-center bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                                            <div className="flex items-center px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm" style={{ backgroundColor: 'var(--bg-surface)' }}>
                                                 <span className="mr-2">📅</span>
                                                 <span className="font-medium text-text-primary">{formatDate(apt.date)}</span>
                                             </div>
-                                            <div className="flex items-center bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-100">
+                                            <div className="flex items-center px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm" style={{ backgroundColor: 'var(--bg-surface)' }}>
                                                 <span className="mr-2">⏰</span>
                                                 <span className="font-medium text-text-primary">{apt.startTime} - {apt.endTime}</span>
                                             </div>
@@ -166,7 +166,7 @@ const MyAppointmentsSection = () => {
                                 </div>
 
                                 {/* Actions */}
-                                <div className="flex gap-3 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-gray-50">
+                                <div className="flex gap-3 w-full md:w-auto pt-4 md:pt-0 border-t md:border-t-0 border-gray-50 dark:border-gray-700">
                                     <Button
                                         onClick={() => handleJoinVideo(apt._id)}
                                         disabled={apt.status === 'CANCELLED' || apt.status === 'completed'} // Assuming lowercase from backend generally, checking strict equality

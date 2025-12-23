@@ -41,10 +41,10 @@ const CollectorDashboard = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-background-light py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
                 <div className="flex items-center justify-between mb-8">
-                    <h1 className="text-3xl font-bold text-gray-900 flex items-center">
+                    <h1 className="text-3xl font-bold text-text-primary flex items-center">
                         <ClipboardList className="h-8 w-8 mr-3 text-teal-600" />
                         Field Worker Dashboard
                     </h1>
@@ -56,18 +56,18 @@ const CollectorDashboard = () => {
                 {loading ? (
                     <div className="text-center py-12">Loading tasks...</div>
                 ) : orders.length === 0 ? (
-                    <div className="bg-white rounded-lg shadow-sm p-8 text-center">
-                        <p className="text-gray-500 text-lg">No assigned collections found.</p>
+                    <div className="bg-white dark:bg-surface rounded-lg shadow-sm p-8 text-center">
+                        <p className="text-text-secondary text-lg">No assigned collections found.</p>
                     </div>
                 ) : (
                     <div className="space-y-6">
                         {orders.map((order) => (
-                            <div key={order._id} className="bg-white rounded-lg shadow-sm border-l-4 border-teal-500 overflow-hidden">
+                            <div key={order._id} className="bg-white dark:bg-surface rounded-lg shadow-sm border-l-4 border-teal-500 overflow-hidden dark:border-gray-700">
                                 <div className="p-6">
                                     <div className="flex flex-col md:flex-row justify-betweenStart gap-4">
                                         <div className="flex-1">
                                             <div className="flex items-center mb-2">
-                                                <h3 className="text-lg font-semibold text-gray-900 mr-3">
+                                                <h3 className="text-lg font-semibold text-text-primary mr-3">
                                                     {order.patient?.name || 'Unknown Patient'}
                                                 </h3>
                                                 <span className={`px-2 py-0.5 rounded text-xs font-bold uppercase
@@ -77,7 +77,7 @@ const CollectorDashboard = () => {
                                                 </span>
                                             </div>
 
-                                            <div className="space-y-1 text-sm text-gray-600 mb-4">
+                                            <div className="space-y-1 text-sm text-text-secondary mb-4">
                                                 <p className="flex items-center">
                                                     <MapPin className="h-4 w-4 mr-2 text-gray-400" />
                                                     {order.collectionAddress.fullAddress}, {order.collectionAddress.city} - {order.collectionAddress.pincode}
@@ -90,9 +90,9 @@ const CollectorDashboard = () => {
                                                 {/* In real app, we would have patient phone accessible here if populated */}
                                             </div>
 
-                                            <div className="bg-gray-50 p-3 rounded-md">
-                                                <p className="text-xs font-semibold text-gray-500 uppercase mb-1">Tests to Collect</p>
-                                                <ul className="list-disc list-inside text-sm text-gray-800">
+                                            <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-md">
+                                                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-1">Tests to Collect</p>
+                                                <ul className="list-disc list-inside text-sm text-gray-800 dark:text-gray-200">
                                                     {order.tests.map((t, i) => (
                                                         <li key={i}>{t.test.name} ({t.test.sampleType})</li>
                                                     ))}
@@ -110,7 +110,7 @@ const CollectorDashboard = () => {
                                                     Mark Collected
                                                 </button>
                                             ) : (
-                                                <button disabled className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-400 bg-gray-100 cursor-not-allowed">
+                                                <button disabled className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-400 bg-gray-100 dark:bg-gray-800 cursor-not-allowed">
                                                     <CheckCircle className="h-4 w-4 mr-2" />
                                                     Completed
                                                 </button>

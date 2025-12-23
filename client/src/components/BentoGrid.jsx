@@ -3,143 +3,139 @@ import { FaPlay } from 'react-icons/fa';
 
 const BentoGrid = () => {
     return (
-        <section className="py-24 bg-primary text-white"> {/* Helper dark color similar to Hertility but warm */}
+        <section className="py-24 bg-background-light text-text-primary">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-heading font-medium tracking-tight mb-4 text-white">
-                        We're here to support you
+                    <h2 className="text-4xl md:text-5xl font-heading font-bold tracking-tight mb-4 text-text-primary">
+                        Complete Care, Simplified
                     </h2>
+                    <p className="text-text-secondary text-lg max-w-2xl mx-auto">
+                        From AI-powered diagnostics to 1-on-1 specialist consultations, we've built a healthcare ecosystem designed entirely around you.
+                    </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-auto lg:h-[600px]">
-                    {/* Card 1: Clinical Grade Results (Top Left - Wide on mobile, 1x1 on desktop?) 
-                        Actually Hertility layout is:
-                        [  1  ] [  2  ] [  3  ]
-                        [    4 (Wide) ] [  5  ]
-                    */}
 
-                    {/* 1. Instant Results (Top Left) */}
-                    <div className="bg-white rounded-[2rem] p-8 text-text-primary flex flex-col justify-between group overflow-hidden relative min-h-[300px]">
+                    {/* 1. Lab Results */}
+                    <div className="bg-surface rounded-[2rem] p-8 text-text-primary flex flex-col justify-between group overflow-hidden relative min-h-[300px] border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
                         <div className="relative z-10 block">
-                            <h3 className="text-2xl font-body font-bold mb-2">Clinical-grade results</h3>
-                            <p className="text-text-secondary">Delivered 24/7 to your dashboard.</p>
+                            <h3 className="text-2xl font-body font-bold mb-2">Precision Diagnostics</h3>
+                            <p className="text-text-secondary">Clinical-grade lab results delivered to your device in 24 hours.</p>
                         </div>
-                        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary/50 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
-                        {/* Fake "Result" UI */}
-                        <div className="mt-8 bg-background-light p-4 rounded-xl shadow-sm border border-gray-100 transform rotate-2 group-hover:rotate-0 transition-transform duration-500">
-                            <div className="h-2 w-24 bg-gray-200 rounded mb-3"></div>
+                        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary/30 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+                        <div className="mt-8 bg-background-light p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 transform rotate-2 group-hover:rotate-0 transition-transform duration-500 hover:scale-105 relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-1 h-full bg-cta"></div>
+                            <div className="h-2 w-24 bg-gray-200 dark:bg-gray-700 rounded mb-3"></div>
                             <div className="flex items-center gap-2 mb-2">
-                                <div className="h-2 w-2 bg-cta rounded-full"></div>
-                                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-                                    <div className="h-full w-3/4 bg-cta"></div>
+                                <div className="h-2 w-2 bg-cta rounded-full animate-pulse"></div>
+                                <div className="h-2 w-full bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden">
+                                    <div className="h-full w-3/4 bg-cta group-hover:w-full transition-all duration-1000 ease-out"></div>
                                 </div>
                             </div>
                             <div className="flex justify-between text-xs text-text-muted">
-                                <span>Low</span>
-                                <span>Normal</span>
-                                <span>High</span>
+                                <span>Analysis</span>
+                                <span className="text-cta font-bold">Complete</span>
                             </div>
                         </div>
                     </div>
 
-                    {/* 2. Insights (Top Middle) */}
-                    <div className="bg-secondary/30 rounded-[2rem] p-8 text-text-primary flex flex-col justify-between group overflow-hidden min-h-[300px]">
+                    {/* 2. Vitals Monitoring */}
+                    <div className="bg-secondary/20 rounded-[2rem] p-8 text-text-primary flex flex-col justify-between group overflow-hidden min-h-[300px] border border-secondary/20 hover:shadow-xl transition-shadow duration-300">
                         <div>
-                            <h3 className="text-2xl font-body font-bold mb-2">Track Your Vitals</h3>
-                            <p className="text-text-secondary">Real-time monitoring of BP & Glucose.</p>
+                            <h3 className="text-2xl font-body font-bold mb-2">Real-time Monitoring</h3>
+                            <p className="text-text-secondary">Track vital trends like BP & Glucose with medical accuracy.</p>
                         </div>
-                        {/* Fake "Graph" UI */}
                         <div className="mt-6 relative h-32 flex items-end gap-2 px-2">
-                            <div className="w-full bg-white/80 rounded-xl shadow-sm p-3 h-full flex items-end justify-between gap-1">
+                            <div className="w-full bg-white rounded-xl shadow-sm p-3 h-full flex items-end justify-between gap-1 border border-white/40">
                                 <div className="w-1/6 bg-cta/20 h-1/3 rounded-t-lg group-hover:h-1/2 transition-all duration-500"></div>
                                 <div className="w-1/6 bg-cta/30 h-1/2 rounded-t-lg group-hover:h-2/3 transition-all duration-500 delay-75"></div>
                                 <div className="w-1/6 bg-cta/40 h-1/4 rounded-t-lg group-hover:h-1/3 transition-all duration-500 delay-100"></div>
-                                <div className="w-1/6 bg-cta/60 h-3/4 rounded-t-lg group-hover:h-full transition-all duration-500 delay-150 relative">
-                                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-cta text-white text-[10px] px-1.5 py-0.5 rounded">120</div>
+                                <div className="w-1/6 bg-cta h-3/4 rounded-t-lg group-hover:h-full transition-all duration-500 delay-150 relative shadow-lg shadow-cta/20">
+                                    <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-surface text-cta text-[10px] font-bold px-2 py-1 rounded shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">120/80</div>
                                 </div>
                                 <div className="w-1/6 bg-cta/40 h-2/3 rounded-t-lg group-hover:h-1/2 transition-all duration-500 delay-200"></div>
                             </div>
                         </div>
                     </div>
 
-                    {/* 3. Symptoms (Top Right) */}
-                    <div className="bg-white rounded-[2rem] p-8 text-text-primary flex flex-col justify-between group overflow-hidden min-h-[300px]">
+                    {/* 3. AI Assistant */}
+                    <div className="bg-surface rounded-[2rem] p-8 text-text-primary flex flex-col justify-between group overflow-hidden min-h-[300px] border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
                         <div className="z-10 relative">
-                            <h3 className="text-2xl font-body font-bold mb-2">Symptom Checker</h3>
-                            <p className="text-text-secondary">AI-powered health assessment.</p>
+                            <h3 className="text-2xl font-body font-bold mb-2">AI Health Assistant</h3>
+                            <p className="text-text-secondary">Instant symptom assessment powered by advanced AI.</p>
                         </div>
-                        {/* Fake "Bubbles" UI */}
                         <div className="mt-4 relative h-40">
-                            <div className="absolute top-0 right-0 bg-secondary/30 text-cta text-xs font-bold px-3 py-1.5 rounded-full transform translate-x-2 -translate-y-2">Migraine</div>
-                            <div className="absolute top-10 left-0 bg-red-50 text-red-500 text-xs font-bold px-3 py-1.5 rounded-full transform -translate-x-2">Fever</div>
-                            <div className="absolute bottom-4 right-8 bg-blue-50 text-blue-500 text-xs font-bold px-4 py-2 rounded-full scale-110 shadow-sm">Nausea?</div>
-                            <div className="absolute bottom-10 left-4 w-16 h-16 rounded-full border border-gray-100 flex items-center justify-center bg-gray-50 group-hover:scale-110 transition-transform">
+                            <div className="absolute top-0 right-0 bg-secondary/30 text-cta text-xs font-bold px-4 py-2 rounded-full transform translate-x-2 -translate-y-2 animate-float border border-secondary/20">Headache</div>
+                            <div className="absolute top-12 left-0 bg-red-50 text-red-500 text-xs font-bold px-4 py-2 rounded-full transform -translate-x-2 animate-float-delayed border border-red-100">Fever</div>
+                            <div className="absolute bottom-6 right-8 bg-blue-50 text-blue-500 text-xs font-bold px-5 py-2.5 rounded-full scale-110 shadow-lg animate-pulse-slow border border-blue-100">Flu Symptoms?</div>
+                            <div className="absolute bottom-10 left-4 w-12 h-12 rounded-full border border-gray-100 flex items-center justify-center bg-gray-50 group-hover:scale-110 transition-transform">
                                 <div className="w-2 h-2 bg-cta rounded-full animate-ping"></div>
                             </div>
                         </div>
                     </div>
 
-                    {/* 4. Doctor Report (Bottom Left - Wide) */}
-                    <div className="lg:col-span-2 bg-background-light rounded-[2rem] p-8 text-text-primary flex flex-col md:flex-row items-center gap-8 group overflow-hidden min-h-[300px]">
-                        <div className="md:w-1/2">
-                            <h3 className="text-2xl font-body font-bold mb-4">Doctor-written reports & care plans</h3>
+                    {/* 4. Doctor Reports (Wide) */}
+                    <div className="lg:col-span-2 bg-surface dark:bg-gray-800/50 rounded-[2rem] p-8 text-text-primary flex flex-col md:flex-row items-center gap-8 group overflow-hidden min-h-[300px] border border-secondary/20 hover:shadow-xl transition-shadow duration-300">
+                        <div className="md:w-1/2 relative z-10">
+                            <h3 className="text-2xl font-body font-bold mb-4">Comprehensive Care Plans</h3>
                             <p className="text-text-secondary leading-relaxed mb-6">
-                                Receive a comprehensive breakdown of your health, reviewed by board-certified specialists, with actionable next steps.
+                                Receive a detailed health breakdown reviewed by board-certified specialists, complete with actionable prescriptions and lifestyle guides.
                             </p>
                             <div className="flex gap-2">
-                                <span className="bg-white px-3 py-1 rounded-md text-xs font-medium text-cta border border-cta/10">Board Certified</span>
-                                <span className="bg-white px-3 py-1 rounded-md text-xs font-medium text-cta border border-cta/10">ISO 27001</span>
+                                <span className="bg-surface/80 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-cta border border-cta/10 shadow-sm">Board Certified</span>
+                                <span className="bg-surface/80 backdrop-blur-sm px-3 py-1.5 rounded-lg text-xs font-bold text-cta border border-cta/10 shadow-sm">Secure & Private</span>
                             </div>
                         </div>
-                        {/* Fake "Document" UI */}
                         <div className="md:w-1/2 w-full relative">
-                            <div className="bg-white p-6 rounded-t-xl shadow-lg border border-gray-100 w-3/4 mx-auto transform translate-y-4 group-hover:translate-y-2 transition-transform duration-500">
-                                <div className="flex items-center gap-3 mb-4">
-                                    <div className="w-8 h-8 bg-gray-100 rounded-full"></div>
-                                    <div className="space-y-1">
-                                        <div className="h-2 w-20 bg-gray-200 rounded"></div>
-                                        <div className="h-1.5 w-12 bg-gray-100 rounded"></div>
+                            <div className="bg-white p-6 rounded-t-2xl shadow-2xl border border-gray-100 w-3/4 mx-auto transform translate-y-6 group-hover:translate-y-2 transition-transform duration-500">
+                                <div className="flex items-center gap-4 mb-6">
+                                    <div className="w-10 h-10 bg-secondary/30 rounded-full flex items-center justify-center text-cta">
+                                        <div className="w-5 h-5 border-2 border-current rounded-full"></div>
+                                    </div>
+                                    <div className="space-y-1.5">
+                                        <div className="h-2.5 w-24 bg-gray-200 rounded-full"></div>
+                                        <div className="h-2 w-16 bg-gray-100 rounded-full"></div>
                                     </div>
                                 </div>
-                                <div className="space-y-2">
-                                    <div className="h-2 w-full bg-gray-100 rounded"></div>
-                                    <div className="h-2 w-full bg-gray-100 rounded"></div>
-                                    <div className="h-2 w-2/3 bg-gray-100 rounded"></div>
+                                <div className="space-y-3">
+                                    <div className="h-2 w-full bg-gray-100 rounded-full group-hover:animate-shimmer"></div>
+                                    <div className="h-2 w-full bg-gray-100 rounded-full group-hover:animate-shimmer" style={{ animationDelay: '0.2s' }}></div>
+                                    <div className="h-2 w-2/3 bg-gray-100 rounded-full group-hover:animate-shimmer" style={{ animationDelay: '0.4s' }}></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* 5. Expert Support (Bottom Right) */}
-                    <div className="bg-white rounded-[2rem] p-8 text-text-primary flex flex-col justify-between group overflow-hidden min-h-[300px] relative">
+                    {/* 5. Expert Support */}
+                    <div className="bg-surface rounded-[2rem] p-8 text-text-primary flex flex-col justify-between group overflow-hidden min-h-[300px] relative border border-gray-100 dark:border-gray-800 hover:shadow-xl transition-shadow duration-300">
                         <div className="relative z-10">
-                            <h3 className="text-2xl font-body font-bold mb-2">Expert support included</h3>
-                            <p className="text-text-secondary">Free 1:1 call to review your results.</p>
+                            <h3 className="text-2xl font-body font-bold mb-2">Instant Specialist Access</h3>
+                            <p className="text-text-secondary">Free 1:1 video consultations included with every plan.</p>
                         </div>
-                        {/* Fake "Video Call" UI */}
-                        <div className="mt-6 relative rounded-2xl overflow-hidden bg-gray-900 h-48 w-full shadow-lg group-hover:shadow-2xl transition-shadow">
+                        <div className="mt-6 relative rounded-2xl overflow-hidden bg-gray-100 h-48 w-full shadow-lg group-hover:shadow-2xl transition-all duration-500 border border-gray-100">
                             <div className="absolute inset-0 flex items-center justify-center">
-                                {/* Abstract avatar */}
-                                <div className="w-16 h-16 bg-cta/90 rounded-full flex items-center justify-center backdrop-blur-sm">
-                                    <div className="w-0 h-0 border-l-[10px] border-l-white border-y-[6px] border-y-transparent ml-1"></div>
+                                <div className="w-16 h-16 bg-white/50 backdrop-blur-md rounded-full flex items-center justify-center border border-white/40 group-hover:scale-110 transition-transform duration-300">
+                                    <div className="w-0 h-0 border-l-[10px] border-l-cta border-y-[6px] border-y-transparent ml-1"></div>
                                 </div>
                             </div>
-                            {/* Small PiP */}
-                            <div className="absolute bottom-3 right-3 w-12 h-16 bg-gray-700 rounded-lg border border-white/20"></div>
-                            {/* Controls */}
-                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-                                <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white text-[10px]">✕</div>
-                                <div className="w-6 h-6 bg-white/20 rounded-full"></div>
+                            <div className="absolute bottom-4 left-0 right-0 px-4 flex justify-between items-center">
+                                <div className="flex -space-x-2">
+                                    <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white"></div>
+                                    <div className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white"></div>
+                                </div>
+                                <div className="flex gap-2">
+                                    <div className="w-8 h-8 bg-red-500/90 hover:bg-red-500 backdrop-blur-sm rounded-full flex items-center justify-center text-white text-[10px] animate-pulse shadow-lg cursor-pointer transition-colors">✕</div>
+                                    <div className="w-8 h-8 bg-black/5 hover:bg-black/10 backdrop-blur-sm rounded-full cursor-pointer transition-colors"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-12 text-center">
-                    <button className="bg-secondary text-cta font-bold py-3 px-8 rounded-full hover:bg-white transition-colors shadow-lg shadow-cta/10">
-                        Start your journey
+                <div className="mt-16 text-center">
+                    <button className="bg-cta hover:bg-cta-hover text-white font-bold py-4 px-10 rounded-full transition-all shadow-xl shadow-cta/20 hover:shadow-2xl hover:shadow-cta/30 transform hover:-translate-y-1">
+                        Start your health journey
                     </button>
-                    {/* The yellow/lime button from example */}
                 </div>
             </div>
         </section>

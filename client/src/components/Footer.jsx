@@ -27,7 +27,7 @@ const Footer = () => {
     );
 
     return (
-        <footer className="bg-white border-t border-gray-100 pt-16 pb-8 font-body">
+        <footer className="bg-surface border-t border-gray-100 dark:border-gray-800 pt-16 pb-8 font-body">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                     {/* Column 1: Care Pathways */}
@@ -93,8 +93,8 @@ const Footer = () => {
                         © {new Date().getFullYear()} MedSync Healthcare. All rights reserved.
                     </p>
                     <div className="flex gap-4">
-                        <span className="text-xs text-text-muted px-2 py-1 bg-gray-50 rounded border border-gray-100">ISO 27001 Certified</span>
-                        <span className="text-xs text-text-muted px-2 py-1 bg-gray-50 rounded border border-gray-100">GDPR Compliant</span>
+                        <span className="text-xs text-text-muted px-2 py-1 bg-transparent border border-gray-200 dark:border-gray-700 rounded">ISO 27001 Certified</span>
+                        <span className="text-xs text-text-muted px-2 py-1 bg-transparent border border-gray-200 dark:border-gray-700 rounded">GDPR Compliant</span>
                     </div>
                 </div>
             </div>

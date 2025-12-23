@@ -68,8 +68,8 @@ const DoctorViewPrescription = () => {
                             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cta"></div>
                         </Card>
                     ) : error ? (
-                        <Card className="p-8 text-center border-red-100 bg-red-50">
-                            <p className="text-red-500 text-lg mb-4 font-bold">{error}</p>
+                        <Card className="p-8 text-center border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10">
+                            <p className="text-red-500 dark:text-red-400 text-lg mb-4 font-bold">{error}</p>
                             {error.includes('No prescription found') && (
                                 <Button
                                     onClick={() => navigate(`/doctor/appointments/${appointmentId}/prescribe`)}
@@ -82,7 +82,7 @@ const DoctorViewPrescription = () => {
                     ) : prescription ? (
                         <Card className="overflow-hidden shadow-xl border-t-8 border-cta">
                             {/* Header */}
-                            <div className="p-8 border-b border-gray-100 bg-gray-50/30">
+                            <div className="p-8 border-b border-gray-100 dark:border-gray-700 bg-gray-50/30 dark:bg-gray-800/30">
                                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                                     <div>
                                         <h1 className="text-3xl font-heading font-bold text-text-primary mb-2">Prescription</h1>
@@ -100,9 +100,9 @@ const DoctorViewPrescription = () => {
                             </div>
 
                             {/* Patient & Doctor Info */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 border-b border-gray-100">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 border-b border-gray-100 dark:border-gray-700">
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl">
+                                    <div className="w-12 h-12 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 text-xl">
                                         <FaUser />
                                     </div>
                                     <div>
@@ -112,7 +112,7 @@ const DoctorViewPrescription = () => {
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xl">
+                                    <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400 text-xl">
                                         <FaUserMd />
                                     </div>
                                     <div>
@@ -130,7 +130,7 @@ const DoctorViewPrescription = () => {
                                     <h3 className="text-lg font-heading font-bold text-text-primary mb-3 flex items-center gap-2">
                                         <FaNotesMedical className="text-cta" /> Diagnosis
                                     </h3>
-                                    <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 text-text-primary">
+                                    <div className="bg-gray-50 dark:bg-gray-800/40 p-4 rounded-xl border border-gray-100 dark:border-gray-700 text-text-primary">
                                         {prescription.diagnosis || 'No diagnosis recorded.'}
                                     </div>
                                 </div>
@@ -143,16 +143,16 @@ const DoctorViewPrescription = () => {
                                     {prescription.medicines && prescription.medicines.length > 0 ? (
                                         <div className="grid gap-3">
                                             {prescription.medicines.map((med, idx) => (
-                                                <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                                <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white dark:bg-surface border border-gray-200 dark:border-gray-700 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                                                     <div>
                                                         <p className="font-bold text-text-primary text-lg">{med.name}</p>
                                                         <p className="text-text-secondary text-sm flex flex-wrap gap-2 mt-1">
-                                                            <span className="bg-gray-100 px-2 py-0.5 rounded text-xs">Dosage: {med.dosage}</span>
-                                                            <span className="bg-gray-100 px-2 py-0.5 rounded text-xs">Freq: {med.frequency}</span>
+                                                            <span className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-xs">Dosage: {med.dosage}</span>
+                                                            <span className="bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded text-xs">Freq: {med.frequency}</span>
                                                         </p>
                                                     </div>
                                                     <div className="mt-2 sm:mt-0 text-right">
-                                                        <span className="text-sm font-bold text-cta bg-blue-50 px-3 py-1 rounded-full">
+                                                        <span className="text-sm font-bold text-cta bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full">
                                                             {med.duration}
                                                         </span>
                                                     </div>
@@ -182,9 +182,9 @@ const DoctorViewPrescription = () => {
 
                                 {/* Advice */}
                                 {prescription.advice && (
-                                    <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-5">
-                                        <h3 className="text-lg font-heading font-bold text-yellow-800 mb-2">Additional Advice</h3>
-                                        <p className="text-yellow-900 leading-relaxed">
+                                    <div className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-100 dark:border-yellow-900/30 rounded-xl p-5">
+                                        <h3 className="text-lg font-heading font-bold text-yellow-800 dark:text-yellow-200 mb-2">Additional Advice</h3>
+                                        <p className="text-yellow-900 dark:text-yellow-100 leading-relaxed">
                                             {prescription.advice}
                                         </p>
                                     </div>
@@ -192,7 +192,7 @@ const DoctorViewPrescription = () => {
                             </div>
 
                             {/* Actions */}
-                            <div className="p-8 bg-gray-50 border-t border-gray-100 flex justify-end gap-3">
+                            <div className="p-8 bg-gray-50 dark:bg-gray-800/20 border-t border-gray-100 dark:border-gray-700 flex justify-end gap-3">
                                 <Button variant="outline" onClick={() => window.print()}>
                                     Print Prescription
                                 </Button>

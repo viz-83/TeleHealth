@@ -54,133 +54,136 @@ import Layout from './components/Layout';
 
 // ... imports ...
 
+import { ThemeProvider } from './context/ThemeContext';
 import { Toaster } from 'react-hot-toast';
 import AIAssistantButton from './components/AIAssistant/AIAssistantButton';
 
 const App = () => {
   return (
-    <Router>
-      <Toaster position="top-right" />
-      <AutoLogoutHandler />
-      <StreamSessionProvider>
-        <TestCartProvider>
-          <MedicineCartProvider>
-            <Routes>
-              {/* Unified Home Route */}
-              <Route path="/" element={<Landing />} />
+    <ThemeProvider>
+      <Router>
+        <Toaster position="top-right" />
+        <AutoLogoutHandler />
+        <StreamSessionProvider>
+          <TestCartProvider>
+            <MedicineCartProvider>
+              <Routes>
+                {/* Unified Home Route */}
+                <Route path="/" element={<Landing />} />
 
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/verify-otp" element={<VerifyOTP />} />
-              <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/verify-otp" element={<VerifyOTP />} />
+                <Route path="/login" element={<Login />} />
 
-              <Route path="/dashboard" element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } />
+                <Route path="/dashboard" element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                } />
 
-              <Route path="/doctor/onboarding" element={
-                <ProtectedRoute>
-                  <DoctorOnboarding />
-                </ProtectedRoute>
-              } />
-              <Route path="/find-doctors" element={
-                <ProtectedRoute>
-                  <FindDoctors />
-                </ProtectedRoute>
-              } />
-              <Route path="/my-appointments" element={
-                <ProtectedRoute>
-                  <MyAppointments />
-                </ProtectedRoute>
-              } />
-              <Route path="/doctor/dashboard" element={
-                <ProtectedRoute>
-                  <DoctorDashboard />
-                </ProtectedRoute>
-              } />
-              <Route path="/doctor/appointments/:id/prescription" element={
-                <ProtectedRoute>
-                  <DoctorViewPrescription />
-                </ProtectedRoute>
-              } />
-              <Route path="/doctor/prescriptions" element={
-                <ProtectedRoute>
-                  <DoctorPrescriptions />
-                </ProtectedRoute>
-              } />
-              <Route path="/doctor/availability" element={
-                <ProtectedRoute>
-                  <DoctorAvailability />
-                </ProtectedRoute>
-              } />
-              <Route path="/appointments/:appointmentId/call" element={
-                <ProtectedRoute>
-                  <VideoCallPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/appointments/:appointmentId/chat" element={
-                <ProtectedRoute>
-                  <ChatPage />
-                </ProtectedRoute>
-              } />
-              <Route path="/doctor/appointments/:id/prescribe" element={
-                <ProtectedRoute>
-                  <CreatePrescription />
-                </ProtectedRoute>
-              } />
-              <Route path="/patient/prescriptions" element={
-                <ProtectedRoute>
-                  <MyPrescriptions />
-                </ProtectedRoute>
-              } />
-              <Route path="/patient/reports/upload" element={
-                <ProtectedRoute>
-                  <UploadLabReport />
-                </ProtectedRoute>
-              } />
-              <Route path="/doctor/patient/:id/reports" element={
-                <ProtectedRoute>
-                  <ViewReportsDoctor />
-                </ProtectedRoute>
-              } />
-              <Route path="/symptom-checker" element={
-                <ProtectedRoute>
-                  <SymptomChecker />
-                </ProtectedRoute>
-              } />
-              <Route path="/ambulance/book" element={
-                <ProtectedRoute>
-                  <AmbulanceBooking />
-                </ProtectedRoute>
-              } />
-              <Route path="/patient/health-tracker" element={
-                <ProtectedRoute>
-                  <HealthTracker />
-                </ProtectedRoute>
-              } />
-              <Route path="/doctor/patient/:id/vitals" element={
-                <ProtectedRoute>
-                  <PatientVitals />
-                </ProtectedRoute>
-              } />
+                <Route path="/doctor/onboarding" element={
+                  <ProtectedRoute>
+                    <DoctorOnboarding />
+                  </ProtectedRoute>
+                } />
+                <Route path="/find-doctors" element={
+                  <ProtectedRoute>
+                    <FindDoctors />
+                  </ProtectedRoute>
+                } />
+                <Route path="/my-appointments" element={
+                  <ProtectedRoute>
+                    <MyAppointments />
+                  </ProtectedRoute>
+                } />
+                <Route path="/doctor/dashboard" element={
+                  <ProtectedRoute>
+                    <DoctorDashboard />
+                  </ProtectedRoute>
+                } />
+                <Route path="/doctor/appointments/:id/prescription" element={
+                  <ProtectedRoute>
+                    <DoctorViewPrescription />
+                  </ProtectedRoute>
+                } />
+                <Route path="/doctor/prescriptions" element={
+                  <ProtectedRoute>
+                    <DoctorPrescriptions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/doctor/availability" element={
+                  <ProtectedRoute>
+                    <DoctorAvailability />
+                  </ProtectedRoute>
+                } />
+                <Route path="/appointments/:appointmentId/call" element={
+                  <ProtectedRoute>
+                    <VideoCallPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/appointments/:appointmentId/chat" element={
+                  <ProtectedRoute>
+                    <ChatPage />
+                  </ProtectedRoute>
+                } />
+                <Route path="/doctor/appointments/:id/prescribe" element={
+                  <ProtectedRoute>
+                    <CreatePrescription />
+                  </ProtectedRoute>
+                } />
+                <Route path="/patient/prescriptions" element={
+                  <ProtectedRoute>
+                    <MyPrescriptions />
+                  </ProtectedRoute>
+                } />
+                <Route path="/patient/reports/upload" element={
+                  <ProtectedRoute>
+                    <UploadLabReport />
+                  </ProtectedRoute>
+                } />
+                <Route path="/doctor/patient/:id/reports" element={
+                  <ProtectedRoute>
+                    <ViewReportsDoctor />
+                  </ProtectedRoute>
+                } />
+                <Route path="/symptom-checker" element={
+                  <ProtectedRoute>
+                    <SymptomChecker />
+                  </ProtectedRoute>
+                } />
+                <Route path="/ambulance/book" element={
+                  <ProtectedRoute>
+                    <AmbulanceBooking />
+                  </ProtectedRoute>
+                } />
+                <Route path="/patient/health-tracker" element={
+                  <ProtectedRoute>
+                    <HealthTracker />
+                  </ProtectedRoute>
+                } />
+                <Route path="/doctor/patient/:id/vitals" element={
+                  <ProtectedRoute>
+                    <PatientVitals />
+                  </ProtectedRoute>
+                } />
 
-              {/* Diagnostic & Medicine Systems */}
-              <Route path="/tests" element={<ProtectedRoute><Layout><Tests /></Layout></ProtectedRoute>} />
-              <Route path="/tests/cart" element={<ProtectedRoute><Layout><TestCart /></Layout></ProtectedRoute>} />
-              <Route path="/tests/orders/:id" element={<ProtectedRoute><Layout><TestOrderDetails /></Layout></ProtectedRoute>} />
-              <Route path="/collector/dashboard" element={<ProtectedRoute><Layout><CollectorDashboard /></Layout></ProtectedRoute>} />
+                {/* Diagnostic & Medicine Systems */}
+                <Route path="/tests" element={<ProtectedRoute><Layout><Tests /></Layout></ProtectedRoute>} />
+                <Route path="/tests/cart" element={<ProtectedRoute><Layout><TestCart /></Layout></ProtectedRoute>} />
+                <Route path="/tests/orders/:id" element={<ProtectedRoute><Layout><TestOrderDetails /></Layout></ProtectedRoute>} />
+                <Route path="/collector/dashboard" element={<ProtectedRoute><Layout><CollectorDashboard /></Layout></ProtectedRoute>} />
 
-              <Route path="/medicines" element={<ProtectedRoute><Layout><Medicines /></Layout></ProtectedRoute>} />
-              <Route path="/medicines/cart" element={<ProtectedRoute><Layout><MedicineCart /></Layout></ProtectedRoute>} />
-              <Route path="/medicines/orders/:id" element={<ProtectedRoute><Layout><MedicineOrderDetails /></Layout></ProtectedRoute>} />
-              <Route path="/pharmacy/dashboard" element={<ProtectedRoute><Layout><PharmacyDashboard /></Layout></ProtectedRoute>} />
-            </Routes>
-          </MedicineCartProvider>
-        </TestCartProvider>
-      </StreamSessionProvider>
-      <AIAssistantButton />
-    </Router>
+                <Route path="/medicines" element={<ProtectedRoute><Layout><Medicines /></Layout></ProtectedRoute>} />
+                <Route path="/medicines/cart" element={<ProtectedRoute><Layout><MedicineCart /></Layout></ProtectedRoute>} />
+                <Route path="/medicines/orders/:id" element={<ProtectedRoute><Layout><MedicineOrderDetails /></Layout></ProtectedRoute>} />
+                <Route path="/pharmacy/dashboard" element={<ProtectedRoute><Layout><PharmacyDashboard /></Layout></ProtectedRoute>} />
+              </Routes>
+            </MedicineCartProvider>
+          </TestCartProvider>
+        </StreamSessionProvider>
+        <AIAssistantButton />
+      </Router>
+    </ThemeProvider>
   );
 };
 

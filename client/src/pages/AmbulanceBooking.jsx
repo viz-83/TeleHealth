@@ -58,10 +58,10 @@ const AmbulanceBooking = () => {
                     <FaArrowLeft className="mr-2" /> Back
                 </Button>
 
-                <Card className="overflow-hidden shadow-2xl border-0 ring-4 ring-red-100">
+                <Card className="overflow-hidden shadow-2xl border-0 ring-4 ring-red-100 dark:ring-red-900/30">
                     <div className="bg-red-600 p-8 text-white text-center relative overflow-hidden">
                         <div className="relative z-10">
-                            <div className="mx-auto bg-white/20 w-20 h-20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm shadow-inner">
+                            <div className="mx-auto bg-white/20 dark:bg-black/20 w-20 h-20 rounded-full flex items-center justify-center mb-4 backdrop-blur-sm shadow-inner">
                                 <FaAmbulance className="text-4xl" />
                             </div>
                             <h1 className="text-3xl font-heading font-bold mb-2">Emergency Ambulance</h1>
@@ -75,10 +75,10 @@ const AmbulanceBooking = () => {
                     <div className="p-8">
                         {!booking ? (
                             <>
-                                <div className="mb-8 bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl">
+                                <div className="mb-8 bg-red-50 dark:bg-red-900/10 border-l-4 border-red-500 p-4 rounded-r-xl">
                                     <div className="flex items-start gap-3">
                                         <FaExclamationTriangle className="text-red-600 mt-1 flex-shrink-0" />
-                                        <p className="text-red-800 text-sm font-medium leading-relaxed">
+                                        <p className="text-red-800 dark:text-red-200 text-sm font-medium leading-relaxed">
                                             For immediate life-threatening emergencies, consider calling your local emergency number (e.g., 911) directly.
                                         </p>
                                     </div>
@@ -93,7 +93,7 @@ const AmbulanceBooking = () => {
                                             value={pickupLocation}
                                             onChange={(e) => setPickupLocation(e.target.value)}
                                             placeholder="Enter your current location..."
-                                            className="w-full h-32 px-4 py-3 rounded-xl border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 bg-gray-50/50 transition-all outline-none resize-none"
+                                            className="w-full h-32 px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 bg-gray-50/50 dark:bg-background-subtle text-text-primary transition-all outline-none resize-none"
                                             required
                                         />
                                     </div>
@@ -123,23 +123,23 @@ const AmbulanceBooking = () => {
                         ) : (
                             <div className="text-center py-4">
                                 <div className="mb-8">
-                                    <div className="inline-block p-5 rounded-full bg-green-100 text-green-600 mb-6 animate-bounce-slow shadow-sm">
+                                    <div className="inline-block p-5 rounded-full bg-green-100 dark:bg-green-900/20 text-green-600 dark:text-green-400 mb-6 animate-bounce-slow shadow-sm">
                                         <FaCheckCircle className="text-5xl" />
                                     </div>
                                     <h2 className="text-3xl font-heading font-bold text-text-primary mb-2">Ambulance Dispatched!</h2>
                                     <p className="text-text-secondary">Help is on the way.</p>
                                 </div>
 
-                                <div className="bg-gray-50 rounded-2xl p-6 mb-8 text-left space-y-4 border border-gray-100">
-                                    <div className="flex justify-between items-center border-b border-gray-200 pb-3">
+                                <div className="bg-gray-50 dark:bg-gray-800/20 rounded-2xl p-6 mb-8 text-left space-y-4 border border-gray-100 dark:border-gray-700">
+                                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-3">
                                         <span className="text-text-secondary text-sm">Ambulance ID</span>
-                                        <span className="font-mono font-bold text-text-primary bg-white px-2 py-1 rounded border border-gray-200">{booking.ambulanceId}</span>
+                                        <span className="font-mono font-bold text-text-primary bg-white dark:bg-surface px-2 py-1 rounded border border-gray-200 dark:border-gray-700">{booking.ambulanceId}</span>
                                     </div>
-                                    <div className="flex justify-between items-center border-b border-gray-200 pb-3">
+                                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-3">
                                         <span className="text-text-secondary text-sm">Status</span>
                                         <Badge variant="primary" className="uppercase tracking-wider text-xs">{booking.status}</Badge>
                                     </div>
-                                    <div className="flex justify-between items-center border-b border-gray-200 pb-3">
+                                    <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-3">
                                         <span className="text-text-secondary text-sm">Estimated Arrival</span>
                                         <span className="font-bold text-text-primary text-lg">
                                             {Math.round((new Date(booking.estimatedArrival) - new Date()) / 60000)} mins
@@ -147,7 +147,7 @@ const AmbulanceBooking = () => {
                                     </div>
                                     <div className="pt-2">
                                         <span className="text-text-secondary text-xs block mb-1">Pickup Location</span>
-                                        <p className="font-medium text-text-primary text-sm bg-white p-3 rounded-lg border border-gray-200">{booking.pickupLocation}</p>
+                                        <p className="font-medium text-text-primary text-sm bg-white dark:bg-surface p-3 rounded-lg border border-gray-200 dark:border-gray-700">{booking.pickupLocation}</p>
                                     </div>
                                 </div>
 

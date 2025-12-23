@@ -57,14 +57,14 @@ const TestCart = () => {
 
     if (cart.length === 0) {
         return (
-            <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+            <div className="min-h-screen bg-background-light flex items-center justify-center p-4">
                 <div className="text-center max-w-md">
-                    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                        <div className="h-16 w-16 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <ShoppingCart className="h-8 w-8 text-teal-600" />
+                    <div className="bg-white dark:bg-surface p-8 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                        <div className="h-16 w-16 bg-teal-50 dark:bg-teal-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <ShoppingCart className="h-8 w-8 text-teal-600 dark:text-teal-400" />
                         </div>
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
-                        <p className="text-gray-500 mb-6">Looks like you haven't added any tests yet.</p>
+                        <h2 className="text-2xl font-bold text-text-primary mb-2">Your cart is empty</h2>
+                        <p className="text-text-secondary mb-6">Looks like you haven't added any tests yet.</p>
                         <button
                             onClick={() => navigate('/tests')}
                             className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700"
@@ -83,28 +83,31 @@ const TestCart = () => {
     const minDate = tomorrow.toISOString().split('T')[0];
 
     return (
-        <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-background-light py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto">
-                <h1 className="text-3xl font-bold text-gray-900 mb-8">Checkout</h1>
+                <h1 className="text-3xl font-bold text-text-primary mb-8">Checkout</h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Order Summary & Form */}
                     <div className="md:col-span-2 space-y-8">
 
                         {/* Selected Tests */}
-                        <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
-                            <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-                                <h3 className="text-lg font-medium text-gray-900">Selected Tests ({cart.length})</h3>
+                        <div className="bg-white dark:bg-surface rounded-lg shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700">
+                            <div
+                                className="px-6 py-4 border-b border-gray-200 dark:border-gray-700"
+                                style={{ backgroundColor: 'var(--bg-subtle)' }}
+                            >
+                                <h3 className="text-lg font-medium text-text-primary">Selected Tests ({cart.length})</h3>
                             </div>
-                            <ul className="divide-y divide-gray-200">
+                            <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                                 {cart.map((item) => (
                                     <li key={item._id} className="p-6 flex items-center justify-between">
                                         <div className="flex-1">
-                                            <h4 className="text-base font-medium text-gray-900">{item.name}</h4>
-                                            <p className="text-sm text-gray-500 mt-1">{item.category} • {item.sampleType}</p>
+                                            <h4 className="text-base font-medium text-text-primary">{item.name}</h4>
+                                            <p className="text-sm text-text-secondary mt-1">{item.category} • {item.sampleType}</p>
                                         </div>
                                         <div className="flex items-center">
-                                            <span className="text-base font-semibold text-gray-900 mr-6">₹{item.price}</span>
+                                            <span className="text-base font-semibold text-text-primary mr-6">₹{item.price}</span>
                                             <button
                                                 onClick={() => removeFromCart(item._id)}
                                                 className="text-gray-400 hover:text-red-500 transition-colors"
@@ -115,47 +118,55 @@ const TestCart = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-between items-center">
-                                <span className="font-medium text-gray-900">Total Amount</span>
-                                <span className="text-xl font-bold text-teal-700">₹{cartTotal}</span>
+                            <div
+                                className="px-6 py-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center"
+                                style={{ backgroundColor: 'var(--bg-subtle)' }}
+                            >
+                                <span className="font-medium text-text-primary">Total Amount</span>
+                                <span className="text-xl font-bold text-teal-700 dark:text-teal-400">₹{cartTotal}</span>
                             </div>
                         </div>
 
                         {/* Collection Details Form */}
-                        <form id="checkout-form" onSubmit={handleSubmit} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                            <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-                                <h3 className="text-lg font-medium text-gray-900 flex items-center">
-                                    <MapPin className="h-5 w-5 mr-2 text-teal-600" />
+                        <form id="checkout-form" onSubmit={handleSubmit} className="bg-white dark:bg-surface rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                            <div
+                                className="px-6 py-4 border-b border-gray-200 dark:border-gray-700"
+                                style={{ backgroundColor: 'var(--bg-subtle)' }}
+                            >
+                                <h3 className="text-lg font-medium text-text-primary flex items-center">
+                                    <MapPin className="h-5 w-5 mr-2 text-teal-600 dark:text-teal-400" />
                                     Collection Details
                                 </h3>
                             </div>
                             <div className="p-6 gap-6 grid grid-cols-1">
                                 <div>
-                                    <label htmlFor="fullAddress" className="block text-sm font-medium text-gray-700">Full Address</label>
+                                    <label htmlFor="fullAddress" className="block text-sm font-medium text-text-secondary">Full Address</label>
                                     <textarea
                                         required
                                         name="fullAddress"
                                         rows={3}
                                         value={details.fullAddress}
                                         onChange={handleChange}
-                                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                        className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm bg-white dark:bg-gray-800 text-text-primary"
                                         placeholder="House No, Street, Landmark..."
+                                        style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--txt-primary)' }}
                                     />
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
+                                        <label htmlFor="city" className="block text-sm font-medium text-text-secondary">City</label>
                                         <input
                                             type="text"
                                             name="city"
                                             required
                                             value={details.city}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                            className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm bg-white dark:bg-gray-800 text-text-primary"
+                                            style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--txt-primary)' }}
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="pincode" className="block text-sm font-medium text-gray-700">Pincode</label>
+                                        <label htmlFor="pincode" className="block text-sm font-medium text-text-secondary">Pincode</label>
                                         <input
                                             type="text"
                                             name="pincode"
@@ -163,19 +174,20 @@ const TestCart = () => {
                                             pattern="[0-9]{6}"
                                             value={details.pincode}
                                             onChange={handleChange}
-                                            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                            className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm bg-white dark:bg-gray-800 text-text-primary"
+                                            style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--txt-primary)' }}
                                         />
                                     </div>
                                 </div>
 
-                                <div className="border-t border-gray-100 pt-6 mt-2">
-                                    <h4 className="text-base font-medium text-gray-900 mb-4 flex items-center">
-                                        <Calendar className="h-5 w-5 mr-2 text-teal-600" />
+                                <div className="border-t border-gray-100 dark:border-gray-700 pt-6 mt-2">
+                                    <h4 className="text-base font-medium text-text-primary mb-4 flex items-center">
+                                        <Calendar className="h-5 w-5 mr-2 text-teal-600 dark:text-teal-400" />
                                         Preferred Slot
                                     </h4>
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
-                                            <label htmlFor="date" className="block text-sm font-medium text-gray-700">Date</label>
+                                            <label htmlFor="date" className="block text-sm font-medium text-text-secondary">Date</label>
                                             <input
                                                 type="date"
                                                 name="date"
@@ -183,17 +195,19 @@ const TestCart = () => {
                                                 min={minDate}
                                                 value={details.date}
                                                 onChange={handleChange}
-                                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                                className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm bg-white dark:bg-gray-800 text-text-primary"
+                                                style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--txt-primary)' }}
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="timeRange" className="block text-sm font-medium text-gray-700">Time</label>
+                                            <label htmlFor="timeRange" className="block text-sm font-medium text-text-secondary">Time</label>
                                             <select
                                                 name="timeRange"
                                                 required
                                                 value={details.timeRange}
                                                 onChange={handleChange}
-                                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                                className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm py-2 px-3 focus:ring-teal-500 focus:border-teal-500 sm:text-sm bg-white dark:bg-gray-800 text-text-primary"
+                                                style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--txt-primary)' }}
                                             >
                                                 <option value="">Select a slot</option>
                                                 <option value="07:00 AM - 09:00 AM">07:00 AM - 09:00 AM</option>
@@ -211,18 +225,18 @@ const TestCart = () => {
 
                     {/* Payment & CTA */}
                     <div className="md:col-span-1">
-                        <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 sticky top-6">
-                            <h3 className="text-lg font-medium text-gray-900 mb-4">Payment Details</h3>
+                        <div className="bg-white dark:bg-surface p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 sticky top-6">
+                            <h3 className="text-lg font-medium text-text-primary mb-4">Payment Details</h3>
                             <div className="space-y-3 mb-6">
-                                <div className="flex justify-between text-gray-600 text-sm">
+                                <div className="flex justify-between text-text-secondary text-sm">
                                     <span>Item Total</span>
                                     <span>₹{cartTotal}</span>
                                 </div>
-                                <div className="flex justify-between text-gray-600 text-sm">
+                                <div className="flex justify-between text-text-secondary text-sm">
                                     <span>Home Collection</span>
                                     <span className="text-green-600 font-medium">FREE</span>
                                 </div>
-                                <div className="border-t border-gray-200 pt-3 flex justify-between font-bold text-gray-900 text-lg">
+                                <div className="border-t border-gray-200 dark:border-gray-700 pt-3 flex justify-between font-bold text-text-primary text-lg">
                                     <span>Total Pay</span>
                                     <span>₹{cartTotal}</span>
                                 </div>

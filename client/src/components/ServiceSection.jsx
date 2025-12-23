@@ -21,20 +21,20 @@ const ServiceSection = () => {
     ];
 
     return (
-        <div className="bg-gray-50 py-20">
+        <div className="bg-gray-50 dark:bg-gray-900 py-20">
             <div className="max-w-7xl mx-auto px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Services</h2>
-                    <p className="text-xl text-gray-600">Comprehensive healthcare solutions tailored to your needs</p>
+                    <h2 className="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-4">Our Services</h2>
+                    <p className="text-xl text-gray-600 dark:text-gray-400">Comprehensive healthcare solutions tailored to your needs</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                     {services.map((service, index) => (
-                        <div key={index} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col items-center text-center">
-                            <div className="mb-6 p-4 bg-blue-50 rounded-full">
+                        <div key={index} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 flex flex-col items-center text-center">
+                            <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/40 rounded-full">
                                 {service.icon}
                             </div>
-                            <h3 className="text-2xl font-bold text-gray-800 mb-4">{service.title}</h3>
-                            <p className="text-gray-600 leading-relaxed">
+                            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">{service.title}</h3>
+                            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                                 {service.description}
                             </p>
                         </div>

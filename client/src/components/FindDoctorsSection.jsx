@@ -143,7 +143,7 @@ const FindDoctorsSection = () => {
         <div className="flex flex-col lg:flex-row gap-8">
             {/* Sidebar Filters - Sticky on Desktop */}
             <div className="lg:w-1/4">
-                <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 sticky top-24">
+                <div className="bg-surface p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 sticky top-24">
                     <h2 className="text-xl font-heading font-bold text-text-primary mb-6">Filters</h2>
 
                     <div className="space-y-6">
@@ -159,7 +159,7 @@ const FindDoctorsSection = () => {
                             <select
                                 value={specialization}
                                 onChange={(e) => setSpecialization(e.target.value)}
-                                className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                                className="w-full px-4 py-2.5 bg-surface border border-gray-200 dark:border-gray-700 rounded-xl text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
                             >
                                 <option value="">All Specializations</option>
                                 <option value="Cardiologist">Cardiologist</option>
@@ -202,7 +202,7 @@ const FindDoctorsSection = () => {
             {/* Results Grid */}
             <div className="lg:w-3/4">
                 {doctors.length === 0 && !loading ? (
-                    <div className="text-center py-20 bg-white rounded-2xl border border-dashed border-gray-200">
+                    <div className="text-center py-20 bg-surface rounded-2xl border border-dashed border-gray-200 dark:border-gray-700">
                         <div className="text-6xl mb-4">🩺</div>
                         <h3 className="text-xl font-bold text-text-primary">No doctors found</h3>
                         <p className="text-text-secondary mt-2">Try adjusting your filters or search a different area.</p>
@@ -210,7 +210,7 @@ const FindDoctorsSection = () => {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {doctors.map((doctor) => (
-                            <Card key={doctor._id} className={`p-0 overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100 ${selectedDoctor?._id === doctor._id ? 'ring-2 ring-cta' : ''}`}>
+                            <Card key={doctor._id} className={`p-0 overflow-hidden hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 ${selectedDoctor?._id === doctor._id ? 'ring-2 ring-cta' : ''}`}>
                                 <div className="p-6">
                                     <div className="flex justify-between items-start mb-4">
                                         <div>
@@ -241,7 +241,7 @@ const FindDoctorsSection = () => {
 
                                     {/* Inline Availability Panel */}
                                     {selectedDoctor?._id === doctor._id && (
-                                        <div className="mt-6 pt-6 border-t border-gray-100 animate-fadeIn">
+                                        <div className="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700 animate-fadeIn">
                                             <h4 className="font-bold text-text-primary text-sm mb-3">Available Slots for {date}:</h4>
 
                                             {availability ? (
@@ -253,11 +253,12 @@ const FindDoctorsSection = () => {
                                                                 disabled={slot.isBooked || bookingLoading}
                                                                 onClick={() => !slot.isBooked && handleBookSlot(slot)}
                                                                 className={`
-                                                                    py-1.5 px-1 text-xs font-medium rounded transition-colors
+                                                                    py-2 px-1 text-xs font-bold rounded-lg transition-all border
                                                                     ${slot.isBooked
-                                                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed line-through'
-                                                                        : 'bg-green-50 text-green-700 hover:bg-green-100 border border-green-200'}
+                                                                        ? 'text-gray-400 dark:text-gray-500 border-gray-100 dark:border-gray-700 cursor-not-allowed line-through'
+                                                                        : 'text-green-700 dark:text-green-400 border-green-200 dark:border-green-800 hover:border-green-500 hover:shadow-sm hover:!bg-green-50 dark:hover:!bg-gray-700'}
                                                                 `}
+                                                                style={{ backgroundColor: slot.isBooked ? 'var(--bg-light)' : 'var(--bg-surface)' }}
                                                             >
                                                                 {slot.startTime}
                                                             </button>

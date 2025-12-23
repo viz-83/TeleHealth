@@ -43,16 +43,16 @@ const PharmacyDashboard = () => {
         : orders.filter(order => order.status === filterStatus);
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6">
+        <div className="min-h-screen bg-background-light p-6">
             <div className="max-w-7xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900">Pharmacy Dashboard</h1>
-                        <p className="text-gray-500">Manage prescription verification and dispatch</p>
+                        <h1 className="text-3xl font-bold text-text-primary">Pharmacy Dashboard</h1>
+                        <p className="text-text-secondary">Manage prescription verification and dispatch</p>
                     </div>
                     <button
                         onClick={fetchOrders}
-                        className="bg-white px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50"
+                        className="bg-white dark:bg-surface px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-text-secondary hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
                     >
                         Refresh
                     </button>
@@ -66,7 +66,7 @@ const PharmacyDashboard = () => {
                             onClick={() => setFilterStatus(status)}
                             className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm font-bold transition-colors ${filterStatus === status
                                 ? 'bg-teal-600 text-white shadow-md'
-                                : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
+                                : 'bg-white dark:bg-surface text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800'
                                 }`}
                         >
                             {status.replace(/_/g, ' ')}
@@ -78,10 +78,10 @@ const PharmacyDashboard = () => {
                 {loading ? (
                     <div className="text-center py-20 text-gray-500">Loading orders...</div>
                 ) : (
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div className="bg-white dark:bg-surface rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
                         <div className="overflow-x-auto">
                             <table className="w-full text-left">
-                                <thead className="bg-gray-50 text-gray-500 uppercase text-xs">
+                                <thead className="bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 uppercase text-xs">
                                     <tr>
                                         <th className="px-6 py-4">Order ID / Date</th>
                                         <th className="px-6 py-4">Customer</th>
@@ -93,14 +93,14 @@ const PharmacyDashboard = () => {
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
                                     {filteredOrders.map((order) => (
-                                        <tr key={order._id} className="hover:bg-gray-50 transition">
+                                        <tr key={order._id} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition border-b border-gray-100 dark:border-gray-800 last:border-0">
                                             <td className="px-6 py-4">
-                                                <span className="font-mono text-xs font-bold bg-gray-100 px-2 py-1 rounded">#{order._id.slice(-6)}</span>
+                                                <span className="font-mono text-xs font-bold bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-text-primary">#{order._id.slice(-6)}</span>
                                                 <p className="text-xs text-gray-400 mt-1">{format(new Date(order.createdAt), 'MMM dd, HH:mm')}</p>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <p className="font-medium text-gray-900">{order.patient?.name || 'Unknown'}</p>
-                                                <p className="text-xs text-gray-500">{order.deliveryAddress.city}</p>
+                                                <p className="font-medium text-text-primary">{order.patient?.name || 'Unknown'}</p>
+                                                <p className="text-xs text-text-secondary">{order.deliveryAddress.city}</p>
                                             </td>
                                             <td className="px-6 py-4">
                                                 {order.prescription ? (
@@ -122,7 +122,7 @@ const PharmacyDashboard = () => {
                                                 </span>
                                             </td>
                                             <td className="px-6 py-4">
-                                                <p className="text-sm text-gray-600 line-clamp-1">
+                                                <p className="text-sm text-text-secondary line-clamp-1">
                                                     {order.medicines.map(m => `${m.quantity}x ${m.name}`).join(', ')}
                                                 </p>
                                                 <p className="text-xs text-gray-400 font-bold mt-1">Total: ₹{order.totalAmount}</p>

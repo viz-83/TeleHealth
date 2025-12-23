@@ -43,15 +43,15 @@ const PatientVitals = () => {
         const valDisplay = type === 'BLOOD_PRESSURE' ? `${latest.value.systolic}/${latest.value.diastolic}` : latest.value;
 
         return (
-            <Card className="hover:shadow-lg transition-all duration-300 border-gray-100 overflow-hidden">
-                <div className={`p-4 border-b border-gray-50 flex justify-between items-center ${colorClass} bg-opacity-5`}>
+            <Card className="hover:shadow-lg transition-all duration-300 border-gray-100 dark:border-gray-700 overflow-hidden">
+                <div className={`p-4 border-b border-gray-50 dark:border-gray-800 flex justify-between items-center ${colorClass} bg-opacity-5 dark:bg-opacity-10`}>
                     <div className="flex items-center gap-2">
-                        <div className={`p-2 rounded-lg ${colorClass} bg-opacity-20 text-gray-700`}>
+                        <div className={`p-2 rounded-lg ${colorClass} bg-opacity-20 text-gray-700 dark:text-gray-200`}>
                             {Icon && <Icon />}
                         </div>
                         <h3 className="font-heading font-bold text-text-primary">{label}</h3>
                     </div>
-                    <span className="text-xs text-text-secondary font-medium bg-white px-2 py-1 rounded-md shadow-sm">
+                    <span className="text-xs text-text-secondary font-medium bg-white dark:bg-surface px-2 py-1 rounded-md shadow-sm">
                         {new Date(latest.recordedAt).toLocaleDateString()}
                     </span>
                 </div>
@@ -65,7 +65,7 @@ const PatientVitals = () => {
                         )}
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-gray-50">
+                    <div className="mt-6 pt-4 border-t border-gray-50 dark:border-gray-800">
                         <div className="flex items-center gap-2 mb-2">
                             <FaChartLine className="text-text-muted" />
                             <h4 className="text-xs uppercase tracking-wide text-text-muted font-bold">History Trend</h4>
@@ -102,7 +102,7 @@ const PatientVitals = () => {
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cta"></div>
                     </div>
                 ) : !metrics || Object.keys(metrics).length === 0 ? (
-                    <div className="bg-white rounded-3xl p-12 text-center border border-dashed border-gray-200">
+                    <div className="bg-white dark:bg-surface rounded-3xl p-12 text-center border border-dashed border-gray-200 dark:border-gray-700">
                         <div className="text-5xl mb-4 text-gray-300">📊</div>
                         <h3 className="text-xl font-bold text-text-primary">No health metrics recorded</h3>
                         <p className="text-text-secondary mt-2">This patient has not logged any health data yet.</p>

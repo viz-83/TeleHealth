@@ -41,7 +41,7 @@ const TestOrderDetails = () => {
     const currentStepIndex = steps.findIndex(step => step.id === order.status);
 
     return (
-        <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-background-light py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
                 <div className="mb-6">
                     <Link to="/tests" className="text-teal-600 hover:text-teal-700 font-medium text-sm">
@@ -49,11 +49,11 @@ const TestOrderDetails = () => {
                     </Link>
                 </div>
 
-                <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden mb-8">
-                    <div className="px-6 py-6 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+                <div className="bg-white dark:bg-surface rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden mb-8">
+                    <div className="px-6 py-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/40">
                         <div>
-                            <h1 className="text-2xl font-bold text-gray-900">Order #{order._id.slice(-6).toUpperCase()}</h1>
-                            <p className="text-sm text-gray-500 mt-1">
+                            <h1 className="text-2xl font-bold text-text-primary">Order #{order._id.slice(-6).toUpperCase()}</h1>
+                            <p className="text-sm text-text-secondary mt-1">
                                 Placed on {new Date(order.createdAt).toLocaleDateString()}
                             </p>
                         </div>
@@ -71,7 +71,7 @@ const TestOrderDetails = () => {
                     <div className="px-6 py-8">
                         <div className="relative">
                             <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                                <div className="w-full border-t border-gray-200"></div>
+                                <div className="w-full border-t border-gray-200 dark:border-gray-700"></div>
                             </div>
                             <div className="relative flex justify-between">
                                 {steps.map((step, index) => {
@@ -81,13 +81,13 @@ const TestOrderDetails = () => {
 
                                     return (
                                         <div key={step.id} className="flex flex-col items-center">
-                                            <div className={`relative flex items-center justify-center h-10 w-10 rounded-full border-2 bg-white
+                                            <div className={`relative flex items-center justify-center h-10 w-10 rounded-full border-2 bg-white dark:bg-gray-800
                                                 ${isCompleted
-                                                    ? 'border-teal-600 text-teal-600'
-                                                    : 'border-gray-300 text-gray-400'}`}>
+                                                    ? 'border-teal-600 text-teal-600 dark:text-teal-400'
+                                                    : 'border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500'}`}>
                                                 <Icon className="h-5 w-5" />
                                             </div>
-                                            <div className="mt-2 text-xs sm:text-sm font-medium text-gray-900 text-center max-w-[80px]">
+                                            <div className="mt-2 text-xs sm:text-sm font-medium text-text-primary text-center max-w-[80px]">
                                                 {step.label}
                                             </div>
                                         </div>
@@ -98,18 +98,18 @@ const TestOrderDetails = () => {
                     </div>
 
                     {/* Details Grid */}
-                    <div className="px-6 py-6 border-t border-gray-200 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="px-6 py-6 border-t border-gray-200 dark:border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Tests */}
                         <div>
-                            <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-3">Diagnostic Tests</h3>
+                            <h3 className="text-sm font-medium text-text-muted uppercase tracking-wide mb-3">Diagnostic Tests</h3>
                             <ul className="space-y-3">
                                 {order.tests.map((item, idx) => (
                                     <li key={idx} className="flex justify-between items-start text-sm">
-                                        <span className="text-gray-900 font-medium">{item.test.name}</span>
-                                        <span className="text-gray-500">₹{item.price}</span>
+                                        <span className="text-text-primary font-medium">{item.test.name}</span>
+                                        <span className="text-text-secondary">₹{item.price}</span>
                                     </li>
                                 ))}
-                                <li className="pt-3 border-t border-gray-100 flex justify-between font-bold text-gray-900">
+                                <li className="pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between font-bold text-text-primary">
                                     <span>Total</span>
                                     <span>₹{order.totalAmount}</span>
                                 </li>
@@ -119,15 +119,15 @@ const TestOrderDetails = () => {
                         {/* Info */}
                         <div>
                             <div className="mb-6">
-                                <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Collection Address</h3>
-                                <p className="text-sm text-gray-900">{order.collectionAddress.fullAddress}</p>
-                                <p className="text-sm text-gray-900">{order.collectionAddress.city} - {order.collectionAddress.pincode}</p>
+                                <h3 className="text-sm font-medium text-text-muted uppercase tracking-wide mb-2">Collection Address</h3>
+                                <p className="text-sm text-text-primary">{order.collectionAddress.fullAddress}</p>
+                                <p className="text-sm text-text-primary">{order.collectionAddress.city} - {order.collectionAddress.pincode}</p>
                             </div>
 
                             <div>
-                                <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">Scheduled For</h3>
-                                <p className="text-sm text-gray-900 font-semibold">{new Date(order.preferredSlot.date).toDateString()}</p>
-                                <p className="text-sm text-gray-900">{order.preferredSlot.timeRange}</p>
+                                <h3 className="text-sm font-medium text-text-muted uppercase tracking-wide mb-2">Scheduled For</h3>
+                                <p className="text-sm text-text-primary font-semibold">{new Date(order.preferredSlot.date).toDateString()}</p>
+                                <p className="text-sm text-text-primary">{order.preferredSlot.timeRange}</p>
                             </div>
                         </div>
                     </div>

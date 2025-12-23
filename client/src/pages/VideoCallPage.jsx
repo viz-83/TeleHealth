@@ -84,11 +84,11 @@ const CustomCallControls = ({ onLeave }) => {
             {/* Microphone */}
             <button
                 onClick={() => microphone.toggle()}
-                className={`p-4 rounded-full transition-all duration-200 shadow-lg ${isMicMuted ? 'bg-accent hover:bg-gray-600' : 'bg-primary hover:bg-green-700'}`}
+                className={`p-4 rounded-full transition-all duration-200 shadow-lg ${isMicMuted ? 'bg-red-100 hover:bg-red-200 dark:bg-red-900/50 dark:hover:bg-red-900/70' : 'bg-primary hover:bg-green-700'}`}
                 title={isMicMuted ? "Unmute" : "Mute"}
             >
                 {isMicMuted ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-600 dark:text-red-400">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z" />
                     </svg>
                 ) : (
@@ -101,11 +101,11 @@ const CustomCallControls = ({ onLeave }) => {
             {/* Camera */}
             <button
                 onClick={() => camera.toggle()}
-                className={`p-4 rounded-full transition-all duration-200 shadow-lg ${isCamMuted ? 'bg-accent hover:bg-gray-600' : 'bg-primary hover:bg-green-700'}`}
+                className={`p-4 rounded-full transition-all duration-200 shadow-lg ${isCamMuted ? 'bg-red-100 hover:bg-red-200 dark:bg-red-900/50 dark:hover:bg-red-900/70' : 'bg-primary hover:bg-green-700'}`}
                 title={isCamMuted ? "Turn Video On" : "Turn Video Off"}
             >
                 {isCamMuted ? (
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-600 dark:text-red-400">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M12 18.75H4.5a2.25 2.25 0 0 1-2.25-2.25V9a2.25 2.25 0 0 1 2.25-2.25h7.5a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25Z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3 3l18 18" />
                     </svg>
@@ -119,10 +119,10 @@ const CustomCallControls = ({ onLeave }) => {
             {/* Screen Share */}
             <button
                 onClick={() => screenShare.toggle()}
-                className={`p-4 rounded-full transition-all duration-200 shadow-lg ${!isScreenShareOff ? 'bg-cta hover:bg-teal-700' : 'bg-accent/50 hover:bg-gray-600'}`}
+                className={`p-4 rounded-full transition-all duration-200 shadow-lg ${!isScreenShareOff ? 'bg-cta hover:bg-teal-700' : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600'}`}
                 title="Share Screen"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-6 h-6 ${!isScreenShareOff ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25" />
                 </svg>
             </button>
@@ -131,7 +131,7 @@ const CustomCallControls = ({ onLeave }) => {
             <div className="relative">
                 {/* Reaction Menu */}
                 {showReactions && (
-                    <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-gray-800 rounded-2xl shadow-xl p-3 flex gap-3 animate-fade-in-up border border-gray-700 z-50 min-w-max">
+                    <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 bg-surface dark:bg-gray-800 rounded-2xl shadow-xl p-3 flex gap-3 animate-fade-in-up border border-gray-200 dark:border-gray-700 z-50 min-w-max">
                         {[
                             { icon: '👍', type: 'reaction', emoji: ':thumbsup:' },
                             { icon: '👎', type: 'reaction', emoji: ':thumbsdown:' },
@@ -153,7 +153,7 @@ const CustomCallControls = ({ onLeave }) => {
                                         console.error('Failed to send reaction:', err);
                                     }
                                 }}
-                                className="text-2xl hover:scale-125 transition-transform duration-200 p-2 hover:bg-gray-700 rounded-lg"
+                                className="text-2xl hover:scale-125 transition-transform duration-200 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                             >
                                 {reaction.icon}
                             </button>
@@ -164,10 +164,10 @@ const CustomCallControls = ({ onLeave }) => {
                 {/* Main Reaction Toggle Button */}
                 <button
                     onClick={() => setShowReactions(!showReactions)}
-                    className={`p-4 rounded-full transition-all duration-200 shadow-lg ${showReactions ? 'bg-cta hover:bg-teal-700' : 'bg-accent/50 hover:bg-gray-600'}`}
+                    className={`p-4 rounded-full transition-all duration-200 shadow-lg ${showReactions ? 'bg-cta hover:bg-teal-700' : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600'}`}
                     title="Reactions"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="w-6 h-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`w-6 h-6 ${showReactions ? 'text-white' : 'text-gray-900 dark:text-white'}`}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
                     </svg>
                 </button>

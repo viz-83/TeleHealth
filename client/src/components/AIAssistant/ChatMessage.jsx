@@ -3,6 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { Bot, User } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
+const ActionChip = ({ action, onClick }) => {
+    const [isHovered, setIsHovered] = React.useState(false);
+
+    return (
+        <button
+            onClick={() => onClick(action)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="px-3 py-1.5 border border-cta/20 dark:border-cta/40 text-cta dark:text-cta-hover text-xs font-semibold rounded-full transition-colors shadow-sm"
+            style={{
+                backgroundColor: isHovered ? 'var(--bg-subtle)' : 'var(--bg-surface)'
+            }}
+        >
+            {action.label}
+        </button>
+    );
+};
+
 const ChatMessage = ({ message, isUser, actions, onActionClick }) => {
     return (
         <div className={`flex w-full mb-4 ${isUser ? 'justify-end' : 'justify-start'}`}>
@@ -10,8 +28,10 @@ const ChatMessage = ({ message, isUser, actions, onActionClick }) => {
 
                 {/* Avatar */}
                 <div className={`
-                    w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm
-                    ${isUser ? 'bg-gray-100 text-gray-600' : 'bg-secondary text-cta'}
+                    w-8 h-8 rounded-full flex items-center justify-center shrink-0 shadow-sm border
+                    ${isUser
+                        ? 'bg-white dark:bg-background-subtle text-gray-600 dark:text-gray-300 border-gray-200 dark:border-white/10'
+                        : 'bg-white dark:bg-background-subtle text-cta dark:text-cta-hover border-cta/20 dark:border-white/10'}
                 `}>
                     {isUser ? <User size={16} /> : <Bot size={16} />}
                 </div>
@@ -19,10 +39,10 @@ const ChatMessage = ({ message, isUser, actions, onActionClick }) => {
                 {/* Message Bubble */}
                 <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}>
                     <div className={`
-                        p-4 rounded-2xl text-sm leading-relaxed shadow-sm
+                        p-4 rounded-2xl text-sm leading-relaxed shadow-sm border
                         ${isUser
-                            ? 'bg-cta text-white rounded-tr-none'
-                            : 'bg-white text-text-primary rounded-tl-none border border-gray-100'}
+                            ? 'bg-cta text-white border-cta rounded-tr-none'
+                            : 'bg-white dark:bg-surface text-text-primary dark:text-text-primary border-gray-100 dark:border-white/5 rounded-tl-none'}
                     `}>
                         {/* Render simple markdown/text */}
                         <div className="prose prose-sm max-w-none dark:prose-invert">
@@ -34,13 +54,11 @@ const ChatMessage = ({ message, isUser, actions, onActionClick }) => {
                     {!isUser && actions && actions.length > 0 && (
                         <div className="flex flex-wrap gap-2 mt-3">
                             {actions.map((action, idx) => (
-                                <button
+                                <ActionChip
                                     key={idx}
-                                    onClick={() => onActionClick(action)}
-                                    className="px-3 py-1.5 bg-white border border-cta/20 text-cta text-xs font-semibold rounded-full hover:bg-secondary/30 transition-colors shadow-sm"
-                                >
-                                    {action.label}
-                                </button>
+                                    action={action}
+                                    onClick={onActionClick}
+                                />
                             ))}
                         </div>
                     )}

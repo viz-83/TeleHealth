@@ -124,11 +124,11 @@ const CreatePrescription = () => {
                         <form onSubmit={handleSubmit} className="space-y-8">
                             {/* Diagnosis Section */}
                             <div className="space-y-4">
-                                <h2 className="text-xl font-heading font-bold text-text-primary border-b border-gray-100 pb-2">1. Diagnosis</h2>
+                                <h2 className="text-xl font-heading font-bold text-text-primary border-b border-gray-100 dark:border-gray-700 pb-2">1. Diagnosis</h2>
                                 <textarea
                                     value={diagnosis}
                                     onChange={(e) => setDiagnosis(e.target.value)}
-                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cta focus:ring-2 focus:ring-cta/10 bg-gray-50/50 transition-all outline-none min-h-[100px]"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:border-cta focus:ring-2 focus:ring-cta/10 bg-gray-50/50 dark:bg-background-subtle transition-all outline-none min-h-[100px] text-text-primary"
                                     placeholder="Enter clinical diagnosis details..."
                                     required
                                 />
@@ -145,7 +145,7 @@ const CreatePrescription = () => {
                                 {medicines.length > 0 && (
                                     <div className="grid gap-3 mb-4">
                                         {medicines.map((med, idx) => (
-                                            <div key={idx} className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-blue-50/50 rounded-xl border border-blue-100 gap-3">
+                                            <div key={idx} className="flex flex-col md:flex-row md:items-center justify-between p-4 bg-blue-50/50 dark:bg-blue-900/10 rounded-xl border border-blue-100 dark:border-blue-900/30 gap-3">
                                                 <div className="flex items-start gap-3">
                                                     <div className="mt-1 text-cta"><FaPrescriptionBottleAlt /></div>
                                                     <div>
@@ -159,7 +159,7 @@ const CreatePrescription = () => {
                                                     variant="ghost"
                                                     size="sm"
                                                     onClick={() => handleRemoveMedicine(idx)}
-                                                    className="text-red-500 hover:bg-red-50 hover:text-red-700 self-end md:self-auto"
+                                                    className="text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-700 dark:hover:text-red-400 self-end md:self-auto"
                                                 >
                                                     <FaTrash size={14} /> Remove
                                                 </Button>
@@ -169,7 +169,7 @@ const CreatePrescription = () => {
                                 )}
 
                                 {/* Add New Medicine Form */}
-                                <div className="p-5 bg-gray-50 rounded-xl border border-gray-200 shadow-inner">
+                                <div className="p-5 bg-gray-50 dark:bg-gray-800/40 rounded-xl border border-gray-200 dark:border-gray-700 shadow-inner">
                                     <p className="text-sm font-bold text-text-secondary uppercase tracking-wider mb-3">Add New Medicine</p>
                                     <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
                                         <div className="md:col-span-4">
@@ -218,12 +218,12 @@ const CreatePrescription = () => {
                                 <h2 className="text-xl font-heading font-bold text-text-primary border-b border-gray-100 pb-2">3. Recommended Tests</h2>
                                 <div className="flex flex-wrap gap-2 mb-3">
                                     {tests.map((test, idx) => (
-                                        <span key={idx} className="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-100 text-sm font-medium">
+                                        <span key={idx} className="inline-flex items-center px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-900/10 text-purple-700 dark:text-purple-300 border border-purple-100 dark:border-purple-900/30 text-sm font-medium">
                                             {test}
                                             <button
                                                 type="button"
                                                 onClick={() => handleRemoveTest(idx)}
-                                                className="ml-2 text-purple-400 hover:text-purple-900 focus:outline-none"
+                                                className="ml-2 text-purple-400 hover:text-purple-900 dark:hover:text-purple-200 focus:outline-none"
                                             >
                                                 ×
                                             </button>
@@ -258,7 +258,7 @@ const CreatePrescription = () => {
                                     <textarea
                                         value={advice}
                                         onChange={(e) => setAdvice(e.target.value)}
-                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cta focus:ring-2 focus:ring-cta/10 bg-gray-50/50 transition-all outline-none min-h-[120px]"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 focus:border-cta focus:ring-2 focus:ring-cta/10 bg-gray-50/50 dark:bg-background-subtle transition-all outline-none min-h-[120px] text-text-primary"
                                         placeholder="Dietary instructions, rest, etc..."
                                     />
                                 </div>
@@ -273,7 +273,7 @@ const CreatePrescription = () => {
                                 </div>
                             </div>
 
-                            <div className="pt-8 flex justify-end gap-4 border-t border-gray-100">
+                            <div className="pt-8 flex justify-end gap-4 border-t border-gray-100 dark:border-gray-700">
                                 <Button
                                     type="submit"
                                     disabled={loading}

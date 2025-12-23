@@ -22,12 +22,12 @@ const Input = ({
                 type={type}
                 className={`
                     w-full px-4 py-2.5 
-                    bg-white border rounded-xl 
+                    bg-surface border rounded-xl 
                     text-text-primary placeholder:text-text-muted/70
                     transition-colors duration-200
                     focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary
-                    disabled:bg-gray-50 disabled:text-text-muted
-                    ${error ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 'border-gray-200 hover:border-gray-300'}
+                    disabled:bg-gray-50 disabled:text-text-muted dark:disabled:bg-gray-800
+                    ${error ? 'border-red-300 focus:border-red-500 focus:ring-red-200' : 'border-gray-200 hover:border-gray-300 dark:border-gray-700 dark:hover:border-gray-600'}
                     ${className}
                 `}
                 {...props}

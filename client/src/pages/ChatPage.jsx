@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, Window, ChannelHeader, MessageList, MessageInput, Thread } from 'stream-chat-react';
-import 'stream-chat-react/dist/css/v2/index.css';
 import { useStreamSession } from '../context/StreamSessionContext';
+import { useTheme } from '../context/ThemeContext';
 import axios from '../utils/axiosInstance';
 import Button from '../components/ui/Button';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -108,26 +108,28 @@ const ChatPage = () => {
         </div>
     );
 
+    const { theme } = useTheme();
+
     const isChatExpired = sessionData?.postConsultChatExpiresAt && new Date() > new Date(sessionData.postConsultChatExpiresAt);
 
     return (
-        <div className="h-screen flex flex-col font-body bg-background-light">
-            <div className="bg-white shadow-sm p-4 flex justify-between items-center border-b border-gray-100 z-10">
+        <div className="h-screen flex flex-col font-body bg-background-light dark:bg-background-dark">
+            <div className="bg-white dark:bg-surface shadow-sm p-4 flex justify-between items-center border-b border-gray-100 dark:border-gray-800 z-10">
                 <div className="flex items-center gap-3">
-                    <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="pl-0 text-text-secondary hover:text-cta">
+                    <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="pl-0 text-text-secondary dark:text-text-secondary hover:text-cta">
                         <FaArrowLeft className="mr-1" /> Back
                     </Button>
-                    <h2 className="text-lg font-heading font-bold text-text-primary">Appointment Chat</h2>
+                    <h2 className="text-lg font-heading font-bold text-text-primary dark:text-text-primary">Appointment Chat</h2>
                 </div>
             </div>
             <div className="flex-1 overflow-hidden" style={{ height: 'calc(100vh - 64px)' }}>
-                <Chat client={chatClient} theme="messaging light">
+                <Chat client={chatClient} theme={`messaging ${theme}`}>
                     <Channel channel={channel}>
                         <Window>
                             <ChannelHeader />
                             <MessageList />
                             {isChatExpired ? (
-                                <div className="p-4 bg-gray-100 text-center text-gray-500 border-t border-gray-200">
+                                <div className="p-4 bg-gray-100 dark:bg-gray-800 text-center text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
                                     This chat session has expired. You cannot send new messages.
                                 </div>
                             ) : (

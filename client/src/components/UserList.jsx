@@ -21,14 +21,14 @@ const UserList = ({ onCallUser }) => {
     }, [currentUser]);
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow mb-8">
-            <h2 className="text-xl font-bold mb-4">Available Users</h2>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-8">
+            <h2 className="text-xl font-bold mb-4 dark:text-white">Available Users</h2>
             <div className="space-y-4">
                 {users.map((user) => (
-                    <div key={user._id} className="flex justify-between items-center p-3 border rounded hover:bg-gray-50">
+                    <div key={user._id} className="flex justify-between items-center p-3 border dark:border-gray-700 rounded hover:bg-gray-50 dark:hover:bg-gray-700">
                         <div>
-                            <p className="font-semibold">{user.name}</p>
-                            <p className="text-sm text-gray-500">{user.role}</p>
+                            <p className="font-semibold dark:text-white">{user.name}</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{user.role}</p>
                         </div>
                         <button
                             onClick={() => onCallUser(user._id)}
@@ -38,7 +38,7 @@ const UserList = ({ onCallUser }) => {
                         </button>
                     </div>
                 ))}
-                {users.length === 0 && <p className="text-gray-500">No other users found.</p>}
+                {users.length === 0 && <p className="text-gray-500 dark:text-gray-400">No other users found.</p>}
             </div>
         </div>
     );

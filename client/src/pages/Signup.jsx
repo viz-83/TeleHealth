@@ -42,7 +42,7 @@ const Signup = () => {
                 </div>
 
                 {error && (
-                    <div className="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 rounded-xl text-sm">
+                    <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 text-red-600 dark:text-red-400 rounded-xl text-sm">
                         {error}
                     </div>
                 )}
@@ -78,7 +78,7 @@ const Signup = () => {
                         <select
                             name="role"
                             onChange={handleChange}
-                            className="w-full px-4 py-2.5 bg-white border border-gray-200 rounded-xl text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
+                            className="w-full px-4 py-2.5 bg-surface border border-gray-200 dark:border-gray-700 rounded-xl text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors duration-200"
                         >
                             <option value="patient">Patient</option>
                             <option value="doctor">Doctor</option>

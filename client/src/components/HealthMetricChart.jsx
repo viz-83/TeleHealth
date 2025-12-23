@@ -58,12 +58,19 @@ const HealthMetricChart = ({ data, metricType, className, height = 300 }) => {
                     data={processedData}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" className="stroke-gray-200 dark:stroke-gray-700" />
                     <XAxis dataKey="date" stroke="#9ca3af" fontSize={12} tickMargin={10} />
                     <YAxis stroke="#9ca3af" fontSize={12} />
                     <Tooltip
-                        contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
+                        contentStyle={{
+                            backgroundColor: 'var(--bg-surface)',
+                            borderRadius: '8px',
+                            border: '1px solid var(--bg-subtle)',
+                            boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                            color: 'var(--txt-primary)'
+                        }}
                         formatter={(value, name) => [value, name]}
+                        itemStyle={{ color: 'var(--txt-primary)' }}
                     />
                     <Legend />
                     {renderChartLines()}

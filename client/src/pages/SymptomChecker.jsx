@@ -71,7 +71,7 @@ const SymptomChecker = () => {
                                 value={symptoms}
                                 onChange={(e) => setSymptoms(e.target.value)}
                                 placeholder="e.g. I have a severe headache, sensitivity to light, and nausea since yesterday..."
-                                className="w-full h-40 p-6 rounded-2xl border border-gray-200 focus:border-cta focus:ring-2 focus:ring-primary/20 bg-white resize-none text-lg placeholder:text-gray-400 focus:outline-none transition-all shadow-inner"
+                                className="w-full h-40 p-6 rounded-2xl border border-gray-200 dark:border-gray-700 focus:border-cta focus:ring-2 focus:ring-primary/20 bg-white dark:bg-background-subtle resize-none text-lg placeholder:text-gray-400 dark:placeholder:text-gray-500 text-text-primary dark:text-text-primary focus:outline-none transition-all shadow-inner"
                             />
                         </div>
 
@@ -86,7 +86,7 @@ const SymptomChecker = () => {
                     </div>
 
                     {result && (
-                        <div className="mt-10 pt-10 border-t border-gray-100 animate-fadeIn">
+                        <div className="mt-10 pt-10 border-t border-gray-100 dark:border-gray-700 animate-fadeIn">
                             <div className="flex items-center justify-between mb-6">
                                 <h3 className="text-xl font-heading font-bold text-text-primary">Analysis Result</h3>
                                 <Badge variant={getSeverityColor(result.severity)} className="text-sm px-3 py-1 uppercase tracking-wide font-bold">
@@ -94,11 +94,11 @@ const SymptomChecker = () => {
                                 </Badge>
                             </div>
 
-                            <div className="bg-secondary/10 rounded-xl p-6 mb-8 border border-secondary/20">
-                                <h4 className="font-bold text-gray-800 mb-2 text-lg">Assessment</h4>
-                                <p className="text-gray-600 leading-relaxed mb-4">{result.advice || result.message}</p>
+                            <div className="bg-white dark:bg-gray-800/50 rounded-xl p-6 mb-8 border border-gray-100 dark:border-gray-700 shadow-sm">
+                                <h4 className="font-bold text-gray-900 dark:text-gray-100 mb-2 text-lg">Assessment</h4>
+                                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">{result.advice || result.message}</p>
                                 {result.specialization && (
-                                    <div className="inline-flex items-center text-sm font-medium text-cta bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm">
+                                    <div className="inline-flex items-center text-sm font-medium text-cta dark:text-cta-hover bg-white dark:bg-surface px-3 py-1.5 rounded-lg border border-gray-100 dark:border-gray-700 shadow-sm">
                                         Recommended Specialist: {result.specialization}
                                     </div>
                                 )}

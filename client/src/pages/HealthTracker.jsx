@@ -9,6 +9,7 @@ import Badge from '../components/ui/Badge';
 
 const HealthTracker = () => {
     const [activeTab, setActiveTab] = useState('GLUCOSE');
+    const [hoveredTab, setHoveredTab] = useState(null);
     const [metrics, setMetrics] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -96,27 +97,38 @@ const HealthTracker = () => {
                     <div className="lg:col-span-1 space-y-6">
                         {/* Tabs */}
                         <div className="grid grid-cols-2 gap-3">
-                            {tabs.map(tab => (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`
+                            {tabs.map(tab => {
+                                const isHovered = hoveredTab === tab.id;
+                                const isActive = activeTab === tab.id;
+                                return (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setActiveTab(tab.id)}
+                                        onMouseEnter={() => setHoveredTab(tab.id)}
+                                        onMouseLeave={() => setHoveredTab(null)}
+                                        className={`
                                         p-4 rounded-xl text-left transition-all duration-200 border
-                                        ${activeTab === tab.id
-                                            ? 'bg-cta text-white shadow-lg shadow-cta/20 border-cta'
-                                            : 'bg-white text-text-secondary hover:bg-gray-50 border-gray-100 hover:border-gray-200'}
+                                        ${isActive
+                                                ? 'bg-cta text-white shadow-lg shadow-cta/20 border-cta'
+                                                : 'text-text-secondary border-gray-100 dark:border-gray-700'}
                                     `}
-                                >
-                                    <span className="text-2xl mr-2">{tab.icon}</span>
-                                    <span className={`font-semibold ${activeTab === tab.id ? 'text-white' : 'text-text-primary'}`}>
-                                        {tab.label}
-                                    </span>
-                                </button>
-                            ))}
+                                        style={{
+                                            backgroundColor: isActive
+                                                ? undefined
+                                                : (isHovered ? 'var(--bg-subtle)' : 'var(--bg-surface)')
+                                        }}
+                                    >
+                                        <span className="text-2xl mr-2">{tab.icon}</span>
+                                        <span className={`font-semibold ${isActive ? 'text-white' : 'text-text-primary'}`}>
+                                            {tab.label}
+                                        </span>
+                                    </button>
+                                );
+                            })}
                         </div>
 
                         {/* Input Form */}
-                        <Card className="border border-gray-100 p-6 md:p-8">
+                        <Card className="border border-gray-100 dark:border-gray-700 p-6 md:p-8">
                             <h2 className="text-xl font-heading font-bold text-text-primary mb-6">Log {activeLabel}</h2>
                             <form onSubmit={handleSubmit} className="space-y-5">
                                 {activeTab === 'BLOOD_PRESSURE' ? (
@@ -170,7 +182,7 @@ const HealthTracker = () => {
                     {/* Right Column: Chart and History */}
                     <div className="lg:col-span-2 space-y-6">
                         {/* Chart */}
-                        <Card className="border border-gray-100 p-6 md:p-8">
+                        <Card className="border border-gray-100 dark:border-gray-700 p-6 md:p-8">
                             <h3 className="text-lg font-heading font-bold text-text-primary mb-6">Trends</h3>
                             {metrics.length > 0 ? (
                                 <div className="h-80 w-full">
@@ -186,7 +198,7 @@ const HealthTracker = () => {
                         </Card>
 
                         {/* Recent History */}
-                        <Card className="border border-gray-100 p-6 md:p-8">
+                        <Card className="border border-gray-100 dark:border-gray-700 p-6 md:p-8">
                             <h3 className="text-lg font-heading font-bold text-text-primary mb-6">Recent History</h3>
                             {metrics.length === 0 ? (
                                 <p className="text-text-muted text-center py-4">No records yet.</p>
@@ -194,7 +206,7 @@ const HealthTracker = () => {
                                 <div className="space-y-3">
                                     {/* Show only last 5 reversed */}
                                     {[...metrics].reverse().slice(0, 5).map(metric => (
-                                        <div key={metric._id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-cta/20 transition-colors">
+                                        <div key={metric._id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 bg-gray-50 dark:bg-background-subtle rounded-xl border border-gray-100 dark:border-gray-700 hover:border-cta/20 transition-colors">
                                             <div className="mb-2 sm:mb-0">
                                                 <div className="flex items-center gap-3">
                                                     <span className="font-heading font-bold text-lg text-text-primary">
@@ -210,7 +222,7 @@ const HealthTracker = () => {
                                                 <p className="text-sm text-text-muted mt-1">{new Date(metric.recordedAt).toLocaleString()}</p>
                                             </div>
                                             {metric.note && (
-                                                <span className="text-sm text-text-secondary bg-white px-3 py-1.5 rounded-lg border border-gray-200">
+                                                <span className="text-sm text-text-secondary bg-white dark:bg-surface px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700">
                                                     {metric.note}
                                                 </span>
                                             )}

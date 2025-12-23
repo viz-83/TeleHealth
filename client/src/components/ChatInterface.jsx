@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
-import 'stream-chat-react/dist/css/v2/index.css';
 import { useChat } from '../context/ChatContext';
+import { useTheme } from '../context/ThemeContext';
 
 const ChatInterface = () => {
     const { chatClient } = useChat();
+    const { theme } = useTheme();
     const [channel, setChannel] = useState(null);
 
     useEffect(() => {
@@ -26,8 +27,8 @@ const ChatInterface = () => {
     if (!chatClient || !channel) return <div>Loading Chat...</div>;
 
     return (
-        <div className="h-screen">
-            <Chat client={chatClient} theme="messaging light">
+        <div className="h-screen bg-background-light dark:bg-background-dark">
+            <Chat client={chatClient} theme={`messaging ${theme}`}>
                 <Channel channel={channel}>
                     <Window>
                         <ChannelHeader />

@@ -67,11 +67,11 @@ const MyPrescriptions = () => {
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cta"></div>
                     </div>
                 ) : error ? (
-                    <div className="bg-red-50 text-red-700 p-4 rounded-xl border border-red-200 text-center shadow-sm">
+                    <div className="bg-red-50 dark:bg-red-900/10 text-red-700 dark:text-red-400 p-4 rounded-xl border border-red-200 dark:border-red-900/30 text-center shadow-sm">
                         {error}
                     </div>
                 ) : prescriptions.length === 0 ? (
-                    <div className="bg-white rounded-3xl p-12 text-center border border-dashed border-gray-200">
+                    <div className="bg-white dark:bg-surface rounded-3xl p-12 text-center border border-dashed border-gray-200 dark:border-gray-700">
                         <div className="text-5xl mb-4 text-gray-300">💊</div>
                         <h3 className="text-xl font-bold text-text-primary">No prescriptions found</h3>
                         <p className="text-text-secondary mt-2">You haven't received any prescriptions yet.</p>
@@ -79,10 +79,10 @@ const MyPrescriptions = () => {
                 ) : (
                     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {prescriptions.map((script) => (
-                            <Card key={script._id} className="hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col h-full">
+                            <Card key={script._id} className="hover:shadow-lg transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full">
                                 <div className="p-6 flex-1">
                                     <div className="flex justify-between items-start mb-4">
-                                        <div className="p-3 bg-blue-50 rounded-xl text-cta">
+                                        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-cta">
                                             <FaPrescriptionBottleAlt size={24} />
                                         </div>
                                         <Badge variant="success" className="text-xs">Issued</Badge>
@@ -97,8 +97,12 @@ const MyPrescriptions = () => {
                                         </p>
                                     </div>
 
-                                    <div className="flex items-center gap-3 mb-6 p-3 bg-gray-50 rounded-lg">
-                                        <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-gray-400 shadow-sm border border-gray-100">
+                                    <div className="flex items-center gap-3 mb-6 p-3 rounded-lg border border-gray-100 dark:border-gray-700"
+                                        style={{ backgroundColor: 'var(--bg-subtle)' }}
+                                    >
+                                        <div className="w-10 h-10 rounded-full flex items-center justify-center text-gray-400 dark:text-gray-500 shadow-sm border border-gray-100 dark:border-gray-700"
+                                            style={{ backgroundColor: 'var(--bg-surface)' }}
+                                        >
                                             <FaUserMd />
                                         </div>
                                         <div>
@@ -108,7 +112,9 @@ const MyPrescriptions = () => {
                                     </div>
                                 </div>
 
-                                <div className="p-4 bg-gray-50 border-t border-gray-100">
+                                <div className="p-4 border-t border-gray-100 dark:border-gray-700"
+                                    style={{ backgroundColor: 'var(--bg-subtle)' }}
+                                >
                                     {script.pdfUrl ? (
                                         <a
                                             href={`http://localhost:5000${script.pdfUrl}`}

@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Button from './ui/Button';
 import medsyncLogo from '../assets/medsync_logo.png';
+import { Sun, Moon } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 
 const Navbar = () => {
+    const { theme, toggleTheme } = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
     const [scrolled, setScrolled] = useState(false);
+    const [hoveredElement, setHoveredElement] = useState(null);
 
     // Handle scroll effect for navbar
     useEffect(() => {
@@ -52,7 +56,7 @@ const Navbar = () => {
         <>
             <nav className={`
                 fixed top-0 w-full z-50 transition-all duration-300
-                ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm border-b border-gray-100' : 'bg-transparent'}
+                ${scrolled ? 'bg-surface/95 backdrop-blur-sm shadow-sm border-b border-gray-100 dark:border-gray-800' : 'bg-transparent'}
             `}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16 sm:h-20">
@@ -85,6 +89,19 @@ const Navbar = () => {
                         </div>
 
                         <div className="flex items-center space-x-4">
+                            <button
+                                onClick={toggleTheme}
+                                onMouseEnter={() => setHoveredElement('theme')}
+                                onMouseLeave={() => setHoveredElement(null)}
+                                className="p-2 rounded-full transition-colors focus:outline-none"
+                                style={{
+                                    backgroundColor: hoveredElement === 'theme' ? 'var(--bg-subtle)' : 'transparent',
+                                    color: 'var(--txt-primary)'
+                                }}
+                                aria-label="Toggle Dark Mode"
+                            >
+                                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                            </button>
                             {user && user.name ? (
                                 <>
                                     <div className="hidden sm:flex items-center space-x-2 text-sm text-text-muted">
@@ -103,8 +120,17 @@ const Navbar = () => {
                                 </>
                             ) : (
                                 <>
-                                    <Link to="/login">
-                                        <Button variant="ghost" size="sm">Login</Button>
+                                    <Link
+                                        to="/login"
+                                        onMouseEnter={() => setHoveredElement('login')}
+                                        onMouseLeave={() => setHoveredElement(null)}
+                                        className="inline-flex items-center justify-center font-semibold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 px-3 py-1.5 text-sm rounded-lg"
+                                        style={{
+                                            backgroundColor: hoveredElement === 'login' ? 'var(--bg-subtle)' : 'transparent',
+                                            color: hoveredElement === 'login' ? 'var(--txt-primary)' : 'var(--text-secondary)'
+                                        }}
+                                    >
+                                        Login
                                     </Link>
                                     <Link to="/signup">
                                         <Button size="sm">Get Started</Button>

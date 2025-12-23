@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 
 const ServiceCard = ({ title, description, icon: Icon, onClick }) => (
-    <Card className="group hover:-translate-y-2 transition-all duration-500 cursor-pointer border-0 shadow-soft hover:shadow-xl bg-white overflow-hidden" onClick={onClick}>
+    <Card className="group hover:-translate-y-2 transition-all duration-500 cursor-pointer border-0 dark:border dark:border-white/5 shadow-soft hover:shadow-xl bg-surface overflow-hidden" onClick={onClick}>
         <div className="p-8 flex flex-col h-full relative">
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150 duration-700"></div>
 

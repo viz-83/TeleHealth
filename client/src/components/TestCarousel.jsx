@@ -60,14 +60,14 @@ const TestCarousel = () => {
                     <div className="flex gap-3">
                         <button
                             onClick={() => scroll('left')}
-                            className="p-3 rounded-full bg-white border border-gray-200 shadow-sm text-gray-700 hover:bg-gray-50 hover:text-teal-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                            className="p-3 rounded-full bg-surface border border-gray-200 dark:border-gray-700 shadow-sm text-text-secondary hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-cta transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
                             aria-label="Scroll left"
                         >
                             <ChevronLeft className="h-6 w-6" />
                         </button>
                         <button
                             onClick={() => scroll('right')}
-                            className="p-3 rounded-full bg-white border border-gray-200 shadow-sm text-gray-700 hover:bg-gray-50 hover:text-teal-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                            className="p-3 rounded-full bg-surface border border-gray-200 dark:border-gray-700 shadow-sm text-text-secondary hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-cta transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
                             aria-label="Scroll right"
                         >
                             <ChevronRight className="h-6 w-6" />
@@ -84,7 +84,7 @@ const TestCarousel = () => {
                     {tests.map((test) => (
                         <div
                             key={test._id}
-                            className="flex-shrink-0 w-72 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 snap-start border border-transparent hover:border-teal-100 flex flex-col justify-between h-[400px] overflow-hidden"
+                            className="flex-shrink-0 w-72 bg-surface rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 snap-start border border-transparent hover:border-teal-100 flex flex-col justify-between h-[400px] overflow-hidden"
                         >
                             {/* Image Section */}
                             <div className="h-40 w-full overflow-hidden relative">
@@ -100,10 +100,10 @@ const TestCarousel = () => {
 
                             <div className="p-6 flex flex-col justify-between flex-grow">
                                 <div>
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
+                                    <h3 className="text-xl font-bold text-text-primary mb-2 line-clamp-2 leading-tight">
                                         {test.name}
                                     </h3>
-                                    <p className="text-gray-500 mb-4 line-clamp-2 text-sm">
+                                    <p className="text-text-secondary mb-4 line-clamp-2 text-sm">
                                         {test.description}
                                     </p>
                                 </div>
@@ -117,10 +117,10 @@ const TestCarousel = () => {
                                     </div>
                                     <button
                                         onClick={() => navigate('/tests')}
-                                        className="group w-full flex items-center justify-between text-sm font-bold text-gray-900 hover:text-teal-700 transition-colors"
+                                        className="group w-full flex items-center justify-between text-sm font-bold text-text-primary hover:text-cta transition-colors"
                                     >
                                         <span>Book Now</span>
-                                        <div className="p-1.5 rounded-full bg-gray-100 group-hover:bg-teal-50 transition-colors">
+                                        <div className="p-1.5 rounded-full bg-surface border border-gray-100 dark:border-gray-700 group-hover:bg-secondary dark:group-hover:bg-teal-900/50 transition-colors shadow-sm">
                                             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </button>

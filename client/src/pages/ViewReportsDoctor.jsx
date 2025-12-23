@@ -69,7 +69,7 @@ const ViewReportsDoctor = () => {
                         {error}
                     </div>
                 ) : reports.length === 0 ? (
-                    <div className="bg-white rounded-3xl p-12 text-center border border-dashed border-secondary">
+                    <div className="bg-white dark:bg-surface rounded-3xl p-12 text-center border border-dashed border-secondary dark:border-gray-700">
                         <div className="text-5xl mb-4 text-secondary">📂</div>
                         <h3 className="text-xl font-bold text-text-primary">No reports found</h3>
                         <p className="text-text-secondary mt-2">This patient has not uploaded any lab reports yet.</p>
@@ -77,10 +77,10 @@ const ViewReportsDoctor = () => {
                 ) : (
                     <div className="grid gap-4">
                         {reports.map((report) => (
-                            <Card key={report._id} className="hover:shadow-md transition-shadow border-gray-100">
+                            <Card key={report._id} className="hover:shadow-md transition-shadow border-gray-100 dark:border-gray-700">
                                 <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                     <div className="flex items-start gap-4">
-                                        <div className="p-3 bg-secondary/20 rounded-xl text-cta">
+                                        <div className="p-3 bg-secondary/20 dark:bg-secondary/10 rounded-xl text-cta">
                                             <FaFileAlt size={24} />
                                         </div>
                                         <div>

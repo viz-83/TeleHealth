@@ -23,10 +23,10 @@ const AIAssistantButton = () => {
 
                 {/* Tooltip / Prompt */}
                 {showTooltip && (
-                    <div className="bg-white px-4 py-2.5 rounded-xl shadow-soft text-sm font-medium text-text-primary mr-2 animate-bounce-slow origin-bottom-right border border-gray-100 pointer-events-auto">
+                    <div className="bg-white dark:bg-background-subtle px-4 py-2.5 rounded-xl shadow-soft text-sm font-medium text-text-primary dark:text-text-primary mr-2 animate-bounce-slow origin-bottom-right border border-gray-100 dark:border-gray-700 pointer-events-auto">
                         Hi! Need help? 👋
                         {/* Triangle */}
-                        <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white rotate-45 border-r border-b border-gray-100"></div>
+                        <div className="absolute -bottom-1.5 right-6 w-3 h-3 bg-white dark:bg-background-subtle rotate-45 border-r border-b border-gray-100 dark:border-gray-700"></div>
                     </div>
                 )}
 

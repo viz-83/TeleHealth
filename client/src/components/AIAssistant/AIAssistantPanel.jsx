@@ -87,26 +87,26 @@ const AIAssistantPanel = ({ isOpen, onClose }) => {
             {/* Panel */}
             <div className={`
                 fixed bottom-24 right-6 w-[90vw] sm:w-[380px] h-[600px] max-h-[80vh] 
-                bg-background-light shadow-2xl z-[100] rounded-2xl overflow-hidden flex flex-col
+                bg-white dark:bg-surface shadow-2xl z-[100] rounded-2xl overflow-hidden flex flex-col
                 transform transition-all duration-300 ease-in-out origin-bottom-right
                 ${isOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95 pointer-events-none'}
             `}>
                 {/* Header */}
-                <div className="px-6 py-4 bg-white border-b border-gray-100 flex justify-between items-center shrink-0">
+                <div className="px-6 py-4 bg-white dark:bg-surface border-b border-gray-100 dark:border-white/5 flex justify-between items-center shrink-0">
                     <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-cta">
+                        <div className="w-8 h-8 rounded-full bg-white dark:bg-background-subtle border border-secondary dark:border-white/10 flex items-center justify-center text-cta dark:text-cta-hover">
                             <Sparkles size={16} fill="currentColor" />
                         </div>
                         <div>
-                            <h3 className="font-heading font-bold text-text-primary">Care Assistant</h3>
-                            <p className="text-[10px] text-text-muted uppercase tracking-wider font-semibold">AI-Powered · Not a Diagnosis</p>
+                            <h3 className="font-heading font-bold" style={{ color: 'var(--txt-primary)' }}>Care Assistant</h3>
+                            <p className="text-[10px] text-gray-500 dark:text-text-secondary uppercase tracking-wider font-semibold">AI-Powered · Not a Diagnosis</p>
                         </div>
                     </div>
 
                 </div>
 
                 {/* Messages Body */}
-                <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-background-light">
+                <div className="flex-1 overflow-y-auto p-4 sm:p-6 bg-gray-50 dark:bg-background-light">
                     {messages.map((msg, idx) => (
                         <ChatMessage
                             key={idx}
@@ -118,7 +118,7 @@ const AIAssistantPanel = ({ isOpen, onClose }) => {
                     ))}
 
                     {isLoading && (
-                        <div className="flex items-center gap-2 p-4 text-xs text-text-muted animate-pulse">
+                        <div className="flex items-center gap-2 p-4 text-xs text-gray-500 dark:text-gray-400 animate-pulse">
                             <div className="w-2 h-2 bg-cta/40 rounded-full animate-bounce"></div>
                             <div className="w-2 h-2 bg-cta/40 rounded-full animate-bounce delay-150"></div>
                             <div className="w-2 h-2 bg-cta/40 rounded-full animate-bounce delay-300"></div>
@@ -129,14 +129,15 @@ const AIAssistantPanel = ({ isOpen, onClose }) => {
                 </div>
 
                 {/* Input Footer */}
-                <div className="p-4 bg-white border-t border-gray-100 shrink-0">
-                    <div className="relative flex items-end gap-2 bg-background-subtle rounded-3xl p-2 pr-2 border border-transparent focus-within:border-cta/30 transition-colors">
+                <div className="p-4 bg-white dark:bg-surface border-t border-gray-100 dark:border-white/5 shrink-0">
+                    <div className="relative flex items-end gap-2 bg-white dark:bg-background-subtle rounded-3xl p-2 pr-2 border border-gray-200 dark:border-white/5 focus-within:border-cta/50 transition-all shadow-sm">
                         <textarea
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyDown={handleKeyDown}
                             placeholder="Ask about symptoms, doctors..."
-                            className="w-full bg-transparent border-none focus:ring-0 text-sm p-3 max-h-32 resize-none text-text-primary placeholder:text-text-muted"
+                            className="w-full bg-transparent border-none focus:ring-0 text-sm p-3 max-h-32 resize-none placeholder:text-gray-500 dark:placeholder:text-gray-400"
+                            style={{ color: 'var(--txt-primary)' }}
                             disabled={isLoading}
                             rows={1}
                         />
@@ -146,14 +147,14 @@ const AIAssistantPanel = ({ isOpen, onClose }) => {
                             className={`
                                 p-3 rounded-full flex items-center justify-center transition-all duration-200 shrink-0 mb-0.5
                                 ${!inputValue.trim() || isLoading
-                                    ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                    ? 'bg-gray-100 dark:bg-white/5 text-gray-400 dark:text-gray-500 cursor-not-allowed'
                                     : 'bg-cta text-white shadow-lg hover:bg-cta-hover hover:scale-105 active:scale-95'}
                             `}
                         >
                             <Send size={18} />
                         </button>
                     </div>
-                    <p className="text-[10px] text-center text-text-muted mt-2 opacity-70">
+                    <p className="text-[10px] text-center text-gray-400 dark:text-text-muted mt-2 opacity-70">
                         MedSync AI can make mistakes. Please consult a doctor for medical advice.
                     </p>
                 </div>

@@ -1,20 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+:root {
+  --bg-light: #F7FAFC;
+  --bg-subtle: #EDF2F7;
+  --bg-surface: #FFFFFF;
+
+  --txt-primary: #1F2933;
+  --txt-secondary: #4A5568;
+  --txt-muted: #718096;
+
+  --col-primary: #4A7C59;
+  --col-secondary: #D1E8E2;
+  --col-cta: #2C7A7B;
+  --col-cta-hover: #285E61;
+}
+
+.dark {
+  --bg-light: #0f172a;
+  --bg-subtle: #1e293b;
+  --bg-surface: #1e293b;
+
+  --txt-primary: #f8fafc;
+  --txt-secondary: #cbd5e1;
+  --txt-muted: #94a3b8;
+}
+
 @theme {
-  --color-primary: #4A7C59;
-  --color-secondary: #D1E8E2;
+  --color-primary: var(--col-primary);
+  --color-secondary: var(--col-secondary);
   --color-accent: #718096;
 
-  --color-cta: #2C7A7B;
-  --color-cta--hover: #285E61;
+  --color-cta: var(--col-cta);
+  --color-cta--hover: var(--col-cta-hover);
 
-  --color-text-primary: #1F2933;
-  --color-text-secondary: #4A5568;
-  --color-text-muted: #718096;
+  --color-text-primary: var(--txt-primary);
+  --color-text-secondary: var(--txt-secondary);
+  --color-text-muted: var(--txt-muted);
 
-  --color-background-light: #F7FAFC;
-  --color-background-subtle: #EDF2F7;
+  --color-background-light: var(--bg-light);
+  --color-background-subtle: var(--bg-subtle);
+  --color-surface: var(--bg-surface);
 
   --font-heading: "Libre Baskerville", serif;
   --font-body: "Plus Jakarta Sans", sans-serif;
@@ -73,4 +99,80 @@
       transform: translateX(0);
     }
   }
+
+  /* Custom Animations for Bento Grid */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out 3s infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-slow {
+
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* Stream Chat Overrides */
+:root {
+  --str-chat__font-family: var(--font-body);
+  --str-chat__primary-color: var(--col-cta);
+  --str-chat__active-primary-color: var(--col-cta-hover);
+  --str-chat__surface-color: var(--bg-surface);
+  --str-chat__secondary-surface-color: var(--bg-light);
+
+  --str-chat__message-send-button-color: var(--col-cta);
+
+  /* Light Mode Message Bubbles */
+  --str-chat__own-message-bubble-color: var(--col-cta);
+  --str-chat__own-message-text-color: #ffffff;
+}
+
+.dark {
+  --str-chat__surface-color: var(--bg-surface);
+  --str-chat__secondary-surface-color: var(--bg-subtle);
+  --str-chat__primary-color: var(--col-cta);
+
+  /* User Request: Input area should be light even in dark mode */
+  --str-chat__message-textarea-background-color: #ffffff;
+  --str-chat__message-textarea-color: #000000;
+
+  /* Dark Mode Message Bubbles */
+  --str-chat__own-message-bubble-color: var(--col-cta);
+  --str-chat__own-message-text-color: #ffffff;
+
+  /* User Request: Received bubbles should be light even in dark mode */
+  --str-chat__message-bubble-background-color: #ffffff;
+  --str-chat__message-text-color: #000000;
+
+  --str-chat__color-text-primary: var(--txt-primary);
+  /* Keep helper text (dates) dark mode appropriate */
+  --str-chat__color-text-secondary: var(--txt-secondary);
 }
