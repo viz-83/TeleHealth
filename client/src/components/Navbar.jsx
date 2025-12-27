@@ -69,8 +69,9 @@ const Navbar = () => {
                 fixed top-0 w-full z-50 transition-all duration-300
                 ${scrolled ? 'bg-surface/95 backdrop-blur-sm shadow-sm border-b border-gray-200 dark:border-white/5' : 'bg-transparent'}
             `}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="w-full mx-auto px-6 sm:px-10 2xl:px-20">
                     <div className="flex justify-between items-center h-16 sm:h-20">
+
                         {/* 1. Left Section: Logo */}
                         <div className="flex-shrink-0">
                             <Link to={user && user.name ? "/dashboard" : "/"} className="flex items-center space-x-0.5">
@@ -82,7 +83,7 @@ const Navbar = () => {
                         </div>
 
                         {/* 2. Center Section: Navigation Links (Desktop) */}
-                        <div className="hidden 2xl:flex flex-1 justify-center items-center gap-1 xl:gap-6 mx-4">
+                        <div className="hidden 2xl:flex flex-1 justify-center items-center gap-1 mx-2">
                             {user && user.role === 'patient' && (
                                 <>
                                     <NavItem to="/symptom-checker">Symptom Checker</NavItem>
@@ -91,6 +92,8 @@ const Navbar = () => {
                                     <NavItem to="/patient/health-tracker">Health Tracker</NavItem>
                                     <NavItem to="/medicines">Pharmacy</NavItem>
                                     <NavItem to="/tests">Lab Tests</NavItem>
+                                    <NavItem to="/wellbeing">Wellbeing</NavItem>
+
                                 </>
                             )}
 
@@ -102,7 +105,7 @@ const Navbar = () => {
                         </div>
 
                         {/* 3. Right Section: Theme & Auth */}
-                        <div className="hidden 2xl:flex items-center space-x-4 flex-shrink-0">
+                        <div className="hidden 2xl:flex items-center space-x-3 flex-shrink-0">
                             <button
                                 onClick={toggleTheme}
                                 onMouseEnter={() => setHoveredElement('theme')}
@@ -118,9 +121,9 @@ const Navbar = () => {
                             </button>
                             {user && user.name ? (
                                 <>
-                                    <div className="hidden md:flex items-center space-x-2 text-sm text-text-muted">
+                                    <div className="hidden md:flex items-center space-x-2 text-sm text-text-muted whitespace-nowrap">
                                         <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                                        <span>{user.name}</span>
+                                        <span className="truncate max-w-[100px]">{user.name}</span>
                                         <span className="text-xs px-2 py-0.5 bg-gray-100 rounded-full uppercase tracking-wider">{user.role}</span>
                                     </div>
                                     <div className="hidden md:block">
@@ -128,7 +131,7 @@ const Navbar = () => {
                                             variant="secondary"
                                             size="sm"
                                             onClick={handleLogout}
-                                            className="!px-4"
+                                            className="!px-4 ml-2"
                                         >
                                             Logout
                                         </Button>
@@ -137,6 +140,7 @@ const Navbar = () => {
                             ) : (
                                 <>
                                     <div className="hidden md:flex items-center gap-4">
+
                                         <Link
                                             to="/login"
                                             onMouseEnter={() => setHoveredElement('login')}
@@ -182,6 +186,8 @@ const Navbar = () => {
                                     <NavItem to="/patient/health-tracker">Health Tracker</NavItem>
                                     <NavItem to="/medicines">Pharmacy</NavItem>
                                     <NavItem to="/tests">Lab Tests</NavItem>
+                                    <NavItem to="/wellbeing">Wellbeing</NavItem>
+
                                 </>
                             )}
                             {user && user.role === 'doctor' && (

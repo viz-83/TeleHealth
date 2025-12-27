@@ -169,20 +169,20 @@ const DoctorOnboarding = () => {
                                 type="button"
                                 onClick={handleUseLocation}
                                 variant="secondary"
-                                disabled={locationStatus === 'loading'}
+                                isLoading={locationStatus === 'loading'}
                                 className="text-sm"
                             >
-                                {locationStatus === 'loading' ? 'Locating...' : 'Use My Location'}
+                                Use My Location
                             </Button>
                         </div>
 
                         <Button
                             type="submit"
-                            disabled={loading}
+                            isLoading={loading}
                             size="lg"
                             className="w-full mt-4 shadow-lg shadow-cta/20"
                         >
-                            {loading ? 'Saving Profile...' : 'Complete Profile'}
+                            Complete Profile
                         </Button>
                     </form>
                 </Card>

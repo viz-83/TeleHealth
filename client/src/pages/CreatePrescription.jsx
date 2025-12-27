@@ -276,11 +276,11 @@ const CreatePrescription = () => {
                             <div className="pt-8 flex justify-end gap-4 border-t border-gray-100 dark:border-gray-700">
                                 <Button
                                     type="submit"
-                                    disabled={loading}
+                                    isLoading={loading}
                                     size="lg"
                                     className="shadow-lg shadow-cta/20 w-full md:w-auto"
                                 >
-                                    {loading ? 'Processing...' : 'Issue Prescription'} <FaCheck className="ml-2" />
+                                    Issue Prescription <FaCheck className="ml-2" />
                                 </Button>
                             </div>
                         </form>

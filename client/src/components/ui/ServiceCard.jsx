@@ -2,7 +2,8 @@ import React from 'react';
 import Card from './Card';
 
 const ServiceCard = ({ title, description, icon: Icon, onClick }) => (
-    <Card className="group cursor-pointer border-0 dark:border dark:border-white/5 bg-surface overflow-hidden" onClick={onClick}>
+    <Card className="group cursor-pointer border-0 dark:border dark:border-white/5 bg-surface overflow-hidden h-96" onClick={onClick}>
+
         <div className="p-6 sm:p-8 flex flex-col h-full relative">
             <div className="absolute top-0 right-0 w-24 h-24 bg-secondary/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150 duration-700"></div>
 
@@ -11,7 +12,7 @@ const ServiceCard = ({ title, description, icon: Icon, onClick }) => (
             </div>
 
             <h3 className="text-xl font-heading font-bold text-text-primary mb-3 group-hover:text-cta transition-colors">{title}</h3>
-            <p className="text-text-secondary leading-relaxed mb-6 flex-1">{description}</p>
+            <p className="text-text-secondary leading-relaxed mb-6 flex-1 line-clamp-4">{description}</p>
 
             <div className="flex items-center text-cta font-medium text-sm group-hover:underline decoration-2 underline-offset-4">
                 Access Feature

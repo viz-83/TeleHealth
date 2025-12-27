@@ -10,9 +10,18 @@ const AIAssistantButton = () => {
     // Initial tooltip state - show for 5s then hide
     const [showTooltip, setShowTooltip] = useState(true);
 
-    // Hide on auth pages
+    // Hide on auth pages and during calls/chats
     const hideOnRoutes = ['/login', '/signup', '/verify-otp', '/doctor/onboarding'];
-    if (hideOnRoutes.includes(location.pathname)) {
+
+    // Regex for dynamic routes (video call and chat)
+    const hidePatterns = [
+        /^\/appointments\/[^/]+\/call$/, // Matches /appointments/:id/call
+        /^\/appointments\/[^/]+\/chat$/, // Matches /appointments/:id/chat
+        /^\/wellbeing/ // Matches /wellbeing and /wellbeing/chat
+    ];
+
+
+    if (hideOnRoutes.includes(location.pathname) || hidePatterns.some(pattern => pattern.test(location.pathname))) {
         return null;
     }
 

@@ -106,6 +106,8 @@ app.use('/api/v1/medicines', require('./routes/medicineRoutes')); // Medicine ca
 app.use('/api/v1/medicine-orders', require('./routes/medicineOrderRoutes')); // Medicine orders
 app.use('/api/v1/payments', require('./routes/paymentRoutes')); // Payment Gateway
 app.use('/api/v1/assistant', require('./routes/aiAssistantRoutes')); // AI Assistant
+app.use('/api/v1/wellbeing', require('./routes/wellbeingRoutes')); // Wellbeing Space
+
 // app.use('/prescriptions', express.static('prescriptions'));
 
 app.get('/', (req, res) => {

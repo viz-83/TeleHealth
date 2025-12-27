@@ -114,8 +114,8 @@ const FilterPanel = ({
             />
 
             <div className="flex flex-col gap-3 pt-2">
-                <Button onClick={() => { handleSearch(); if (setShowFilters) setShowFilters(false); }} disabled={loading} className="w-full">
-                    {loading ? 'Searching...' : 'Search Doctors'}
+                <Button onClick={() => { handleSearch(); if (setShowFilters) setShowFilters(false); }} isLoading={loading} className="w-full">
+                    Search Doctors
                 </Button>
                 <Button variant="secondary" onClick={handleUseLocation} disabled={loading} className="w-full">
                     Use My Location
@@ -453,8 +453,8 @@ const FindDoctorsSection = () => {
                         <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
                             Cancel
                         </Button>
-                        <Button onClick={executeBooking} disabled={bookingLoading}>
-                            {bookingLoading ? 'Booking...' : 'Confirm Booking'}
+                        <Button onClick={executeBooking} isLoading={bookingLoading}>
+                            Confirm Booking
                         </Button>
                     </div>
                 </div>

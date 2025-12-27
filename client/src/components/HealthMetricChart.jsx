@@ -52,8 +52,9 @@ const HealthMetricChart = ({ data, metricType, className, height = 300 }) => {
     });
 
     return (
-        <div style={{ width: '100%', height: height }} className={className}>
-            <ResponsiveContainer width="100%" height="100%">
+        <div style={{ width: '100%', height: height, minHeight: height }} className={className}>
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
+
                 <LineChart
                     data={processedData}
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}

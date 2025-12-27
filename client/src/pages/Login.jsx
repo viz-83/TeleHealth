@@ -80,9 +80,9 @@ const Login = () => {
                         type="submit"
                         className="w-full"
                         size="md"
-                        disabled={isLoading}
+                        isLoading={isLoading}
                     >
-                        {isLoading ? 'Logging in...' : 'Log In'}
+                        Log In
                     </Button>
                 </form>
 

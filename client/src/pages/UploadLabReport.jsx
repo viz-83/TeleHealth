@@ -129,10 +129,10 @@ const UploadLabReport = () => {
                             </div>
                             <Button
                                 type="submit"
-                                disabled={uploading}
+                                isLoading={uploading}
                                 className="w-full md:w-auto shadow-md"
                             >
-                                {uploading ? 'Uploading...' : 'Upload Report'}
+                                Upload Report
                             </Button>
                         </form>
                     </Card>

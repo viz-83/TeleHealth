@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from '../components/ui/Button';
 import { useMedicineCart } from '../context/MedicineCartContext';
 import { useNavigate } from 'react-router-dom';
 import { Trash2, Plus, Minus, Home, ArrowRight, AlertTriangle } from 'lucide-react';
@@ -230,14 +231,13 @@ const MedicineCart = () => {
                                 </div>
                             </div>
 
-                            <button
+                            <Button
                                 onClick={handlePlaceOrder}
-                                disabled={submitting}
-                                className="w-full bg-teal-600 text-white py-3.5 rounded-xl font-bold hover:bg-teal-700 transition shadow-lg shadow-teal-200 flex items-center justify-center gap-2 disabled:opacity-70"
+                                isLoading={submitting}
+                                className="w-full shadow-lg shadow-teal-200 py-3.5 flex items-center justify-center"
                             >
-                                {submitting ? 'Processing...' : 'Place Order'}
-                                {!submitting && <ArrowRight className="h-5 w-5" />}
-                            </button>
+                                Place Order <ArrowRight className="h-5 w-5 ml-2" />
+                            </Button>
                         </div>
                     </div>
                 </div>

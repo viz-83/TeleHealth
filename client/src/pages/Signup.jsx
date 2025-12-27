@@ -128,9 +128,9 @@ const Signup = () => {
                         type="submit"
                         className="w-full"
                         size="md"
-                        disabled={isLoading}
+                        isLoading={isLoading}
                     >
-                        {isLoading ? 'Creating Account...' : 'Sign Up'}
+                        Sign Up
                     </Button>
                 </form>
 

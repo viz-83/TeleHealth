@@ -38,6 +38,10 @@ import MedicineCart from './pages/MedicineCart';
 import MedicineOrderDetails from './pages/MedicineOrderDetails';
 import PharmacyDashboard from './pages/PharmacyDashboard';
 
+import WellbeingLanding from './pages/WellbeingLanding';
+import WellbeingChat from './pages/WellbeingChat';
+
+
 import { TestCartProvider } from './context/TestCartContext';
 import { MedicineCartProvider } from './context/MedicineCartContext';
 import { AuthProvider } from './context/AuthContext';
@@ -177,7 +181,12 @@ const App = () => {
                   <Route path="/medicines/cart" element={<ProtectedRoute><Layout><MedicineCart /></Layout></ProtectedRoute>} />
                   <Route path="/medicines/orders/:id" element={<ProtectedRoute><Layout><MedicineOrderDetails /></Layout></ProtectedRoute>} />
                   <Route path="/pharmacy/dashboard" element={<ProtectedRoute><Layout><PharmacyDashboard /></Layout></ProtectedRoute>} />
+
+                  {/* Wellbeing Space */}
+                  <Route path="/wellbeing" element={<ProtectedRoute><WellbeingLanding /></ProtectedRoute>} />
+                  <Route path="/wellbeing/chat" element={<ProtectedRoute><WellbeingChat /></ProtectedRoute>} />
                 </Routes>
+
               </MedicineCartProvider>
             </TestCartProvider>
           </AuthProvider>

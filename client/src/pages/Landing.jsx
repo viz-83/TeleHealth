@@ -6,7 +6,7 @@ import Button from '../components/ui/Button';
 import ServiceCard from '../components/ui/ServiceCard';
 import BentoGrid from '../components/BentoGrid';
 import doctorsHero from '../assets/doctors_hero.jpeg';
-import { FaLaptopMedical, FaUserMd, FaNotesMedical, FaHeartbeat, FaCalendarAlt, FaMicroscope } from 'react-icons/fa';
+import { FaLaptopMedical, FaUserMd, FaNotesMedical, FaHeartbeat, FaCalendarAlt, FaMicroscope, FaSpa } from 'react-icons/fa';
 import { Pill } from 'lucide-react';
 import DiseaseMarquee from '../components/DiseaseMarquee';
 import TestCarousel from '../components/TestCarousel';
@@ -70,6 +70,13 @@ const Landing = () => {
             description: "Book diagnostic tests for home sample collection.",
             icon: FaMicroscope,
             action: () => handleNavigation('/tests')
+        },
+        {
+            title: "Wellbeing Space",
+            description: "A safe space for emotional support and reflection.",
+            icon: FaSpa,
+            action: () => handleNavigation('/wellbeing'),
+            color: "bg-teal-50"
         },
     ];
 
@@ -193,18 +200,18 @@ const Landing = () => {
                                 <div className="absolute -inset-4 border-2 border-cta/20 rounded-3xl transform rotate-6"></div>
                                 <div className="bg-cta p-12 rounded-3xl text-white relative overflow-hidden shadow-2xl">
                                     <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
-                                    <h3 className="text-3xl font-heading font-bold mb-6">Patient Promise</h3>
-                                    <p className="text-lg leading-relaxed opacity-90 mb-8">
+                                    <h3 className="text-3xl font-heading font-bold mb-6 text-white">Patient Promise</h3>
+                                    <p className="text-lg leading-relaxed opacity-90 mb-8 text-white">
                                         We are committed to providing you with the best digital healthcare experience. Your data is encrypted, your doctors are vetted, and your health is our priority.
                                     </p>
                                     <div className="flex gap-8">
                                         <div>
-                                            <p className="text-4xl font-bold mb-1">Encrypted</p>
-                                            <p className="text-sm opacity-75">Data Security</p>
+                                            <p className="text-4xl font-bold mb-1 text-white">Encrypted</p>
+                                            <p className="text-sm opacity-75 text-white">Data Security</p>
                                         </div>
                                         <div>
-                                            <p className="text-4xl font-bold mb-1">24/7</p>
-                                            <p className="text-sm opacity-75">Support</p>
+                                            <p className="text-4xl font-bold mb-1 text-white">24/7</p>
+                                            <p className="text-sm opacity-75 text-white">Support</p>
                                         </div>
                                     </div>
                                 </div>
