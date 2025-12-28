@@ -8,11 +8,24 @@ import { useTheme } from '../context/ThemeContext';
 
 const WellbeingLanding = () => {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = React.useState(true);
     const { theme } = useTheme();
 
+    React.useEffect(() => {
+        const hasSeenDisclaimer = sessionStorage.getItem('hasSeenWellbeingDisclaimer');
+        if (hasSeenDisclaimer) {
+            navigate('/wellbeing/chat', { replace: true });
+        } else {
+            setIsLoading(false);
+        }
+    }, [navigate]);
+
     const handleEnter = () => {
+        sessionStorage.setItem('hasSeenWellbeingDisclaimer', 'true');
         navigate('/wellbeing/chat');
     };
+
+    if (isLoading) return null;
 
     return (
         <div className={`h-screen font-body flex flex-col overflow-hidden transition-colors duration-300 pt-16 sm:pt-20
