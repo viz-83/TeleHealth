@@ -31,6 +31,10 @@ if (missingEnvs.length > 0) {
 }
 
 const app = express();
+
+// Required for Render/Heroku (Reverse Proxy)
+app.set('trust proxy', 1);
+
 const PORT = process.env.PORT || 5000;
 
 // Middleware
