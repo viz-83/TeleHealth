@@ -23,7 +23,7 @@ const UploadLabReport = () => {
         try {
             setLoading(true);
             const token = localStorage.getItem('token');
-            const { data } = await axios.get('http://localhost:5000/api/v1/reports/my', {
+            const { data } = await axios.get('/v1/reports/my', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (data.status === 'success') {
@@ -54,7 +54,7 @@ const UploadLabReport = () => {
             setUploading(true);
             setError('');
             const token = localStorage.getItem('token');
-            const { data } = await axios.post('http://localhost:5000/api/v1/reports/upload', formData, {
+            const { data } = await axios.post('/v1/reports/upload', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -169,7 +169,7 @@ const UploadLabReport = () => {
                                             </div>
                                             <div className="flex items-center gap-2">
                                                 <a
-                                                    href={`http://localhost:5000/api/v1/reports/download/${report._id}`}
+                                                    href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/v1/reports/download/${report._id}`}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                 >

@@ -52,7 +52,7 @@ const DoctorOnboarding = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.post('http://localhost:5000/api/v1/doctors/me/profile', formData, {
+            const { data } = await axios.post('/v1/doctors/me/profile', formData, {
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
             });

@@ -18,7 +18,7 @@ const PatientVitals = () => {
         const fetchVitals = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const { data } = await axios.get(`http://localhost:5000/api/v1/health-metrics/patient/${id}`, {
+                const { data } = await axios.get(`/v1/health-metrics/patient/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                     withCredentials: true
                 });

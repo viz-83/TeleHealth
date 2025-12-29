@@ -18,7 +18,7 @@ const DoctorDashboard = () => {
         const fetchAppointments = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const { data } = await axios.get('http://localhost:5000/api/v1/appointments/my', {
+                const { data } = await axios.get('/v1/appointments/my', {
                     headers: { Authorization: `Bearer ${token}` },
                     withCredentials: true
                 });
@@ -38,7 +38,7 @@ const DoctorDashboard = () => {
     const handleJoinVideo = async (appointmentId) => {
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.post('http://localhost:5000/api/v1/stream/token',
+            const { data } = await axios.post('/v1/stream/token',
                 { appointmentId, purpose: 'video' },
                 {
                     headers: { Authorization: `Bearer ${token}` },
@@ -59,7 +59,7 @@ const DoctorDashboard = () => {
     const handleOpenChat = async (appointmentId) => {
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.post('http://localhost:5000/api/v1/stream/token',
+            const { data } = await axios.post('/v1/stream/token',
                 { appointmentId, purpose: 'chat' },
                 {
                     headers: { Authorization: `Bearer ${token}` },

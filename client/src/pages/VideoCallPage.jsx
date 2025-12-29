@@ -211,7 +211,7 @@ const VideoCallPage = () => {
             if (!currentSession || currentSession.callId !== `call_${appointmentId}`) {
                 try {
                     const token = localStorage.getItem('token');
-                    const { data } = await axios.post('http://localhost:5000/api/v1/stream/token',
+                    const { data } = await axios.post('/v1/stream/token',
                         { appointmentId, purpose: 'video' },
                         {
                             headers: { Authorization: `Bearer ${token}` },

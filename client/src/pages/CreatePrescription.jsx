@@ -76,7 +76,7 @@ const CreatePrescription = () => {
                 nextVisit
             };
 
-            const { data } = await axios.post('http://localhost:5000/api/v1/prescriptions', payload, {
+            const { data } = await axios.post('/v1/prescriptions', payload, {
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
             });

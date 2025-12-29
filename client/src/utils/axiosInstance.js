@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:5000', // Adjust if your API base URL is different or use relative path in prod
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api', // Use env var or default to local
     withCredentials: true, // Important for sending cookies
 });
 
@@ -45,7 +45,7 @@ axiosInstance.interceptors.response.use(
 
                 // Let's use the instance but reliance on the loop protection 'originalRequest.url' check is key.
                 // Or better: use a completely separate axios call for refresh to be safe.
-                const response = await axios.post('http://localhost:5000/api/auth/refresh-token', {}, {
+                const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/auth/refresh-token`, {}, {
                     withCredentials: true
                 });
 

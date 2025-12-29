@@ -17,7 +17,7 @@ const MyPrescriptions = () => {
         const fetchPrescriptions = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const { data } = await axios.get('http://localhost:5000/api/v1/prescriptions/my', {
+                const { data } = await axios.get('/v1/prescriptions/my', {
                     headers: { Authorization: `Bearer ${token}` },
                     withCredentials: true
                 });
@@ -117,7 +117,7 @@ const MyPrescriptions = () => {
                                 >
                                     {script.pdfUrl ? (
                                         <a
-                                            href={`http://localhost:5000${script.pdfUrl}`}
+                                            href={`${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace(/\/api\/?$/, '')}${script.pdfUrl}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="w-full"

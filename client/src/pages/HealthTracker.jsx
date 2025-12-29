@@ -47,7 +47,7 @@ const HealthTracker = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.get('http://localhost:5000/api/v1/health-metrics/my', {
+            const { data } = await axios.get('/v1/health-metrics/my', {
                 params: { metricType: activeTab },
                 headers: { Authorization: `Bearer ${token} ` },
                 withCredentials: true
@@ -94,7 +94,7 @@ const HealthTracker = () => {
             };
 
             const token = localStorage.getItem('token');
-            const { data } = await axios.post('http://localhost:5000/api/v1/health-metrics/insights', payload, {
+            const { data } = await axios.post('/v1/health-metrics/insights', payload, {
                 headers: { Authorization: `Bearer ${token} ` },
                 withCredentials: true
             });
@@ -129,7 +129,7 @@ const HealthTracker = () => {
                 payload.value = Number(value);
             }
 
-            await axios.post('http://localhost:5000/api/v1/health-metrics', payload, {
+            await axios.post('/v1/health-metrics', payload, {
                 headers: { Authorization: `Bearer ${token} ` },
                 withCredentials: true
             });
@@ -159,7 +159,7 @@ const HealthTracker = () => {
 
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:5000/api/v1/health-metrics/${deleteId}`, {
+            await axios.delete(`/v1/health-metrics/${deleteId}`, {
                 headers: { Authorization: `Bearer ${token} ` },
                 withCredentials: true
             });

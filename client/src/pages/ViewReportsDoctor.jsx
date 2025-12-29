@@ -17,7 +17,7 @@ const ViewReportsDoctor = () => {
         const fetchReports = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const { data } = await axios.get(`http://localhost:5000/api/v1/reports/patient/${patientId}`, {
+                const { data } = await axios.get(`/v1/reports/patient/${patientId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (data.status === 'success') {
@@ -93,7 +93,7 @@ const ViewReportsDoctor = () => {
 
                                     <div className="flex gap-2 w-full sm:w-auto">
                                         <a
-                                            href={`http://localhost:5000/api/v1/reports/download/${report._id}`}
+                                            href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/v1/reports/download/${report._id}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="flex-1 sm:flex-none"

@@ -24,7 +24,7 @@ const Login = () => {
         setError('');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', formData, { withCredentials: true });
+            const res = await axios.post('/auth/login', formData, { withCredentials: true });
 
             // Use AuthContext Login (handles storage and state)
             login(res.data.user, res.data.token);

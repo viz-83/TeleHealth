@@ -27,7 +27,7 @@ const AmbulanceBooking = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.post('http://localhost:5000/api/v1/ambulance/book',
+            const { data } = await axios.post('/v1/ambulance/book',
                 { pickupLocation, contactNumber },
                 {
                     headers: { Authorization: `Bearer ${token}` },

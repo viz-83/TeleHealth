@@ -28,7 +28,7 @@ const ChatPage = () => {
                 console.log('Fetching new token...');
                 try {
                     const token = localStorage.getItem('token');
-                    const { data } = await axios.post('http://localhost:5000/api/v1/stream/token',
+                    const { data } = await axios.post('/v1/stream/token',
                         { appointmentId, purpose: 'chat' },
                         {
                             headers: { Authorization: `Bearer ${token}` },

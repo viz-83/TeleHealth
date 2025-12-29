@@ -28,7 +28,7 @@ const Signup = () => {
         setError('');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/signup', formData, { withCredentials: true });
+            const res = await axios.post('/auth/signup', formData, { withCredentials: true });
 
             // Handle Direct Login (No OTP)
             // Use AuthContext

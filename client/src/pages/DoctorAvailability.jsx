@@ -30,7 +30,7 @@ const DoctorAvailability = () => {
     const fetchAvailability = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/v1/doctors/me', {
+            const res = await axios.get('/v1/doctors/me', {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -66,7 +66,7 @@ const DoctorAvailability = () => {
             setError(null);
             setSuccessMessage('');
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/v1/doctors/me/availability', {
+            await axios.post('/v1/doctors/me/availability', {
                 availabilitySlots: availability
             }, {
                 headers: { Authorization: `Bearer ${token}` }

@@ -8,7 +8,7 @@ const UserList = ({ onCallUser }) => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const { data } = await axios.post('http://localhost:5000/api/auth/users', { userId: currentUser._id });
+                const { data } = await axios.post('/auth/users', { userId: currentUser._id });
                 setUsers(data);
             } catch (error) {
                 console.error('Error fetching users:', error);

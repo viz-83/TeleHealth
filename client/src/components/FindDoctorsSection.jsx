@@ -157,7 +157,7 @@ const FindDoctorsSection = () => {
     const fetchCities = async () => {
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.get('http://localhost:5000/api/v1/doctors/cities', {
+            const { data } = await axios.get('/v1/doctors/cities', {
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
             });
@@ -183,7 +183,7 @@ const FindDoctorsSection = () => {
             if (specToUse) params.specialization = specToUse;
 
             const token = localStorage.getItem('token');
-            const { data } = await axios.get('http://localhost:5000/api/v1/doctors/nearby', {
+            const { data } = await axios.get('/v1/doctors/nearby', {
                 params,
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
@@ -206,7 +206,7 @@ const FindDoctorsSection = () => {
                 setLoading(true);
                 try {
                     const token = localStorage.getItem('token');
-                    const { data } = await axios.get('http://localhost:5000/api/v1/doctors/nearby', {
+                    const { data } = await axios.get('/v1/doctors/nearby', {
                         params: { lat: latitude, lng: longitude, specialization },
                         headers: { Authorization: `Bearer ${token}` },
                         withCredentials: true
@@ -240,7 +240,7 @@ const FindDoctorsSection = () => {
         setAvailability(null);
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.get(`http://localhost:5000/api/v1/doctors/${doctor._id}/availability`, {
+            const { data } = await axios.get(`/v1/doctors/${doctor._id}/availability`, {
                 params: { date },
                 headers: { Authorization: `Bearer ${token}` },
                 withCredentials: true
@@ -260,7 +260,7 @@ const FindDoctorsSection = () => {
         setBookingLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const { data } = await axios.post('http://localhost:5000/api/v1/appointments', {
+            const { data } = await axios.post('/v1/appointments', {
                 doctorId: selectedDoctor._id,
                 date,
                 startTime: slotToBook.startTime,

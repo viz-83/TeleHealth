@@ -19,7 +19,7 @@ const DoctorViewPrescription = () => {
             try {
                 const token = localStorage.getItem('token');
                 // Fetch prescription by appointment ID
-                const { data } = await axios.get(`http://localhost:5000/api/v1/prescriptions/${appointmentId}`, {
+                const { data } = await axios.get(`/v1/prescriptions/${appointmentId}`, {
                     headers: { Authorization: `Bearer ${token}` },
                     withCredentials: true
                 });
