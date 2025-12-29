@@ -38,8 +38,22 @@ app.set('trust proxy', 1);
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+const allowedOrigins = [
+    'https://med-sync-pearl.vercel.app',
+    'http://localhost:5173',
+    'https://medsync-o3qg.onrender.com' // Allow self for verifying API
+];
+
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true); // Allow requests with no origin (like mobile apps or curl requests)
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error('CORS blocked'), false);
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
 }));
