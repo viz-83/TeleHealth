@@ -10,11 +10,6 @@ const videoClient = new StreamClient(process.env.STREAM_API_KEY, process.env.STR
 exports.getAppointmentToken = catchAsync(async (req, res, next) => {
     const { appointmentId, purpose = 'both' } = req.body;
 
-    if (!process.env.STREAM_API_KEY || !process.env.STREAM_API_SECRET) {
-        console.error('CRITICAL: STREAM_API_KEY or STREAM_API_SECRET is missing in environment variables!');
-        return next(new AppError('Stream Configuration Missing on Server', 500));
-    }
-
     // 1. Find Appointment
     const appointment = await Appointment.findById(appointmentId)
         .populate('patient', 'id name email')

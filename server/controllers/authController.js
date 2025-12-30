@@ -42,14 +42,14 @@ const createSendToken = async (user, statusCode, res, isDoctorProfileComplete = 
         expires: new Date(Date.now() + 15 * 60 * 1000), // Match access token
         httpOnly: true,
         secure: isProduction,
-        sameSite: isProduction ? 'strict' : 'lax'
+        sameSite: isProduction ? 'none' : 'lax'
     };
 
     const refreshCookieOptions = {
         expires: refreshTokenExpires,
         httpOnly: true,
         secure: isProduction,
-        sameSite: isProduction ? 'strict' : 'lax', // Strict for same-site, Lax for dev if needed
+        sameSite: isProduction ? 'none' : 'lax', // Strict for same-site, Lax for dev if needed
         path: '/api/auth/refresh-token' // Restrict path
     };
 
