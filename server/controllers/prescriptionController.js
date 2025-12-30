@@ -108,6 +108,9 @@ exports.createPrescription = catchAsync(async (req, res, next) => {
         // Actually, let's create it first, then update pdfUrl to point to our download route
     });
 
+    // For strict security, we should ideally use a short-lived signed URL.
+    // However, properly appending the user's auth token in the frontend is simpler.
+    // The previous implementation hardcoded the URL.
     prescription.pdfUrl = `/api/v1/prescriptions/download/${prescription._id}`;
     await prescription.save({ validateBeforeSave: false });
 
