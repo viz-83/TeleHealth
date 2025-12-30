@@ -13,7 +13,7 @@ const Medicines = () => {
     const [hoveredCategory, setHoveredCategory] = useState(null);
     const [isCartHovered, setIsCartHovered] = useState(false);
 
-    const { addToCart } = useMedicineCart();
+    const { addToCart, cart } = useMedicineCart();
     const navigate = useNavigate();
 
     const categories = ["All", "Tablets", "Syrups", "OTC", "Chronic Care", "Vitamins & Supplements", "First Aid"];
@@ -44,71 +44,72 @@ const Medicines = () => {
     };
 
     return (
-        <div className="min-h-screen bg-background-light pb-20">
-            {/* Header */}
-            <div className="bg-white dark:bg-background-light pt-8 pb-16 px-4 shadow-sm border-b border-gray-100 dark:border-white/5">
-                <div className="max-w-7xl mx-auto">
-                    <div className="flex justify-between items-center mb-6">
-                        <style>{`
-                            .pharmacy-title-fix { color: #000000 !important; }
-                            .dark .pharmacy-title-fix { color: #ffffff !important; }
-                        `}</style>
-                        <h1 className="text-3xl font-bold pharmacy-title-fix">Online Pharmacy</h1>
-                        <button
-                            onClick={() => navigate('/Medicines/cart')}
-                            onMouseEnter={() => setIsCartHovered(true)}
-                            onMouseLeave={() => setIsCartHovered(false)}
-                            className="p-2.5 rounded-full transition relative border border-gray-200 dark:border-teal-800"
-                            style={{
-                                backgroundColor: isCartHovered ? 'var(--bg-subtle)' : 'var(--bg-surface)'
-                            }}
-                        >
-                            <ShoppingCart className="h-6 w-6 text-teal-600 dark:text-teal-400" />
-                        </button>
+        <div className="min-h-screen bg-background-light py-8 px-4 sm:px-6 lg:px-8 pb-20">
+            <div className="max-w-7xl mx-auto">
+                {/* Header */}
+                <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <div>
+                        <h1 className="text-3xl font-bold text-text-primary">Online Pharmacy</h1>
+                        <p className="mt-2 text-text-secondary">Genuine medicines, fast delivery, trusted brands.</p>
                     </div>
 
-                    {/* Search Bar */}
-                    <div className="relative max-w-2xl">
-                        <input
-                            type="text"
-                            placeholder="Search for medicines, brands, or composition..."
-                            className="w-full pl-12 pr-4 py-3 rounded-xl bg-white dark:bg-background-subtle border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-teal-500 shadow-sm placeholder-gray-400 dark:placeholder-gray-500"
-                            style={{ color: 'var(--txt-primary)' }}
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        <Search className="absolute left-4 top-3.5 h-5 w-5 text-gray-400 dark:text-gray-500" />
-                    </div>
+                    <button
+                        onClick={() => navigate('/Medicines/cart')}
+                        className="mt-4 md:mt-0 relative inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 shadow-sm transition-colors duration-200"
+                    >
+                        <ShoppingCart className="h-5 w-5 mr-2" />
+                        View Cart
+                        {cart.length > 0 && (
+                            <span className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 flex items-center justify-center text-xs font-bold text-white border-2 border-white">
+                                {cart.length}
+                            </span>
+                        )}
+                    </button>
                 </div>
-            </div>
 
-            <div className="max-w-7xl mx-auto px-4 -mt-8 relative z-10">
-                {/* Categories */}
-                <div className="bg-white dark:bg-surface p-4 rounded-xl shadow-sm mb-6 overflow-x-auto flex space-x-2 no-scrollbar border border-gray-100 dark:border-white/5">
-                    {categories.map(cat => {
-                        const isHovered = hoveredCategory === cat;
-                        const isActive = activeCategory === cat;
-                        return (
-                            <button
-                                key={cat}
-                                onClick={() => setActiveCategory(cat)}
-                                onMouseEnter={() => setHoveredCategory(cat)}
-                                onMouseLeave={() => setHoveredCategory(null)}
-                                className={`px-4 py-2 rounded-lg whitespace-nowrap text-sm font-medium transition-colors border ${isActive
-                                    ? 'bg-teal-600 text-white border-teal-600'
-                                    : 'text-gray-900 dark:text-gray-100 border-gray-200 dark:border-white/10'
-                                    }`}
-                                style={{
-                                    backgroundColor: isActive
-                                        ? undefined
-                                        : (isHovered ? 'var(--bg-subtle)' : 'var(--bg-surface)'),
-                                    color: isActive ? '#ffffff' : 'var(--txt-primary)'
-                                }}
-                            >
-                                {cat}
-                            </button>
-                        );
-                    })}
+                {/* Search and Filter */}
+                <div className="bg-white dark:bg-surface rounded-lg shadow-sm p-4 mb-8">
+                    <div className="flex flex-col md:flex-row gap-4">
+                        <div className="relative flex-grow">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <Search className="h-5 w-5 text-gray-400" />
+                            </div>
+                            <input
+                                type="text"
+                                className="block w-full pl-10 pr-3 py-2 border border-gray-50 dark:border-white/10 rounded-md leading-5 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 text-text-primary focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                placeholder="Search for medicines (e.g. Paracetamol, Syrup)..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                style={{ backgroundColor: 'var(--bg-surface)', color: 'var(--txt-primary)' }}
+                            />
+                        </div>
+                        <div className="flex overflow-x-auto pb-2 md:pb-0 gap-2 no-scrollbar">
+                            {categories.map(category => {
+                                const isHovered = hoveredCategory === category;
+                                const isActive = activeCategory === category;
+                                return (
+                                    <button
+                                        key={category}
+                                        onClick={() => setActiveCategory(category)}
+                                        onMouseEnter={() => setHoveredCategory(category)}
+                                        onMouseLeave={() => setHoveredCategory(null)}
+                                        className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 border ${isActive
+                                            ? 'bg-teal-600 text-white border-teal-600'
+                                            : 'text-gray-600 dark:text-gray-300 border-gray-50 dark:border-white/10'
+                                            }`}
+                                        style={{
+                                            backgroundColor: isActive
+                                                ? undefined
+                                                : (isHovered ? 'var(--bg-subtle)' : 'var(--bg-surface)'),
+                                            color: isActive ? '#ffffff' : 'var(--txt-primary)'
+                                        }}
+                                    >
+                                        {category}
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
 
                 {/* Medicine Grid */}
@@ -128,7 +129,7 @@ const Medicines = () => {
                             </div>
                         ))}
                     </div>
-                ) : (
+                ) : medicines.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {medicines.map((med) => (
                             <div key={med._id} className="bg-white dark:bg-surface rounded-2xl p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 ease-out border border-gray-100 dark:border-white/5 flex flex-col h-full">
@@ -174,11 +175,11 @@ const Medicines = () => {
                             </div>
                         ))}
                     </div>
-                )}
-
-                {!loading && medicines.length === 0 && (
-                    <div className="text-center py-20">
-                        <p className="text-gray-500 text-lg">No medicines found searching for "{searchTerm}"</p>
+                ) : (
+                    <div className="text-center py-20 bg-white dark:bg-surface rounded-lg shadow-sm">
+                        <Filter className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+                        <h3 className="text-lg font-medium text-text-primary">No medicines found</h3>
+                        <p className="mt-1 text-text-secondary">Try adjusting your search or category filter.</p>
                         <button
                             onClick={() => { setSearchTerm(''); setActiveCategory('All'); }}
                             className="mt-4 text-teal-600 font-medium hover:underline"

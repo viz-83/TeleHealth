@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
 
 const TestCartContext = createContext();
 
@@ -22,13 +23,16 @@ export const TestCartProvider = ({ children }) => {
     }, [cart]);
 
     const addToCart = (test) => {
-        setCart(prevCart => {
-            // Prevent duplicates
-            if (prevCart.find(item => item._id === test._id)) {
-                return prevCart;
-            }
-            return [...prevCart, test];
-        });
+        // Check for duplicates using current state
+        const isDuplicate = cart.some(item => item._id === test._id);
+
+        if (isDuplicate) {
+            toast.error("Item already in cart");
+            return;
+        }
+
+        setCart(prevCart => [...prevCart, test]);
+        toast.success("Test added to cart");
     };
 
     const removeFromCart = (testId) => {
