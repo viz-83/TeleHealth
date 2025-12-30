@@ -132,6 +132,21 @@ app.get('/api/v1/stream-test', (req, res) => {
     res.json({ message: 'Inline route works!' });
 });
 
+app.get('/api/v1/stream-test-connection', (req, res) => {
+    try {
+        const { StreamClient } = require('@stream-io/node-sdk');
+        if (!process.env.STREAM_API_KEY || !process.env.STREAM_API_SECRET) {
+            throw new Error('Missing Stream Keys in Env');
+        }
+        const client = new StreamClient(process.env.STREAM_API_KEY, process.env.STREAM_API_SECRET);
+        const token = client.generateUserToken({ user_id: 'test_user_DEBUG' });
+        res.json({ status: 'success', message: 'Stream Init & Token Gen Success!', tokenPreview: token.substring(0, 10) + '...' });
+    } catch (e) {
+        console.error('Stream Test Failed:', e);
+        res.status(500).json({ status: 'error', message: e.message, stack: e.stack });
+    }
+});
+
 app.use('/api/v1/doctors', require('./routes/doctorRoutes'));
 app.use('/api/v1/appointments', require('./routes/appointmentRoutes'));
 app.use('/api/v1/prescriptions', require('./routes/prescriptionRoutes'));
