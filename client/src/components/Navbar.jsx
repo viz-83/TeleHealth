@@ -226,13 +226,13 @@ const Navbar = () => {
                                 {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                             </button>
 
-                            {!user.name && (
+                            {(!user || !user.name) && (
                                 <div className="pt-4 mt-2 border-t border-gray-100 dark:border-gray-700 space-y-2">
                                     <Link to="/login" className="block w-full text-center py-2 text-sm font-semibold text-text-primary bg-gray-50 dark:bg-white/5 rounded-lg">
                                         Login
                                     </Link>
-                                    <Link to="/signup" className="block w-full">
-                                        <Button className="w-full justify-center" size="sm">Get Started</Button>
+                                    <Link to="/signup" className="block w-full text-center py-2 text-sm font-semibold text-white bg-cta hover:bg-cta/90 rounded-lg transition-colors">
+                                        Get Started
                                     </Link>
                                 </div>
                             )}

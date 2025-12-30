@@ -85,3 +85,13 @@
 {"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:37:02.880Z","url":"/api/v1/tests"}
 {"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:38:15.954Z","url":"/api/v1/health-metrics/my?metricType=GLUCOSE"}
 {"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:38:16.026Z","url":"/api/v1/health-metrics/my?metricType=GLUCOSE"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:43:41.729Z","url":"/api/v1/tests"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:43:41.856Z","url":"/api/v1/tests"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:43:44.923Z","url":"/api/v1/tests"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:43:44.955Z","url":"/api/v1/tests"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:43:46.520Z","url":"/api/v1/tests"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:43:46.559Z","url":"/api/v1/tests"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:46:05.587Z","url":"/api/v1/medicines?isActive=true"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:46:05.652Z","url":"/api/v1/medicines?isActive=true"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:46:06.579Z","url":"/api/v1/tests"}
+{"level":"info","message":"Incoming Request","method":"GET","service":"medsync-api","timestamp":"2025-12-30T10:46:06.610Z","url":"/api/v1/tests"}
